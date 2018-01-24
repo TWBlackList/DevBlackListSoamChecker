@@ -28,8 +28,8 @@ namespace CNBlackListSoamChecker.CommandObject
                     );
                 return true;
             }
-            int[] users;
             int BanUserId = 0;
+            int[] UsersArray;
             long ExpiresTime = 0;
             int Level = 0;
             string Reason = "";
@@ -37,6 +37,7 @@ namespace CNBlackListSoamChecker.CommandObject
             string value = RawMessage.text.Substring(banSpace + 1);
             int valLen = value.Length;
             bool NotHalal = true;
+            bool status;
             
             if (valLen >= 5)
             {
@@ -55,12 +56,12 @@ namespace CNBlackListSoamChecker.CommandObject
                                 );
                             return true;
                         }
-                        users = new GetValues().GetUserIDs(new Dictionary<string, string> { { "from" , value.Substring(6) } }, RawMessage); 
+                        UsersArray = new GetValues().GetUserIDs(new Dictionary<string, string> { { "from" , value.Substring(6) } }, RawMessage); 
                         
                     }
                     else
                     {
-                        users = new GetValues().GetUserIDs(new Dictionary<string, string> {  }, RawMessage);
+                        UsersArray = new GetValues().GetUserIDs(new Dictionary<string, string> {  }, RawMessage);
                     }
                 }
             }
@@ -72,7 +73,7 @@ namespace CNBlackListSoamChecker.CommandObject
                     string tmpString = "";
 
                     // 获取使用者
-                    users = new GetValues().GetUserIDs(banValues, RawMessage);
+                    UsersArray = new GetValues().GetUserIDs(banValues, RawMessage);
 
                     // 获取 ExpiresTime
                     long tmpExpiresTime = new GetValues().GetBanUnixTime(banValues, RawMessage);
@@ -113,10 +114,8 @@ namespace CNBlackListSoamChecker.CommandObject
                     return true;
                 }
             }
-            bool status;
-            foreach (int userid in users){
-
-                
+            
+            foreach (int userid in UsersArray){
                 BanUserId = userid;
                 status = Temp.GetDatabaseManager().BanUser(
                     RawMessage.GetSendUser().id,
