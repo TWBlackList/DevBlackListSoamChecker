@@ -54,12 +54,12 @@ namespace CNBlackListSoamChecker.CommandObject
                                 );
                             return true;
                         }
-                        string[] users = new GetValues().GetUserIDs(new Dictionary<string, string> { { "from" , value.Substring(6) } }, RawMessage); 
+                        int[] users = new GetValues().GetUserIDs(new Dictionary<string, string> { { "from" , value.Substring(6) } }, RawMessage); 
                         
                     }
                     else
                     {
-                        string[] users = new GetValues().GetUserIDs(new Dictionary<string, string> {  }, RawMessage);
+                        int[] users = new GetValues().GetUserIDs(new Dictionary<string, string> {  }, RawMessage);
                     }
                 }
             }
@@ -70,24 +70,8 @@ namespace CNBlackListSoamChecker.CommandObject
                     Dictionary<string, string> banValues = CommandDecoder.cutKeyIsValue(value);
                     string tmpString = "";
 
-                    // 获取使用者信息
-                    string[] users = new GetValues().GetUserIDs(banValues, RawMessage);
-                    if (tmpUinfo == null) return true; // 如果没拿到使用者信息则代表出现了异常
-                    else
-                    {
-                        BanUserId = tmpUinfo.id;
-                        if (tmpUinfo.language_code != null)
-                        {
-                            if (tmpUinfo.language_code != "__CAN_NOT_GET_USERINFO__")
-                            {
-                                BanUserInfo = tmpUinfo;
-                            }
-                        }
-                        else
-                        {
-                            BanUserInfo = tmpUinfo;
-                        }
-                    }
+                    // 获取使用者
+                    int[] users = new GetValues().GetUserIDs(banValues, RawMessage);
 
                     // 获取 ExpiresTime
                     long tmpExpiresTime = new GetValues().GetBanUnixTime(banValues, RawMessage);
