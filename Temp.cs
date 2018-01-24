@@ -11,12 +11,12 @@ namespace CNBlackListSoamChecker
         internal static List<SpamMessage> spamMessageList = null;
         internal static Dictionary<long, GroupCfg> groupConfig = new Dictionary<long, GroupCfg>() { };
         internal static Dictionary<int, BanUser> bannedUsers = new Dictionary<int, BanUser>() { };
-        public static long AdminGroupID = -1001283591008; // If haven't, change it to 0
-        public static long MainChannelID = -1001132678262; // If haven't, change it to 0
-        public static long ReasonChannelID = -1001132678262; // If haven't, change it to 0
-        public static string MainChannelName = null; // If haven't, change it to null
-        public static string ReasonChannelName = null; // If haven't, change it to null
-        public static string ReportGroupName = "J_Court";//這ㄍ意思是：你他媽不能亂改群組username
+        public static long AdminGroupID = -1001157582347; // If haven't, change it to 0
+        public static long MainChannelID = -1001263651463; // If haven't, change it to 0
+        public static long ReasonChannelID = -1001222529529; // If haven't, change it to 0
+        public static string MainChannelName = "CNBL_main"; // If haven't, change it to null
+        public static string ReasonChannelName = "CNBL_Reason"; // If haven't, change it to null
+        public static string ReportGroupName = "ChineseBlackList";//這ㄍ意思是：你他媽不能亂改群組username
 
         internal static DatabaseManager GetDatabaseManager()
         {
