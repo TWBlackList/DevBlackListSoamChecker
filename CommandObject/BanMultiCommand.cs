@@ -28,8 +28,9 @@ namespace CNBlackListSoamChecker.CommandObject
                     );
                 return true;
             }
+
             int BanUserId = 0;
-            int[] UsersArray;
+            int[] UsersArray = new int[]{};
             long ExpiresTime = 0;
             int Level = 0;
             string Reason = "";
@@ -37,7 +38,7 @@ namespace CNBlackListSoamChecker.CommandObject
             string value = RawMessage.text.Substring(banSpace + 1);
             int valLen = value.Length;
             bool NotHalal = true;
-            bool status;
+            bool status = false;
             
             if (valLen >= 5)
             {
