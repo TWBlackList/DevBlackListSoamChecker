@@ -13,14 +13,14 @@ namespace CNBlackListSoamChecker.CommandObject
             {
                 TgApi.getDefaultApiConnection().sendMessage(
                     RawMessage.GetMessageChatInfo().id,
-                    "/twunban [i|id=1] [f|from=f|fwd|r|reply]" +
+                    "/cnunban [i|id=1] [f|from=f|fwd|r|reply]" +
                     " r|reason=\"asdfsadf asdfadsf\"\n\n" +
                     "from 選項僅在 id 未被定義時起作用\n" +
                     "ID 選擇優先度: 手動輸入 ID > 回覆的被轉發訊息 > 回覆的訊息\n" +
                     "選項優先度: 簡寫 > 全名\n" +
                     "Example:\n" +
-                    "/twunban id=1 reason=\"aaa bbb\\n\\\"ccc\\\" ddd\"\n" +
-                    "/twunban",
+                    "/cnunban id=1 reason=\"aaa bbb\\n\\\"ccc\\\" ddd\"\n" +
+                    "/cnunban",
                     RawMessage.message_id
                     );
                 return true;

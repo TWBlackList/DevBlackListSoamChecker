@@ -11,7 +11,7 @@ namespace CNBlackListSoamChecker.CommandObject {
                                 "/soamstatus - 取得目前群組開啟功能\n" +
                                 "/twkick - 將一個已在封鎖列表內的使用這從群組中移除出去";
             string privateHelp = "";
-            string sharedHelp = "/twbanstat - 查詢處分狀態\n" + 
+            string sharedHelp = "/cnbanstat - 查詢處分狀態\n" + 
                                 "/lsop - Operator 名冊";
             switch (RawMessage.chat.type){
                 case "group":
@@ -28,8 +28,8 @@ namespace CNBlackListSoamChecker.CommandObject {
             if (RAPI.getIsBotAdmin(RawMessage.from.id))
             {
                 finalHelpMsg = finalHelpMsg + "\n\nOP指令:\n" +
-                                "/twban - 封鎖\n" +
-                                "/twunban - 解除封鎖\n" +
+                                "/cnban - 封鎖\n" +
+                                "/cnunban - 解除封鎖\n" +
                                 "/getspampoints - 測試關鍵字\n\n" +
                                 "Admin指令:\n" +
                                 "/addspamstr - 新增 1 個自動規則\n" +

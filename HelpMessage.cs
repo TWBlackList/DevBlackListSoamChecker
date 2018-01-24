@@ -13,7 +13,7 @@ namespace CNBlackListSoamChecker
                                 "/soamdisable - 關閉功能\n" +
                                 "/soamstatus - 取得目前群組開啟功能\n";
             string privateHelp = "";
-            string sharedHelp = "/twbanstat - 看看自己有沒有被封鎖\n" + 
+            string sharedHelp = "/cnbanstat - 看看自己有沒有被封鎖\n" + 
                                 "/lsop - Operator 名冊";
             switch (RawMessage.chat.type){
                 case "group":
@@ -30,8 +30,8 @@ namespace CNBlackListSoamChecker
             if (RAPI.getIsBotAdmin(RawMessage.from.id))
             {
                 finalHelpMsg = finalHelpMsg + "\n\nOP指令:\n" +
-                                "/twban - 封鎖\n" +
-                                "/twunban - 解除封鎖\n" +
+                                "/cnban - 封鎖\n" +
+                                "/cnunban - 解除封鎖\n" +
                                 "/getspampoints - 測試關鍵字\n\n" +
                                 "Admin指令:\n" +
                                 "/addspamstr - 新增 1 個自動規則\n" +
