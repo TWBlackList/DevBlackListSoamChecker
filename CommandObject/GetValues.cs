@@ -207,7 +207,7 @@ namespace CNBlackListSoamChecker.CommandObject
             {
                 tmpString = banValues.GetValueOrDefault("id", "__invalid__");
             }
-            int[] users = Array.ConvertAll<string, int>(tmpString.Split(","), int.Parse);
+            int[] users = System.Array.ConvertAll<string, int>(tmpString.Split(","), int.Parse);
 
             return users;
         }

@@ -55,12 +55,12 @@ namespace CNBlackListSoamChecker.CommandObject
                                 );
                             return true;
                         }
-                        int[] users = new GetValues().GetUserIDs(new Dictionary<string, string> { { "from" , value.Substring(6) } }, RawMessage); 
+                        users = new GetValues().GetUserIDs(new Dictionary<string, string> { { "from" , value.Substring(6) } }, RawMessage); 
                         
                     }
                     else
                     {
-                        int[] users = new GetValues().GetUserIDs(new Dictionary<string, string> {  }, RawMessage);
+                        users = new GetValues().GetUserIDs(new Dictionary<string, string> {  }, RawMessage);
                     }
                 }
             }
@@ -72,7 +72,7 @@ namespace CNBlackListSoamChecker.CommandObject
                     string tmpString = "";
 
                     // 获取使用者
-                    int[] users = new GetValues().GetUserIDs(banValues, RawMessage);
+                    users = new GetValues().GetUserIDs(banValues, RawMessage);
 
                     // 获取 ExpiresTime
                     long tmpExpiresTime = new GetValues().GetBanUnixTime(banValues, RawMessage);
@@ -113,10 +113,11 @@ namespace CNBlackListSoamChecker.CommandObject
                     return true;
                 }
             }
+            bool status;
             foreach (int userid in users){
 
-                bool status;
-                int BanUserId = userid;
+                
+                BanUserId = userid;
                 status = Temp.GetDatabaseManager().BanUser(
                     RawMessage.GetSendUser().id,
                     BanUserId,
