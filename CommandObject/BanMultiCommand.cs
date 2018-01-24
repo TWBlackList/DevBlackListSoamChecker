@@ -28,6 +28,7 @@ namespace CNBlackListSoamChecker.CommandObject
                     );
                 return true;
             }
+            int[] users;
             int BanUserId = 0;
             long ExpiresTime = 0;
             int Level = 0;
