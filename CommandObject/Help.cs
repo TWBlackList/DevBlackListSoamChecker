@@ -8,8 +8,7 @@ namespace CNBlackListSoamChecker.CommandObject {
             string finalHelpMsg;
             string groupHelp =  "/soamenable - 啟用功能\n" +
                                 "/soamdisable - 關閉功能\n" +
-                                "/soamstatus - 取得目前群組開啟功能\n" +
-                                "/twkick - 將一個已在封鎖列表內的使用這從群組中移除出去";
+                                "/soamstatus - 取得目前群組開啟功能\n";
             string privateHelp = "";
             string sharedHelp = "/cnbanstat - 查詢處分狀態\n" + 
                                 "/lsop - Operator 名冊";
