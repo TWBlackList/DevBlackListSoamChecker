@@ -75,7 +75,7 @@ namespace TWBlackListSoamChecker
                     }
                     new OP().DelOP(RawMessage);
                     throw new StopProcessException();
-                case "/twban":
+                case "/cnban":
                     if (Temp.DisableBanList || Temp.DisableAdminTools)
                     {
                         TgApi.getDefaultApiConnection().sendMessage(RawMessage.chat.id,Disabled_Ban_Msg,RawMessage.message_id);
@@ -83,7 +83,7 @@ namespace TWBlackListSoamChecker
                     }
                     new BanUserCommand().Ban(RawMessage, JsonMessage, Command);
                     throw new StopProcessException();
-                case "/twunban":
+                case "/cnunban":
                     if (Temp.DisableBanList)
                     {
                         TgApi.getDefaultApiConnection().sendMessage(RawMessage.chat.id,Disabled_Ban_Msg,RawMessage.message_id);
