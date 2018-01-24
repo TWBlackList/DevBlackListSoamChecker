@@ -66,7 +66,7 @@ namespace CNBlackListSoamChecker
                             return new CallbackMessage() { StopProcess = true };
                         new SoamManager().SoamStatus(RawMessage);
                         break;
-                    case "/twkick":
+                    case "/cnkick":
                         if (Temp.DisableBanList)
                         {
                             TgApi.getDefaultApiConnection().sendMessage(

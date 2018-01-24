@@ -293,7 +293,7 @@ namespace CNBlackListSoamChecker.CommandObject
             int count = Temp.GetDatabaseManager().DeleteSpamMessage(RuleFriendlyName);
             TgApi.getDefaultApiConnection().sendMessage(
                 RawMessage.GetMessageChatInfo().id,
-                "删除了 " + count + " 项",
+                "刪除了 " + count + " 項",
                 RawMessage.message_id
                 );
         }
