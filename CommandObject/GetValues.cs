@@ -146,7 +146,7 @@ namespace CNBlackListSoamChecker.CommandObject
                                 {
                                     TgApi.getDefaultApiConnection().sendMessage(
                                         RawMessage.GetMessageChatInfo().id,
-                                        "没有找到任何使用者 ID，請檢查您的輸入，或使用 /ban 查看帮助。 err1"
+                                        "没有找到任何使用者 ID，請檢查您的輸入，或使用 /cnban 查看帮助。 err1"
                                         );
                                     return null;
                                 }
@@ -160,7 +160,7 @@ namespace CNBlackListSoamChecker.CommandObject
                             {
                                 TgApi.getDefaultApiConnection().sendMessage(
                                     RawMessage.GetMessageChatInfo().id,
-                                    "未檢查到您指定的回覆訊息的 ID，請檢查您的輸入，或使用 /ban 查看帮助。 err2"
+                                    "未檢查到您指定的回覆訊息的 ID，請檢查您的輸入，或使用 /cnban 查看帮助。 err2"
                                     );
                                 return null;
                             }
@@ -174,7 +174,7 @@ namespace CNBlackListSoamChecker.CommandObject
                         {
                             TgApi.getDefaultApiConnection().sendMessage(
                                 RawMessage.GetMessageChatInfo().id,
-                                "未檢查到您指定的回覆訊息的 ID，請檢查您的輸入，或使用 /ban 查看帮助。 err2"
+                                "未檢查到您指定的回覆訊息的 ID，請檢查您的輸入，或使用 /cnban 查看帮助。 err2"
                                 );
                             return null;
                         }
@@ -189,7 +189,7 @@ namespace CNBlackListSoamChecker.CommandObject
                 {
                     TgApi.getDefaultApiConnection().sendMessage(
                         RawMessage.GetMessageChatInfo().id,
-                        "您的輸入有錯誤，請檢查您的輸入，或使用 /ban 查詢幫助。 err3"
+                        "您的輸入有錯誤，請檢查您的輸入，或使用 /cnban 查詢幫助。 err3"
                         );
                     return null;
                 }
