@@ -103,7 +103,7 @@ namespace CNBlackListSoamChecker
                             TgApi.getDefaultApiConnection().sendMessage(RawMessage.chat.id,Disabled_Ban_Msg,RawMessage.message_id);
                             break;
                         }
-                        new UnBanMultiUserCommand().UnBanMulti(RawMessage, JsonMessage, Command);
+                        new UnBanMultiUserCommand().UnbanMulti(RawMessage, JsonMessage, Command);
                     }else{
                         TgApi.getDefaultApiConnection().sendMessage(RawMessage.chat.id,"你沒有權限",RawMessage.message_id);
                         break;
