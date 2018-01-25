@@ -29,7 +29,6 @@ namespace CNBlackListSoamChecker.CommandObject
             bool status = false;
             int BanUserId = 0;
             string Reason;
-            UserInfo BanUserInfo = null;
             try
             {
                 Dictionary<string, string> banValues = CommandDecoder.cutKeyIsValue(RawMessage.text.Substring(banSpace + 1));

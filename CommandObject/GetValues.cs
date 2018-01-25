@@ -200,7 +200,6 @@ namespace CNBlackListSoamChecker.CommandObject
 
         internal int[] GetUserIDs(Dictionary<string, string> banValues, TgMessage RawMessage)
         {
-            UserInfo BanUserInfo = null;
             string tmpString = "";
             tmpString = banValues.GetValueOrDefault("i", "__invalid__");
             if (tmpString == "__invalid__")

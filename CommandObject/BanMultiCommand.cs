@@ -34,7 +34,6 @@ namespace CNBlackListSoamChecker.CommandObject
             long ExpiresTime = 0;
             int Level = 0;
             string Reason = "";
-            UserInfo BanUserInfo = null;
             string value = RawMessage.text.Substring(banSpace + 1);
             int valLen = value.Length;
             bool NotHalal = true;
