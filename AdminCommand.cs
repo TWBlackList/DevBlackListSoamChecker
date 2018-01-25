@@ -96,6 +96,19 @@ namespace CNBlackListSoamChecker
                     }
                     new BanUserCommand().Ban(RawMessage, JsonMessage, Command);
                     throw new StopProcessException();
+                case "/unban":
+                    if (RAPI.getIsBotOP(RawMessage.GetSendUser().id)){
+                        if (Temp.DisableBanList)
+                        {
+                            TgApi.getDefaultApiConnection().sendMessage(RawMessage.chat.id,Disabled_Ban_Msg,RawMessage.message_id);
+                            break;
+                        }
+                        new UnBanMultiUserCommand().UnBanMulti(RawMessage, JsonMessage, Command);
+                    }else{
+                        TgApi.getDefaultApiConnection().sendMessage(RawMessage.chat.id,"你沒有權限",RawMessage.message_id);
+                        break;
+                    }
+                    throw new StopProcessException();
                 case "/cnunban":
                     if (Temp.DisableBanList)
                     {
