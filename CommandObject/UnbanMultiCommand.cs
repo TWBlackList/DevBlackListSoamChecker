@@ -90,24 +90,6 @@ namespace CNBlackListSoamChecker.CommandObject
                     );
                 return true;
             }
-            //return false;
-        }
-
-        private UserInfo GetUserInfo(TgMessage RawMessage, string from)
-        {
-            if (RawMessage.reply_to_message == null)
-            {
-                return null;
-            }
-            if (from == "r" || from == "reply")
-            {
-                return RawMessage.GetReplyMessage().GetSendUser();
-            }
-            else if (from == "f" || from == "fwd")
-            {
-                return RawMessage.GetForwardedFromUser();
-            }
-            return null;
         }
     }
 }
