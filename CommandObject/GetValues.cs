@@ -121,7 +121,7 @@ namespace CNBlackListSoamChecker.CommandObject
             return ExpiresTime;
         }
 
-        internal UserInfo GetByTgMessage(Dictionary<string, string> banValues, TgMessage RawMessage)
+       internal UserInfo GetByTgMessage(Dictionary<string, string> banValues, TgMessage RawMessage)
         {
             UserInfo BanUserInfo = null;
             string tmpString = "";
@@ -129,7 +129,7 @@ namespace CNBlackListSoamChecker.CommandObject
             if (tmpString == "__invalid__")
             {
                 tmpString = banValues.GetValueOrDefault("id", "__invalid__");
-                if (tmpString == "__1``invalid__")
+                if (tmpString == "__invalid__")
                 {
                     UserInfo tmpUserInfo;
                     tmpString = banValues.GetValueOrDefault("f", "__invalid__");
