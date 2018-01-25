@@ -36,23 +36,7 @@ namespace CNBlackListSoamChecker.CommandObject
 
                 // 获取使用者信息
                 UsersArray = new GetValues().GetUserIDs(banValues, RawMessage); 
-                else
-                {
-                    BanUserId = tmpUinfo.id;
-                    if (tmpUinfo.language_code != null)
-                    {
-                        if (tmpUinfo.language_code != "__CAN_NOT_GET_USERINFO__")
-                        {
-                            BanUserInfo = tmpUinfo;
-                        }
-                    }
-                    else
-                    {
-                        BanUserInfo = tmpUinfo;
-                    }
-                }
-
-                // 获取 Reason
+                
                 Reason = new GetValues().GetReason(banValues, RawMessage);
                 if (Reason == null) return true; // 如果 Reason 是 null 則代表出现了异常
             }
