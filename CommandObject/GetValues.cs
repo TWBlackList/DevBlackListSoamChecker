@@ -90,7 +90,7 @@ namespace CNBlackListSoamChecker.CommandObject
                 }
                 else
                 {
-                    tmpString = banValues.GetValueOrDefault("days", "15");
+                    tmpString = banValues.GetValueOrDefault("days", "90");
                 }
             }
             if (!int.TryParse(tmpString, out Days))
