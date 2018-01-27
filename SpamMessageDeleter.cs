@@ -299,33 +299,31 @@ namespace CNBlackListSoamChecker
         private void CallAdmin(TgMessage msg)
         {
             GroupUserInfo[] admins = TgApi.getDefaultApiConnection().getChatAdministrators(msg.chat.id);
-            string retmsg = "";
+            string[] temp;
+
             foreach (GroupUserInfo i in admins)
             {
-                if (i.user.username != null)
-                {
-                    retmsg += "@" + i.user.username;
+                if(temp.Length == 5){
+                    TgApi.getDefaultApiConnection().sendMessage(
+                        msg.chat.id,
+                        System.String.Join("",temp),
+                        msg.message_id
+                    );
+                    temp.Clear();
                 }
-                else
-                {
-                    string userRealName = "[NO_NAME]";
-                    if (i.user.first_name != null)
-                    {
-                        userRealName = i.user.first_name;
-                    }
-                    if (i.user.last_name != null)
-                    {
-                        userRealName = " " + i.user.last_name;
-                    }
-                    retmsg += "<a href=\"tg://user?id=" + i.user.id + "\">" + userRealName + "</a>";
-                }
-                retmsg += " , ";
+                temp.Add("<a href=\"tg://user?id=" + i.user.id.ToString() + "\">" + "." + "</a>");
             }
-            TgApi.getDefaultApiConnection().sendMessage(
-                msg.chat.id,
-                retmsg,
-                msg.message_id
+
+            if(temp.Length != 0){
+                TgApi.getDefaultApiConnection().sendMessage(
+                    msg.chat.id,
+                    System.String.Join("",temp),
+                    msg.message_id,
+                    ParseMode : TgApi.PARSEMODE_HTML
                 );
+                temp.Clear();
+            }
+            
         }
 
         public CallbackMessage ReceiveOtherMessage(TgMessage RawMessage, string JsonMessage)

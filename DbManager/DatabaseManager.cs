@@ -36,7 +36,7 @@ namespace CNBlackListSoamChecker.DbManager
             int ReasonID = 0;
             if (Temp.ReasonChannelID != 0 && ChatID != 0 && MessageID != 0)
             {
-                try{result = TgApi.getDefaultApiConnection().forwardMessage(Temp.ReasonChannelID, ChatID, MessageID);}catch{}
+                result = TgApi.getDefaultApiConnection().forwardMessage(Temp.ReasonChannelID, ChatID, MessageID);
             }
             int ChannelReasonID = 0;
             if (Temp.MainChannelID != 0)
@@ -134,7 +134,7 @@ namespace CNBlackListSoamChecker.DbManager
                 {
                     banmsg += "，原因 : \n" + Reason;
                 }
-                try{ChannelReasonID = TgApi.getDefaultApiConnection().sendMessage(Temp.MainChannelID,banmsg).result.message_id;}catch{}
+                ChannelReasonID = TgApi.getDefaultApiConnection().sendMessage(Temp.MainChannelID,banmsg).result.message_id;
             }
             ChangeDbUnban(AdminID, UserID, Reason, ChannelReasonID);
             CNBlacklistApi.PostToAPI(UserID, false, 1, 0, Reason);
