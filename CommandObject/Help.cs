@@ -6,7 +6,8 @@ namespace CNBlackListSoamChecker.CommandObject {
     internal class Help {
         internal bool HelpStatus(TgMessage RawMessage){
             string finalHelpMsg;
-            string groupHelp =  "/soamenable - 啟用功能\n" +
+            string groupHelp =  "/leave - 離開群組\n" +
+                                "/soamenable - 啟用功能\n" +
                                 "/soamdisable - 關閉功能\n" +
                                 "/soamstatus - 取得目前群組開啟功能\n";
             string privateHelp = "";
