@@ -331,6 +331,7 @@ namespace CNBlackListSoamChecker.DbManager
                         AdminOnly = 1,
                         BlackList = 0,
                         AutoKick = 0,
+                        AntiBot = 1,
                         AntiHalal = 0,
                         AutoDeleteSpamMessage = 0,
                         AutoDeleteCommand = 1,
@@ -350,6 +351,7 @@ namespace CNBlackListSoamChecker.DbManager
             int AdminOnly = 3,
             int BlackList = 3,
             int AutoKick = 3,
+            int AntiBot = 3,
             int AntiHalal = 3,
             int AutoDeleteSpamMessage = 3,
             int AutoDeleteCommand = 3,
@@ -368,6 +370,10 @@ namespace CNBlackListSoamChecker.DbManager
             if (AutoKick != 3)
             {
                 groupCfg.AutoKick = AutoKick;
+            }
+            if (AntiBot != 3)
+            {
+                groupCfg.AntiBot = AntiBot;
             }
             if (AntiHalal != 3)
             {
