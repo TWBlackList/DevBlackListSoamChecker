@@ -228,7 +228,7 @@ namespace CNBlackListSoamChecker.CommandObject
             string byChannelName = "";
             if (Temp.MainChannelName != null)
             {
-                byChannelName = " (by @TWBlackList )";
+                byChannelName = " (by @CNBL_Bot )";
             }
             GroupCfg gc = Temp.GetDatabaseManager().GetGroupConfig(message.chat.id);
             TgApi.getDefaultApiConnection().sendMessage(
