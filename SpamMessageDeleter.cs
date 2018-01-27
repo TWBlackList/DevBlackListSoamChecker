@@ -300,28 +300,45 @@ namespace CNBlackListSoamChecker
         {
             GroupUserInfo[] admins = TgApi.getDefaultApiConnection().getChatAdministrators(msg.chat.id);
             List<string> temp = new List<string>();
-
+            int step = 1;
             foreach (GroupUserInfo i in admins)
             {
                 if(temp.Count == 5){
-                    TgApi.getDefaultApiConnection().sendMessage(
-                        msg.chat.id,
-                        System.String.Join("",temp),
-                        msg.message_id
-                    );
+                    if(step == 1){
+                        TgApi.getDefaultApiConnection().sendMessage(
+                            msg.chat.id,
+                            System.String.Join("",temp),
+                            msg.message_id,
+                            ParseMode : TgApi.PARSEMODE_HTML
+                        );
+                    }else{
+                        TgApi.getDefaultApiConnection().sendMessage(
+                            msg.chat.id,
+                            System.String.Join("",temp),
+                            ParseMode : TgApi.PARSEMODE_HTML
+                        );
+                    }
                     temp.Clear();
                 }
                 temp.Add("<a href=\"tg://user?id=" + i.user.id.ToString() + "\">" + "." + "</a>");
             }
 
             if(temp.Count != 0){
-                TgApi.getDefaultApiConnection().sendMessage(
-                    msg.chat.id,
-                    System.String.Join("",temp),
-                    msg.message_id,
-                    ParseMode : TgApi.PARSEMODE_HTML
-                );
-                    temp.Clear();
+                if(step == 1){
+                    TgApi.getDefaultApiConnection().sendMessage(
+                        msg.chat.id,
+                        System.String.Join("",temp),
+                        msg.message_id,
+                        ParseMode : TgApi.PARSEMODE_HTML
+                    );
+                }else{
+                    TgApi.getDefaultApiConnection().sendMessage(
+                        msg.chat.id,
+                        System.String.Join("",temp),
+                        ParseMode : TgApi.PARSEMODE_HTML
+                    ); 
+                }
+                temp.Clear();
             }
             
         }

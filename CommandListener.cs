@@ -151,6 +151,7 @@ namespace CNBlackListSoamChecker
                     return new Help().HelpStatus(RawMessage);
                 case "/banstat":
                 case "/banstatus":
+                case "/cnbanstat":
                     if (Temp.DisableBanList)
                     {
                         TgApi.getDefaultApiConnection().sendMessage(
