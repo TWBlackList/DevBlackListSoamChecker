@@ -9,7 +9,7 @@ namespace CNBlackListSoamChecker.CommandObject {
             string groupHelp =  "/leave - 離開群組\n" +
                                 "/soamenable - 啟用功能\n" +
                                 "/soamdisable - 關閉功能\n" +
-                                "/soamstatus - 取得目前群組開啟功能\n";
+                                "/soamstatus - 取得目前群組開啟功能";
             string privateHelp = "";
             string sharedHelp = "/banstat - 查詢處分狀態\n" + 
                                 "/lsop - Operator 名冊";
@@ -30,7 +30,7 @@ namespace CNBlackListSoamChecker.CommandObject {
                 finalHelpMsg = finalHelpMsg + "\n\nOperator指令:\n" +
                                 "/twban - 封鎖\n" +
                                 "/twunban - 解除封鎖\n" +
-                                "/getspampoints - 測試關鍵字\n\n";
+                                "/getspampoints - 測試關鍵字";
             }
             if (RAPI.getIsBotOP(RawMessage.from.id))
             {
@@ -44,7 +44,7 @@ namespace CNBlackListSoamChecker.CommandObject {
                                 "/getspamstr - 查看自動規則列表\n" +
                                 "/say - 廣播\n" +
                                 "/addop - 新增 Operator\n" +
-                                "/delop - 解除 Operator\n";
+                                "/delop - 解除 Operator";
             }
             TgApi.getDefaultApiConnection().sendMessage(RawMessage.GetMessageChatInfo().id,finalHelpMsg,RawMessage.message_id);
             return true;
