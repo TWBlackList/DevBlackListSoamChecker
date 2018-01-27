@@ -299,11 +299,11 @@ namespace CNBlackListSoamChecker
         private void CallAdmin(TgMessage msg)
         {
             GroupUserInfo[] admins = TgApi.getDefaultApiConnection().getChatAdministrators(msg.chat.id);
-            string[] temp;
+            List<string> temp = new List<string>();
 
             foreach (GroupUserInfo i in admins)
             {
-                if(temp.Length == 5){
+                if(temp.Count == 5){
                     TgApi.getDefaultApiConnection().sendMessage(
                         msg.chat.id,
                         System.String.Join("",temp),
@@ -321,7 +321,7 @@ namespace CNBlackListSoamChecker
                     msg.message_id,
                     ParseMode : TgApi.PARSEMODE_HTML
                 );
-                temp.Clear();
+                    temp.Clear();
             }
             
         }
