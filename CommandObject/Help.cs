@@ -10,7 +10,7 @@ namespace CNBlackListSoamChecker.CommandObject {
                                 "/soamdisable - 關閉功能\n" +
                                 "/soamstatus - 取得目前群組開啟功能\n";
             string privateHelp = "";
-            string sharedHelp = "/cnbanstat - 查詢處分狀態\n" + 
+            string sharedHelp = "/banstat - 查詢處分狀態\n" + 
                                 "/lsop - Operator 名冊";
             switch (RawMessage.chat.type){
                 case "group":
