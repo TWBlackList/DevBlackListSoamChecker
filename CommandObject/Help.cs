@@ -34,7 +34,7 @@ namespace CNBlackListSoamChecker.CommandObject {
             }
             if (RAPI.getIsBotOP(RawMessage.from.id))
             {
-                finalHelpMsg = finalHelpMsg + "Admin指令:\n" +
+                finalHelpMsg = finalHelpMsg + "\n\nAdmin指令:\n" +
                                 "/ban - 封鎖\n" +
                                 "/_ban - 批次封鎖\n" +
                                 "/unban - 解除封鎖\n" +
