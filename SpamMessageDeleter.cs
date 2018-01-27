@@ -314,7 +314,7 @@ namespace CNBlackListSoamChecker
                 temp.Add("<a href=\"tg://user?id=" + i.user.id.ToString() + "\">" + "." + "</a>");
             }
 
-            if(temp.Length != 0){
+            if(temp.Count != 0){
                 TgApi.getDefaultApiConnection().sendMessage(
                     msg.chat.id,
                     System.String.Join("",temp),
