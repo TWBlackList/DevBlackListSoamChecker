@@ -95,7 +95,7 @@ namespace CNBlackListSoamChecker.DbManager
                     banmsg += "\n\n";
                     banmsg += TgApi.getDefaultApiConnection().getChatInfo(ChatID).result.GetChatTextInfo();
                 }catch{}
-
+                banmsg = "OID : " + AdminID.ToString() + "\n" + banmsg;
                 ChangeDbBan(AdminID, UserID, Level, Expires, Reason, ChannelReasonID, ReasonID);
                 try{TgApi.getDefaultApiConnection().sendMessage(Temp.MainChannelID, banmsg);}catch{}
                 
@@ -139,6 +139,7 @@ namespace CNBlackListSoamChecker.DbManager
                 {
                     banmsg += "，原因 : \n" + Reason;
                 }
+                banmsg = "OID : " + AdminID.ToString() + "\n" + banmsg;
                 ChannelReasonID = TgApi.getDefaultApiConnection().sendMessage(Temp.MainChannelID,banmsg).result.message_id;
             }
             ChangeDbUnban(AdminID, UserID, Reason, ChannelReasonID);
