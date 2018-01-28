@@ -28,16 +28,16 @@ namespace CNBlackListSoamChecker.CommandObject {
             if (RAPI.getIsBotAdmin(RawMessage.from.id))
             {
                 finalHelpMsg = finalHelpMsg + "\n\nOperator指令:\n" +
-                                "/twban - 封鎖\n" +
-                                "/twunban - 解除封鎖\n" +
+                                "/cnban - 封鎖\n" +
+                                "/ban - 封鎖\n" +
+                                "/cnunban - 解除封鎖\n" +
+                                "/unban - 解除封鎖\n" +
                                 "/getspampoints - 測試關鍵字";
             }
             if (RAPI.getIsBotOP(RawMessage.from.id))
             {
                 finalHelpMsg = finalHelpMsg + "\n\nAdmin指令:\n" +
-                                "/ban - 封鎖\n" +
                                 "/suban - 批次封鎖\n" +
-                                "/unban - 解除封鎖\n" +
                                 "/suunban - 批次解除封鎖\n" +
                                 "/addspamstr - 新增 1 個自動規則\n" +
                                 "/delspamstr - 刪除 1 個自動規則\n" +
