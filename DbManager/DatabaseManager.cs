@@ -85,7 +85,7 @@ namespace CNBlackListSoamChecker.DbManager
                     banmsg += "\n時效 : 永久";
                 }
                 banmsg += "\n原因 : " + Reason;
-                banmsg += "OID : " + AdminID.ToString() + "\n";
+                banmsg += "\nOID : " + AdminID.ToString() + "\n";
                 if (Temp.ReasonChannelID != 0 && ReasonID != 0)
                 {
                     banmsg += "\n\n參考 : \nhttps://t.me/" + Temp.ReasonChannelName + "/" + ReasonID;
@@ -139,7 +139,7 @@ namespace CNBlackListSoamChecker.DbManager
                 {
                     banmsg += "，原因 : \n" + Reason;
                 }
-                banmsg += "OID : " + AdminID.ToString() + "\n";
+                banmsg += "\nOID : " + AdminID.ToString() + "\n";
                 ChannelReasonID = TgApi.getDefaultApiConnection().sendMessage(Temp.MainChannelID,banmsg).result.message_id;
             }
             ChangeDbUnban(AdminID, UserID, Reason, ChannelReasonID);
