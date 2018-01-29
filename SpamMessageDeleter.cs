@@ -269,7 +269,7 @@ namespace CNBlackListSoamChecker
                             SendUserInfo.id,
                             smsg.BanLevel,
                             banUtilTime,
-                            "\n自動封鎖 : " + smsg.FriendlyName,
+                            "自動封鎖 - " + smsg.FriendlyName,
                             ChatID,
                             MsgID,
                             SendUserInfo
