@@ -88,7 +88,7 @@ namespace CNBlackListSoamChecker.DbManager
                 banmsg += "\nOID : " + AdminID.ToString() + "\n";
                 if (Temp.ReasonChannelID != 0 && ReasonID != 0)
                 {
-                    banmsg += "\n\n參考 : \nhttps://t.me/" + Temp.ReasonChannelName + "/" + ReasonID;
+                    banmsg += "參考 : \nhttps://t.me/" + Temp.ReasonChannelName + "/" + ReasonID;
                 }
                 else if (Temp.ReasonChannelID != 0 && ChatID != 0 && MessageID != 0) finalResult = false;
                 
