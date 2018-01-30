@@ -12,6 +12,7 @@ namespace CNBlackListSoamChecker.CommandObject {
                                 "/soamstatus - 取得目前群組開啟功能";
             string privateHelp = "";
             string sharedHelp = "/banstat - 查詢處分狀態\n" + 
+                                "/user - 取得 User ID\n" + 
                                 "/lsop - Operator 名冊";
             switch (RawMessage.chat.type){
                 case "group":
