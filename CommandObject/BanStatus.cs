@@ -33,7 +33,7 @@ namespace CNBlackListSoamChecker.CommandObject
                             ban.GetBanMessage();
                     }
                 }
-                TgApi.getDefaultApiConnection().sendMessage(RawMessage.GetMessageChatInfo().id, banmsg, RawMessage.message_id);
+                TgApi.getDefaultApiConnection().sendMessage(RawMessage.GetMessageChatInfo().id, banmsg, RawMessage.message_id, ParseMode : TgApi.PARSEMODE_MARKDOWN);
                 return true;
             }
             else
