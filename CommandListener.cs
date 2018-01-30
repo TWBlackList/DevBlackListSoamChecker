@@ -145,6 +145,8 @@ namespace CNBlackListSoamChecker
         {
             switch (Command)
             {
+                case "/user":
+                    return new UserCommand().User(RawMessage);
                 case "/lsop":
                     return new OP().LsOP(RawMessage);
                 case "/help":
