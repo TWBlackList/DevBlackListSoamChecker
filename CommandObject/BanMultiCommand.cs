@@ -129,7 +129,7 @@ namespace CNBlackListSoamChecker.CommandObject
                         ExpiresTime,
                         Reason
                     );
-                    Thread.Sleep(3000);
+                    Thread.Sleep(3500);
                 }
                 //if (status)
                 //{
