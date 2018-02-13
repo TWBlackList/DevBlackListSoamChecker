@@ -1,11 +1,12 @@
-﻿using ReimuAPI.ReimuBase;
-using ReimuAPI.ReimuBase.TgData;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Json;
 using System.Text;
+using Microsoft.EntityFrameworkCore;
+using ReimuAPI.ReimuBase;
+using ReimuAPI.ReimuBase.TgData;
 
 namespace CNBlackListSoamChecker.DbManager
 {
@@ -28,11 +29,9 @@ namespace CNBlackListSoamChecker.DbManager
             long ChatID = 0,
             int MessageID = 0,
             UserInfo userinfo = null
-            )
+        )
         {
-            if(RAPI.getIsInWhitelist(UserID)){
-                return false;
-            }
+            if (RAPI.getIsInWhitelist(UserID)) return false;
             bool finalResult = true;
             string banmsg = "";
             SendMessageResult result = null;
@@ -46,6 +45,7 @@ namespace CNBlackListSoamChecker.DbManager
                     result = null;
                 }
             }
+
             int ChannelReasonID = 0;
             if (Temp.MainChannelID != 0)
             {
@@ -67,42 +67,45 @@ namespace CNBlackListSoamChecker.DbManager
                 {
                     banmsg = userinfo.GetUserTextInfo();
                 }
+
                 string textlevel;
                 if (Level == 0)
-                {
                     textlevel = "封鎖";
-                }
                 else if (Level == 1)
-                {
                     textlevel = "警告";
-                }
                 else
-                {
                     textlevel = Level + " （未知）";
-                }
                 banmsg += "\n處分 : " + textlevel;
                 string ExpTime = GetTime.GetExpiresTime(Expires);
-                if (ExpTime != "永久封鎖"){
+                if (ExpTime != "永久封鎖")
                     banmsg += "\n時效至 : " + GetTime.GetExpiresTime(Expires);
-                }else{
+                else
                     banmsg += "\n時效 : 永久";
-                }
                 banmsg += "\n原因 : " + Reason;
-                banmsg += "\nOID : " + AdminID.ToString() + "\n";
+                banmsg += "\nOID : " + AdminID + "\n";
                 if (Temp.ReasonChannelID != 0 && ReasonID != 0)
-                {
                     banmsg += "參考 : \nhttps://t.me/" + Temp.ReasonChannelName + "/" + ReasonID;
-                }
                 else if (Temp.ReasonChannelID != 0 && ChatID != 0 && MessageID != 0) finalResult = false;
-                
-                try{
+
+                try
+                {
                     banmsg += "\n\n";
                     banmsg += TgApi.getDefaultApiConnection().getChatInfo(ChatID).result.GetChatTextInfo();
-                }catch{}
+                }
+                catch
+                {
+                }
+
                 ChangeDbBan(AdminID, UserID, Level, Expires, Reason, ChannelReasonID, ReasonID);
-                try{TgApi.getDefaultApiConnection().sendMessage(Temp.MainChannelID, banmsg);}catch{}
-                
+                try
+                {
+                    TgApi.getDefaultApiConnection().sendMessage(Temp.MainChannelID, banmsg);
+                }
+                catch
+                {
+                }
             }
+
             CNBlacklistApi.PostToAPI(UserID, true, Level, Expires, Reason);
             return finalResult;
         }
@@ -112,7 +115,7 @@ namespace CNBlackListSoamChecker.DbManager
             int UserID,
             string Reason = null,
             UserInfo userinfo = null
-            )
+        )
         {
             bool finalResult = true;
             int ChannelReasonID = 0;
@@ -137,14 +140,14 @@ namespace CNBlackListSoamChecker.DbManager
                 {
                     banmsg = userinfo.GetUserTextInfo();
                 }
+
                 banmsg += "\n\n已被解除封鎖";
-                if (Reason != null)
-                {
-                    banmsg += "，原因 : \n" + Reason;
-                }
-                banmsg += "\nOID : " + AdminID.ToString() + "\n";
-                ChannelReasonID = TgApi.getDefaultApiConnection().sendMessage(Temp.MainChannelID,banmsg).result.message_id;
+                if (Reason != null) banmsg += "，原因 : \n" + Reason;
+                banmsg += "\nOID : " + AdminID + "\n";
+                ChannelReasonID = TgApi.getDefaultApiConnection().sendMessage(Temp.MainChannelID, banmsg).result
+                    .message_id;
             }
+
             ChangeDbUnban(AdminID, UserID, Reason, ChannelReasonID);
             CNBlacklistApi.PostToAPI(UserID, false, 1, 0, Reason);
             return finalResult;
@@ -180,7 +183,7 @@ namespace CNBlackListSoamChecker.DbManager
                     db.BanUsers.Update(baninfo);
                     db.SaveChanges();
                 }
-                catch (Microsoft.EntityFrameworkCore.DbUpdateException)
+                catch (DbUpdateException)
                 {
                     db.BanUsers.Update(baninfo);
                     db.SaveChanges();
@@ -196,9 +199,10 @@ namespace CNBlackListSoamChecker.DbManager
             string Reason,
             int ChannelMessageID = 0,
             int ReasonMessageID = 0
-            )
+        )
         {
-            BanUser baninfo = new BanUser {
+            BanUser baninfo = new BanUser
+            {
                 UserID = UserID,
                 Ban = 0,
                 Level = Level,
@@ -209,7 +213,8 @@ namespace CNBlackListSoamChecker.DbManager
                 Expires = Expires
             };
             Temp.bannedUsers[UserID] = baninfo;
-            BanHistory banHistory = new BanHistory {
+            BanHistory banHistory = new BanHistory
+            {
                 UserID = UserID,
                 Ban = 0,
                 Level = Level,
@@ -233,12 +238,13 @@ namespace CNBlackListSoamChecker.DbManager
                     db.BanUsers.Update(baninfo);
                     db.SaveChanges();
                 }
-                catch (Microsoft.EntityFrameworkCore.DbUpdateException)
+                catch (DbUpdateException)
                 {
                     db.BanUsers.Update(baninfo);
                     db.SaveChanges();
                 }
             }
+
             new SubscribeBanListCaller().CallGroupsInThread(baninfo);
         }
 
@@ -247,7 +253,7 @@ namespace CNBlackListSoamChecker.DbManager
             int UserID,
             string Reason,
             int ChannelMessageID = 0
-            )
+        )
         {
             Temp.bannedUsers.Remove(UserID);
             BanHistory banHistory = new BanHistory
@@ -266,10 +272,11 @@ namespace CNBlackListSoamChecker.DbManager
             {
                 db.BanHistorys.Add(banHistory);
                 var bannedUser = db.BanUsers
-                .Single(users => users.UserID == UserID);
+                    .Single(users => users.UserID == UserID);
                 db.Remove(bannedUser);
                 db.SaveChanges();
             }
+
             new UnBanCaller().UnBanCallerThread(UserID);
         }
 
@@ -284,28 +291,32 @@ namespace CNBlackListSoamChecker.DbManager
                     banuser.Ban = 1;
                     Temp.bannedUsers[uid] = banuser;
                 }
+
                 return banuser;
             }
+
             using (var db = new BlacklistDatabaseContext())
             {
                 BanUser bannedUser;
                 try
                 {
                     bannedUser = db.BanUsers
-                    .Single(users => users.UserID == uid);
+                        .Single(users => users.UserID == uid);
                     Temp.bannedUsers.TryAdd(uid, bannedUser);
                 }
                 catch (InvalidOperationException)
                 {
-                    bannedUser = new BanUser() { Ban = 1 };
+                    bannedUser = new BanUser {Ban = 1};
                     Temp.bannedUsers.TryAdd(uid, bannedUser);
                     return bannedUser;
                 }
+
                 if (GetTime.GetIsExpired(bannedUser.Expires))
                 {
                     bannedUser.Ban = 1;
                     db.BanUsers.Update(bannedUser);
                 }
+
                 return bannedUser;
             }
         }
@@ -314,22 +325,19 @@ namespace CNBlackListSoamChecker.DbManager
         {
             GroupCfg config = null;
             config = Temp.groupConfig.GetValueOrDefault(gid, null);
-            if (config != null)
-            {
-                return config;
-            }
+            if (config != null) return config;
             using (var db = new BlacklistDatabaseContext())
             {
                 GroupCfg groupCfg;
                 try
                 {
                     groupCfg = db.GroupConfig
-                    .Single(groups => groups.GroupID == gid);
+                        .Single(groups => groups.GroupID == gid);
                     Temp.groupConfig.TryAdd(gid, groupCfg);
                 }
                 catch (InvalidOperationException)
                 {
-                    groupCfg = new GroupCfg()
+                    groupCfg = new GroupCfg
                     {
                         GroupID = gid,
                         AdminOnly = 1,
@@ -346,6 +354,7 @@ namespace CNBlackListSoamChecker.DbManager
                     db.SaveChanges();
                     return groupCfg;
                 }
+
                 return groupCfg;
             }
         }
@@ -360,41 +369,17 @@ namespace CNBlackListSoamChecker.DbManager
             int AutoDeleteSpamMessage = 3,
             int AutoDeleteCommand = 3,
             int SubscribeBanList = 3
-            )
+        )
         {
             GroupCfg groupCfg = GetGroupConfig(gid);
-            if (AdminOnly != 3)
-            {
-                groupCfg.AdminOnly = AdminOnly;
-            }
-            if (BlackList != 3)
-            {
-                groupCfg.BlackList = BlackList;
-            }
-            if (AutoKick != 3)
-            {
-                groupCfg.AutoKick = AutoKick;
-            }
-            if (AntiBot != 3)
-            {
-                groupCfg.AntiBot = AntiBot;
-            }
-            if (AntiHalal != 3)
-            {
-                groupCfg.AntiHalal = AntiHalal;
-            }
-            if (AutoDeleteSpamMessage != 3)
-            {
-                groupCfg.AutoDeleteSpamMessage = AutoDeleteSpamMessage;
-            }
-            if (AutoDeleteCommand != 3)
-            {
-                groupCfg.AutoDeleteCommand = AutoDeleteCommand;
-            }
-            if (SubscribeBanList != 3)
-            {
-                groupCfg.SubscribeBanList = SubscribeBanList;
-            }
+            if (AdminOnly != 3) groupCfg.AdminOnly = AdminOnly;
+            if (BlackList != 3) groupCfg.BlackList = BlackList;
+            if (AutoKick != 3) groupCfg.AutoKick = AutoKick;
+            if (AntiBot != 3) groupCfg.AntiBot = AntiBot;
+            if (AntiHalal != 3) groupCfg.AntiHalal = AntiHalal;
+            if (AutoDeleteSpamMessage != 3) groupCfg.AutoDeleteSpamMessage = AutoDeleteSpamMessage;
+            if (AutoDeleteCommand != 3) groupCfg.AutoDeleteCommand = AutoDeleteCommand;
+            if (SubscribeBanList != 3) groupCfg.SubscribeBanList = SubscribeBanList;
             Temp.groupConfig[gid] = groupCfg;
             using (var db = new BlacklistDatabaseContext())
             {
@@ -403,11 +388,12 @@ namespace CNBlackListSoamChecker.DbManager
                     db.GroupConfig.Add(groupCfg);
                     db.SaveChanges();
                 }
-                catch (Microsoft.EntityFrameworkCore.DbUpdateException)
+                catch (DbUpdateException)
                 {
                     db.GroupConfig.Update(groupCfg);
                     db.SaveChanges();
                 }
+
                 return groupCfg;
             }
         }
@@ -421,7 +407,7 @@ namespace CNBlackListSoamChecker.DbManager
                 try
                 {
                     jsonText = File.ReadAllText(ConfigManager.GetConfigPath() + "spamstrings.json");
-                    data = (List<SpamMessage>)new DataContractJsonSerializer(
+                    data = (List<SpamMessage>) new DataContractJsonSerializer(
                         typeof(List<SpamMessage>)
                     ).ReadObject(
                         new MemoryStream(
@@ -431,11 +417,13 @@ namespace CNBlackListSoamChecker.DbManager
                 }
                 catch
                 {
-                    data = new List<SpamMessage>() { };
+                    data = new List<SpamMessage>();
                 }
+
                 Temp.spamMessageList = data;
                 return data;
             }
+
             return Temp.spamMessageList;
         }
 
@@ -443,12 +431,8 @@ namespace CNBlackListSoamChecker.DbManager
         {
             List<SpamMessage> spamMessageList = GetSpamMessageList();
             foreach (SpamMessage smsg in spamMessageList)
-            {
                 if (smsg.FriendlyName.Equals(Name))
-                {
                     return smsg;
-                }
-            }
             return null;
         }
 
@@ -467,11 +451,9 @@ namespace CNBlackListSoamChecker.DbManager
             for (int i = 0; i < length; i++)
             {
                 SpamMessage nowMsg = spamMessageList[i];
-                if (nowMsg.FriendlyName == msg.FriendlyName)
-                {
-                    spamMessageList[i] = msg;
-                }
+                if (nowMsg.FriendlyName == msg.FriendlyName) spamMessageList[i] = msg;
             }
+
             Temp.spamMessageList = spamMessageList;
             WriteSpamMessageToDatabase(spamMessageList);
         }
@@ -479,19 +461,13 @@ namespace CNBlackListSoamChecker.DbManager
         public int DeleteSpamMessage(string friendlyName)
         {
             List<SpamMessage> spamMessageList = GetSpamMessageList();
-            List<SpamMessage> newList = new List<SpamMessage>() { };
+            List<SpamMessage> newList = new List<SpamMessage>();
             int deletedCount = 0;
             foreach (SpamMessage smsg in spamMessageList)
-            {
                 if (smsg.FriendlyName != friendlyName)
-                {
                     newList.Add(smsg);
-                }
                 else
-                {
                     deletedCount++;
-                }
-            }
             Temp.spamMessageList = newList;
             WriteSpamMessageToDatabase(newList);
             return deletedCount;
