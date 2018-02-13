@@ -134,7 +134,7 @@ namespace CNBlackListSoamChecker.CommandObject
                     return true;
                 }
 
-            if (RAPI.getIsInWhitelist(UserID)) 
+            if (RAPI.getIsInWhitelist(RawMessage.GetSendUser().id)) 
             {
                 TgApi.getDefaultApiConnection().sendMessage(
                     RawMessage.GetMessageChatInfo().id,
