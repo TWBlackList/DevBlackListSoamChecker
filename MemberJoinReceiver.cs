@@ -104,7 +104,7 @@ namespace CNBlackListSoamChecker
                     if (banUser.Level == 0)
                     {
                         resultmsg += "警告：這個使用者「將會」對群組造成負面影響，已自動封鎖" + RAPI.escapeMarkdown(banReason) + "\n" +
-                                     "被封鎖的用戶，可以到 [這個群組](https://t.me/J_Court) 尋求申訴";
+                                     "被封鎖的用戶，可以到 [這個群組](https://t.me/ChineseBlackList) 尋求申訴";
                         if (groupCfg.AutoKick == 0)
                             try
                             {
