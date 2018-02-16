@@ -126,8 +126,8 @@ namespace CNBlackListSoamChecker
             // AUTO DELETE SPAM MESSAGE START
             if (Temp.DisableBanList == false && cfg.AutoDeleteSpamMessage == 0)
             {
-                int max_point = 0;
-                SpamMessage max_point_spam ;
+                private int max_point = 0;
+                private SpamMessage max_point_spam ;
                 List<SpamMessage> spamMsgList = Temp.GetDatabaseManager().GetSpamMessageList();
                 foreach (SpamMessage smsg in spamMsgList)
                 {
