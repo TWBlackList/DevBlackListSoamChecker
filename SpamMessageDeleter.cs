@@ -124,10 +124,10 @@ namespace CNBlackListSoamChecker
             // ALTI HALAL AND INDIA END
 
             // AUTO DELETE SPAM MESSAGE START
-            int max_point = 0;
-            SpamMessage max_point_spam ;
             if (Temp.DisableBanList == false && cfg.AutoDeleteSpamMessage == 0)
             {
+                int max_point = 0;
+                SpamMessage max_point_spam ;
                 List<SpamMessage> spamMsgList = Temp.GetDatabaseManager().GetSpamMessageList();
                 foreach (SpamMessage smsg in spamMsgList)
                 {
@@ -161,7 +161,7 @@ namespace CNBlackListSoamChecker
                     {
                         if(points > max_point){
                             max_point = points;
-                            SpamMessage max_point_spam = smsg;
+                            max_point_spam = smsg;
                         }
                         //new Task(() =>
                         //{
@@ -175,9 +175,7 @@ namespace CNBlackListSoamChecker
 
                     }
                 }
-            }
-
-            if(max_point > 0){
+                if(max_point > 0){
                 ProcessMessage(max_point_spam, BaseMessage.message_id, BaseMessage.GetMessageChatInfo().id,
                 BaseMessage.GetSendUser(),max_point);
 
@@ -206,6 +204,9 @@ namespace CNBlackListSoamChecker
                 }).Start();
                 return new CallbackMessage {StopProcess = true};
             }
+            }
+
+            
             // AUTO DELETE SPAM MESSAGE END
 
             // Auto DELETE Command START
