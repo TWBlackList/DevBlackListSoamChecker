@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using ReimuAPI.ReimuBase;
 using ReimuAPI.ReimuBase.Interfaces;
 using ReimuAPI.ReimuBase.TgData;
-using TWBlackListSoamChecker.DbManager;
+using CNBlackListSoamChecker.DbManager;
 
 namespace CNBlackListSoamChecker
 {
