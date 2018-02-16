@@ -125,7 +125,7 @@ namespace CNBlackListSoamChecker
 
             // AUTO DELETE SPAM MESSAGE START
             int max_point = 0;
-            SpamMessage max_point_spam;
+            SpamMessage max_point_spam ;
             if (Temp.DisableBanList == false && cfg.AutoDeleteSpamMessage == 0)
             {
                 List<SpamMessage> spamMsgList = Temp.GetDatabaseManager().GetSpamMessageList();
@@ -161,7 +161,7 @@ namespace CNBlackListSoamChecker
                     {
                         if(points > max_point){
                             max_point = points;
-                            max_point_spam = smsg;
+                            SpamMessage max_point_spam = smsg;
                         }
                         //new Task(() =>
                         //{
