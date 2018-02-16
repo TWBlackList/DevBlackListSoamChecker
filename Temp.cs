@@ -14,10 +14,10 @@ namespace CNBlackListSoamChecker
         public static long AdminGroupID = -1001157582347; // If haven't, change it to 0
         public static long MainChannelID = -1001263651463; // If haven't, change it to 0
         public static long ReasonChannelID = -1001222529529; // If haven't, change it to 0
-        public static long ReportGroupID = -1001157582347; // If haven't, change it to 0
+        public static long ReportGroupID = -1001197757308; // If haven't, change it to 0
         public static string MainChannelName = "CNBL_main"; // If haven't, change it to null
         public static string ReasonChannelName = "CNBL_Reason"; // If haven't, change it to null
-        public static string ReportGroupName = "ChineseBlackList"; //這ㄍ意思是：你他媽不能亂改群組username
+        public static string ReportGroupName = "CNBL_Court"; //這ㄍ意思是：你他媽不能亂改群組username
 
 
         internal static DatabaseManager GetDatabaseManager()
