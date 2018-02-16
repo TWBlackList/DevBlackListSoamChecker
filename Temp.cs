@@ -19,7 +19,6 @@ namespace CNBlackListSoamChecker
         public static string ReasonChannelName = "CNBL_Reason"; // If haven't, change it to null
         public static string ReportGroupName = "CNBL_Court"; //這ㄍ意思是：你他媽不能亂改群組username
 
-
         internal static DatabaseManager GetDatabaseManager()
         {
             if (databaseManager == null) databaseManager = new DatabaseManager();
