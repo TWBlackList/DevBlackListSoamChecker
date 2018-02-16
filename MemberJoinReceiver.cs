@@ -82,7 +82,7 @@ namespace CNBlackListSoamChecker
                 {
                     string resultmsg = "這位使用者被封鎖了";
                     resultmsg += "，原因 : \n" + RAPI.escapeMarkdown(banUser.Reason) + "\nID : " + JoinedUser.id;
-                    if (banUser.ChannelMessageID != 0)
+                    if (banUser.ChannelMessageID != 0 && Temp.MainChannelName != null)
                         resultmsg += "\n參考 : https://t.me/" + Temp.MainChannelName + "/" + banUser.ChannelMessageID ;
                     TgApi.getDefaultApiConnection().sendMessage(
                         RawMessage.GetMessageChatInfo().id,
@@ -125,7 +125,7 @@ namespace CNBlackListSoamChecker
                 if (banUser.Ban == 0)
                 {
                     string banReason;
-                    if (banUser.ChannelMessageID != 0)
+                    if (banUser.ChannelMessageID != 0 && Temp.MainChannelName != null)
                         banReason = "， [原因請點選這裡查看](https://t.me/" + Temp.MainChannelName + "/" +
                                     banUser.ChannelMessageID + ")";
                     else
@@ -133,7 +133,7 @@ namespace CNBlackListSoamChecker
                     if (banUser.Level == 0)
                     {
                         resultmsg += "警告：這個使用者「將會」對群組造成負面影響，已自動封鎖" + banReason + "\n" +
-                                     "被封鎖的用戶，可以到 [這個群組](https://t.me/ChineseBlackList) 尋求申訴";
+                                     "被封鎖的用戶，可以到 [這個群組](https://t.me/" + Temp.CourtGroupName + ") 尋求申訴";
                         if (groupCfg.AutoKick == 0)
                             try
                             {
@@ -154,7 +154,7 @@ namespace CNBlackListSoamChecker
                     {
                         resultmsg += "警告：這個使用者「可能」對群組造成負面影響" + RAPI.escapeMarkdown(banReason) + "\n" +
                                      "請群組管理員多加留意\n" +
-                                     "對於被警告的使用者，你可以通過 [這個群組](https://t.me/J_Court) 以請求解除。";
+                                     "對於被警告的使用者，你可以通過 [這個群組](https://t.me/" + Temp.CourtGroupName + ") 以請求解除。";
                     }
                 }
                 else
