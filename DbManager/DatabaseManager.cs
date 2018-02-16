@@ -36,17 +36,13 @@ namespace CNBlackListSoamChecker.DbManager
             string banmsg = "";
             SendMessageResult result = null;
             int ReasonID = 0;
-            if (Temp.ReasonChannelID != 0 && ChatID != 0 && MessageID != 0)
+            int ChannelReasonID = 0;
+            if(Temp.ReasonChannelID != 0 && ChatID != 0 && MessageID != 0)
             {
-                result = TgApi.getDefaultApiConnection().forwardMessage(Temp.ReasonChannelID, ChatID, MessageID);
-                if (result.ok)
-                {
-                    ReasonID = result.result.message_id;
-                    result = null;
-                }
+                ReasonID = TgApi.getDefaultApiConnection().forwardMessage(Temp.ReasonChannelID, ChatID, MessageID).result.message_id;
+                result = null;
             }
 
-            int ChannelReasonID = 0;
             if (Temp.MainChannelID != 0)
             {
                 if (userinfo == null)
@@ -83,29 +79,16 @@ namespace CNBlackListSoamChecker.DbManager
                     banmsg += "\n時效 : 永久";
                 banmsg += "\n原因 : " + Reason;
                 banmsg += "\nOID : " + AdminID + "\n";
-                if (Temp.ReasonChannelID != 0 && ReasonID != 0)
-                    banmsg += "參考 : \nhttps://t.me/" + Temp.ReasonChannelName + "/" + ReasonID;
+                if (Temp.ReasonChannelID != 0 && ReasonID != 0 && Temp.ReasonChannelName != null)
+                    banmsg += "\n\n參考 : \nhttps://t.me/" + Temp.ReasonChannelName + "/" + ReasonID;
                 else if (Temp.ReasonChannelID != 0 && ChatID != 0 && MessageID != 0) finalResult = false;
 
-                try
-                {
-                    banmsg += "\n\n";
-                    banmsg += TgApi.getDefaultApiConnection().getChatInfo(ChatID).result.GetChatTextInfo();
-                }
-                catch
-                {
-                }
+                banmsg += "\n";
+                banmsg += TgApi.getDefaultApiConnection().getChatInfo(ChatID).result.GetChatTextInfo();
 
-                ChangeDbBan(AdminID, UserID, Level, Expires, Reason, ChannelReasonID, ReasonID);
-                try
-                {
-                    TgApi.getDefaultApiConnection().sendMessage(Temp.MainChannelID, banmsg);
-                }
-                catch
-                {
-                }
+                ChannelReasonID = TgApi.getDefaultApiConnection().sendMessage(Temp.MainChannelID, banmsg).result.message_id;
             }
-
+            ChangeDbBan(AdminID, UserID, Level, Expires, Reason, ChannelReasonID, ReasonID);
             CNBlacklistApi.PostToAPI(UserID, true, Level, Expires, Reason);
             return finalResult;
         }
@@ -144,8 +127,14 @@ namespace CNBlackListSoamChecker.DbManager
                 banmsg += "\n\n已被解除封鎖";
                 if (Reason != null) banmsg += "，原因 : \n" + Reason;
                 banmsg += "\nOID : " + AdminID + "\n";
-                ChannelReasonID = TgApi.getDefaultApiConnection().sendMessage(Temp.MainChannelID, banmsg).result
-                    .message_id;
+                try
+                {
+                    ChannelReasonID = TgApi.getDefaultApiConnection().sendMessage(Temp.MainChannelID, banmsg).result
+                        .message_id;
+                }
+                catch
+                {
+                }
             }
 
             ChangeDbUnban(AdminID, UserID, Reason, ChannelReasonID);
