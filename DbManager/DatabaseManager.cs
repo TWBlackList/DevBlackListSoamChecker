@@ -40,9 +40,7 @@ namespace CNBlackListSoamChecker.DbManager
             if(Temp.ReasonChannelID != 0 && ChatID != 0 && MessageID != 0)
             {
                 ReasonID = TgApi.getDefaultApiConnection().forwardMessage(Temp.ReasonChannelID, ChatID, MessageID).result.message_id;
-                result = null;
             }
-
             if (Temp.MainChannelID != 0)
             {
                 if (userinfo == null)
@@ -63,7 +61,6 @@ namespace CNBlackListSoamChecker.DbManager
                 {
                     banmsg = userinfo.GetUserTextInfo();
                 }
-
                 string textlevel;
                 if (Level == 0)
                     textlevel = "封鎖";
@@ -82,10 +79,8 @@ namespace CNBlackListSoamChecker.DbManager
                 if (Temp.ReasonChannelID != 0 && ReasonID != 0 && Temp.ReasonChannelName != null)
                     banmsg += "\n參考 : \nhttps://t.me/" + Temp.ReasonChannelName + "/" + ReasonID;
                 else if (Temp.ReasonChannelID != 0 && ChatID != 0 && MessageID != 0) finalResult = false;
-
                 banmsg += "\n";
-                banmsg += TgApi.getDefaultApiConnection().getChatInfo(ChatID).result.GetChatTextInfo();
-
+                try{banmsg += TgApi.getDefaultApiConnection().getChatInfo(ChatID).result.GetChatTextInfo();}catch{}
                 ChannelReasonID = TgApi.getDefaultApiConnection().sendMessage(Temp.MainChannelID, banmsg).result.message_id;
             }
             ChangeDbBan(AdminID, UserID, Level, Expires, Reason, ChannelReasonID, ReasonID);

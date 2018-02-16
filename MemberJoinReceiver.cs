@@ -107,6 +107,10 @@ namespace CNBlackListSoamChecker
                                     JoinedUser.id,
                                     GetTime.GetUnixTime() + 86400
                                 );
+                            TgApi.getDefaultApiConnection().restrictChatMember(
+                                RawMessage.GetMessageChatInfo().id, 
+                                JoinedUser.id, 
+                                0, true, true, false, false);
                         }catch{}
                      }).Start();   
                 }
