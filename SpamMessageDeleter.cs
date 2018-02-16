@@ -124,7 +124,7 @@ namespace CNBlackListSoamChecker
             // ALTI HALAL AND INDIA END
 
             // AUTO DELETE SPAM MESSAGE START
-                        int max_point = 0;
+            int max_point = 0;
             SpamMessage max_point_spam;
             if (Temp.DisableBanList == false && cfg.AutoDeleteSpamMessage == 0)
             {
@@ -195,7 +195,7 @@ namespace CNBlackListSoamChecker
                     SendMessageResult autodeletespammessagesendresult = TgApi.getDefaultApiConnection()
                         .sendMessage(
                         BaseMessage.GetMessageChatInfo().id,
-                        "偵測到 " + smsg.FriendlyName +
+                        "偵測到 " + max_point_spam.FriendlyName +
                         " ，已自動回報，如有誤報請加入 @" + Temp.ReportGroupName + " 以報告誤報。"
                     );
                     Thread.Sleep(60000);
