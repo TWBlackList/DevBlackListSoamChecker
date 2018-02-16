@@ -91,7 +91,7 @@ namespace CNBlackListSoamChecker
                         TgApi.PARSEMODE_MARKDOWN
                     );
                 }else{
-                    if (RAPI.getIsInWhitelist(UserID)) return false;
+                    if (RAPI.getIsInWhitelist(JoinedUser.id)) return new CallbackMessage();
                     TgApi.getDefaultApiConnection().sendMessage(
                         RawMessage.GetMessageChatInfo().id,
                         "您未被封鎖，請離開",
