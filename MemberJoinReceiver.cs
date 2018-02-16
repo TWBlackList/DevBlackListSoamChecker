@@ -88,6 +88,25 @@ namespace CNBlackListSoamChecker
                         RawMessage.message_id,
                         TgApi.PARSEMODE_MARKDOWN
                     );
+                }else{
+                    if (RAPI.getIsInWhitelist(UserID)) return false;
+                    TgApi.getDefaultApiConnection().sendMessage(
+                        RawMessage.GetMessageChatInfo().id,
+                        "您未被封鎖，請離開",
+                        RawMessage.message_id,
+                        TgApi.PARSEMODE_MARKDOWN
+                    );
+
+                    new Thread(delegate() { 
+                        Thread.Sleep(30000);
+                        try{
+                            TgApi.getDefaultApiConnection().kickChatMember(
+                                    RawMessage.GetMessageChatInfo().id,
+                                    JoinedUser.id,
+                                    GetTime.GetUnixTime() + 86400
+                                );
+                        }catch{}
+                     }).Start();   
                 }
 
                 return new CallbackMessage();
