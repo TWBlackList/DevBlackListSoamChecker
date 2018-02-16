@@ -240,6 +240,14 @@ namespace CNBlackListSoamChecker
             else
                 banUtilTime = GetTime.GetUnixTime() + smsg.BanDays * 86400 + smsg.BanHours * 3600 +
                               smsg.BanMinutes * 60;
+            if (smsg.AutoMute)
+                TgApi.getDefaultApiConnection().restrictChatMember(
+                    ChatID,
+                    SendUserInfo.id,
+                    banUtilTime,
+                    true,
+                    false
+                );
             if (smsg.AutoBlackList)
             {
                 if (Temp.GetDatabaseManager().GetUserBanStatus(SendUserInfo.id).Ban == 0) return;
@@ -257,26 +265,17 @@ namespace CNBlackListSoamChecker
                     );
                 }).Start();
             }
-
+            if (smsg.AutoKick)
+                new Task(() =>
+                {
+                    TgApi.getDefaultApiConnection().kickChatMember(ChatID, SendUserInfo.id, banUtilTime);
+                }).Start();
             if (smsg.AutoDelete)
                 new Thread(delegate()
                 {
                     Thread.Sleep(5000);
                     TgApi.getDefaultApiConnection().deleteMessage(ChatID, MsgID);
                 }).Start();
-            if (smsg.AutoKick)
-                new Task(() =>
-                {
-                    TgApi.getDefaultApiConnection().kickChatMember(ChatID, SendUserInfo.id, banUtilTime);
-                }).Start();
-            if (smsg.AutoMute)
-                TgApi.getDefaultApiConnection().restrictChatMember(
-                    ChatID,
-                    SendUserInfo.id,
-                    banUtilTime,
-                    true,
-                    false
-                );
         }
 
         private void CallAdmin_SendMessage(TgMessage msg, string content, int step)
