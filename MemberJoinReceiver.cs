@@ -53,6 +53,11 @@ namespace CNBlackListSoamChecker
 
             if (JoinedUser.id == TgApi.getDefaultApiConnection().getMe().id)
             {
+                if(RAPI.getIsBlockGroup(RawMessage.GetMessageChatInfo().id)){
+                    TgApi.getDefaultApiConnection().sendMessage(RawMessage.GetMessageChatInfo().id), "此群組禁止使用本服務。");
+                    TgApi.getDefaultApiConnection().leaveChat(RawMessage.GetMessageChatInfo().id));
+                    return new CallbackMessage();
+                }
                 TgApi.getDefaultApiConnection().sendMessage(
                     RawMessage.GetMessageChatInfo().id,
                     "歡迎使用 @" + TgApi.getDefaultApiConnection().getMe().username + "\n" +
@@ -74,11 +79,9 @@ namespace CNBlackListSoamChecker
                 if (banUser.Ban == 0)
                 {
                     string resultmsg = "這位使用者被封鎖了";
+                    resultmsg += "，原因 : \n" + banUser.Reason + "\nID : " + JoinedUser.id;
                     if (banUser.ChannelMessageID != 0)
-                        resultmsg += "， [原因請點選這裡查看](https://t.me/" + Temp.MainChannelName + "/" +
-                                     banUser.ChannelMessageID + ")";
-                    else
-                        resultmsg += "，原因 : \n" + banUser.Reason + "\nID : " + JoinedUser.id;
+                        resultmsg += "\n參考 : https://t.me/" + Temp.MainChannelName + "/" + banUser.ChannelMessageID ;
                     TgApi.getDefaultApiConnection().sendMessage(
                         RawMessage.GetMessageChatInfo().id,
                         resultmsg,

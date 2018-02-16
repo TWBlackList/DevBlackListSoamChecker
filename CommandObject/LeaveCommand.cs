@@ -7,7 +7,7 @@ namespace CNBlackListSoamChecker.CommandObject
     {
         internal bool Leave(TgMessage RawMessage)
         {
-            if (RAPI.getIsBotSYSOP(RawMessage.GetSendUser().id) || RAPI.getIsBotAdmin(RawMessage.GetSendUser().id) ||
+            if (RAPI.getIsBotAdmin(RawMessage.GetSendUser().id) || RAPI.getIsBotOP(RawMessage.GetSendUser().id) ||
                 TgApi.getDefaultApiConnection().checkIsAdmin(RawMessage.chat.id, RawMessage.GetSendUser().id))
             {
                 TgApi.getDefaultApiConnection().sendMessage(RawMessage.GetMessageChatInfo().id,

@@ -29,7 +29,7 @@ namespace CNBlackListSoamChecker
                     break;
             }
 
-            if (RAPI.getIsBotAdmin(RawMessage.from.id))
+            if (RAPI.getIsBotOP(RawMessage.from.id))
                 finalHelpMsg = finalHelpMsg + "\n\nOperator指令:\n" +
                                "/cnban - 封鎖\n" +
                                "/cnunban - 解除封鎖\n" +
