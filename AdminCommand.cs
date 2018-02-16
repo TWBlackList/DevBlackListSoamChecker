@@ -19,23 +19,9 @@ namespace CNBlackListSoamChecker
                             new BroadCast().BroadCast_Status(RawMessage);
                             throw new StopProcessException();
                         case "/addop":
-                            if (Temp.DisableBanList)
-                            {
-                                TgApi.getDefaultApiConnection().sendMessage(RawMessage.chat.id, Disabled_Ban_Msg,
-                                    RawMessage.message_id);
-                                break;
-                            }
-
                             new OP().addOP(RawMessage);
                             throw new StopProcessException();
                         case "/delop":
-                            if (Temp.DisableBanList)
-                            {
-                                TgApi.getDefaultApiConnection().sendMessage(RawMessage.chat.id, Disabled_Ban_Msg,
-                                    RawMessage.message_id);
-                                break;
-                            }
-
                             new OP().delOP(RawMessage);
                             throw new StopProcessException();
                     }
@@ -72,6 +58,15 @@ namespace CNBlackListSoamChecker
                     throw new StopProcessException();
                 case "/lswl":
                     new Whitelist().listWhitelist(RawMessage);
+                    throw new StopProcessException();
+                case "/block":
+                    new BlockGroup().addBlockGroup(RawMessage);
+                    throw new StopProcessException();
+                case "/unblock":
+                    new BlockGroup().deleteBlockGroup(RawMessage);
+                    throw new StopProcessException();
+                case "/blocks":
+                    new BlockGroup().listBlockGroup(RawMessage);
                     throw new StopProcessException();
                 case "/suban":
                     if (RAPI.getIsBotAdmin(RawMessage.GetSendUser().id))
