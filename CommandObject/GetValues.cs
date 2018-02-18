@@ -34,14 +34,10 @@ namespace DevBlackListSoamChecker.CommandObject
         {
             string GroupID = null;
             GroupID = banValues.GetValueOrDefault("g", null);
-            if (GroupID == 0) GroupID = banValues.GetValueOrDefault("group", null);
-            if (GroupID == 0) GroupID = banValues.GetValueOrDefault("groupid", null);
-            if (GroupID == 0)
+            if (GroupID == null) GroupID = banValues.GetValueOrDefault("group", null);
+            if (GroupID == null) GroupID = banValues.GetValueOrDefault("groupid", null);
+            if (GroupID == null)
             {
-                TgApi.getDefaultApiConnection().sendMessage(
-                    RawMessage.GetMessageChatInfo().id,
-                    "您的輸入有錯誤，請檢查您的輸入，或使用 /say 查詢幫助。 err9"
-                );
                 return 0;
             }
             int id = 0 ;
