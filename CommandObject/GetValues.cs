@@ -34,8 +34,8 @@ namespace DevBlackListSoamChecker.CommandObject
         {
             string GroupID = "";
             GroupID = banValues.GetValueOrDefault("g", "__invalid__");
-            if (GroupID == "__invalid__") tmpString = banValues.GetValueOrDefault("group", "__invalid__");
-            if (GroupID == "__invalid__") tmpString = banValues.GetValueOrDefault("groupid", "__invalid__");
+            if (GroupID == "__invalid__") GroupID = banValues.GetValueOrDefault("group", "__invalid__");
+            if (GroupID == "__invalid__") GroupID = banValues.GetValueOrDefault("groupid", "__invalid__");
             if (GroupID == "__invalid__") return 0;
             long id = 0 ;
             if(System.Int64.TryParse(GroupID,out id))
