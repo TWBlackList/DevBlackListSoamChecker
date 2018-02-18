@@ -32,7 +32,7 @@ namespace DevBlackListSoamChecker.CommandObject
 
         internal int GetGroupID(Dictionary<string, string> banValues, TgMessage RawMessage)
         {
-            string GroupID = 0;
+            string GroupID = null;
             GroupID = banValues.GetValueOrDefault("g", null);
             if (GroupID == 0) GroupID = banValues.GetValueOrDefault("group", null);
             if (GroupID == 0) GroupID = banValues.GetValueOrDefault("groupid", null);
@@ -45,7 +45,7 @@ namespace DevBlackListSoamChecker.CommandObject
                 return 0;
             }
             int id = 0 ;
-            if(System.Int64.TryParse(GroupID,id))
+            if(System.Int64.TryParse(GroupID,out id))
             {
                 return id;
             }else{
