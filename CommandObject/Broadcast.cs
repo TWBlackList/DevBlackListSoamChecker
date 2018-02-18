@@ -36,7 +36,7 @@ namespace DevBlackListSoamChecker.CommandObject
                 return true;
             }
 
-            int groupID = new GetValues().GetGroupID(new Dictionary<string, string>(), RawMessage);
+            long groupID = new GetValues().GetGroupID(new Dictionary<string, string>(), RawMessage);
 
             if(groupID == 0){
                 new Thread(delegate() { BC(RawMessage,text); }).Start();
