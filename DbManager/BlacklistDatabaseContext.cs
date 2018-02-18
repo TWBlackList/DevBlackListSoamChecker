@@ -52,7 +52,7 @@ namespace DevBlackListSoamChecker.DbManager
                 msg += "\n原因 : " + Reason;
 
                 if (ChannelMessageID != 0 && Temp.MainChannelName != null)
-                    msg += "\n\n參考: https://t.me/" + Temp.MainChannelName + "/" + ChannelMessageID;
+                    msg += "\n\n參考 : https://t.me/" + Temp.MainChannelName + "/" + ChannelMessageID;
             }
 
             return msg;
@@ -82,7 +82,7 @@ namespace DevBlackListSoamChecker.DbManager
                 msg = RAPI.escapeMarkdown(msg);
 
                 if (ChannelMessageID != 0 && Temp.MainChannelName != null)
-                    msg += "\n\n參考: https://t.me/" + Temp.MainChannelName + "/" + ChannelMessageID;
+                    msg += "\n\n參考 : https://t.me/" + Temp.MainChannelName + "/" + ChannelMessageID;
             }
 
             return msg;
