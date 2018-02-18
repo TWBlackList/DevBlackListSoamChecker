@@ -12,13 +12,47 @@ namespace DevBlackListSoamChecker.CommandObject
     {
         internal bool BroadCast_Status(TgMessage RawMessage)
         {
-            new Thread(delegate() { BC(RawMessage); }).Start();
+            int saySpace = RawMessage.text.IndexOf(" ");
+            if (saySpace == -1)
+            {
+                TgApi.getDefaultApiConnection().sendMessage(
+                    RawMessage.GetMessageChatInfo().id,
+                    "/say [g|group|groupid=1] [t|text=text]" +
+                    "g=ChatID , t=訊息",
+                    RawMessage.message_id
+                );
+                return true;
+            }
+
+            string text = new GetValues().GetText(new Dictionary<string, string>(), RawMessage);
+
+            if(text == null){
+                TgApi.getDefaultApiConnection().sendMessage(
+                    RawMessage.GetMessageChatInfo().id,
+                    "/say [g|group|groupid=1] [t|text=text]" +
+                    "g=ChatID , t=訊息",
+                    RawMessage.message_id
+                );
+                return true;
+            }
+
+            int groupID = new GetValues().GetGroupID(new Dictionary<string, string>(), RawMessage);
+
+            if(groupID == 0){
+                new Thread(delegate() { BC(RawMessage,text); }).Start();
+            }else{
+                TgApi.getDefaultApiConnection()
+                    .sendMessage(groupID, text, ParseMode: TgApi.PARSEMODE_MARKDOWN);
+                TgApi.getDefaultApiConnection()
+                    .sendMessage(RawMessage.chat.id, "傳送完畢!", RawMessage.message_id);
+            }
+
+            
             return true;
         }
 
-        internal bool BC(TgMessage RawMessage)
+        internal bool BC(TgMessage RawMessage,string Msg)
         {
-            string Msg = RawMessage.text.Replace("/say", "");
             if (RAPI.getIsBotAdmin(RawMessage.GetSendUser().id))
             {
                 Console.WriteLine("Broadcasting " + Msg + " ......");

@@ -27,7 +27,42 @@ namespace DevBlackListSoamChecker.CommandObject
                 return null;
             }
 
-            return Reason;
+            return Text;
+        }
+
+        internal int GetGroupID(Dictionary<string, string> banValues, TgMessage RawMessage)
+        {
+            int GroupID = 0;
+            GroupID = banValues.GetValueOrDefault("g", 0);
+            if (GroupID == 0) GroupID = banValues.GetValueOrDefault("group", 0);
+            if (GroupID == 0) GroupID = banValues.GetValueOrDefault("groupid", 0);
+            if (GroupID == 0)
+            {
+                TgApi.getDefaultApiConnection().sendMessage(
+                    RawMessage.GetMessageChatInfo().id,
+                    "您的輸入有錯誤，請檢查您的輸入，或使用 /say 查詢幫助。 err9"
+                );
+                return 0;
+            }
+
+            return GroupID;
+        }
+
+        internal string GetText(Dictionary<string, string> banValues, TgMessage RawMessage)
+        {
+            string Text = null;
+            Text = banValues.GetValueOrDefault("t", null);
+            if (Text == null) Text = banValues.GetValueOrDefault("text", null);
+            if (Text == null)
+            {
+                TgApi.getDefaultApiConnection().sendMessage(
+                    RawMessage.GetMessageChatInfo().id,
+                    "您的輸入有錯誤，請檢查您的輸入，或使用 /say 查詢幫助。 err9"
+                );
+                return null;
+            }
+
+            return Text;
         }
 
         internal UserInfo GetUserInfo(TgMessage RawMessage, string from)
