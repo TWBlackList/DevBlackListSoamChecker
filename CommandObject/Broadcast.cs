@@ -23,8 +23,8 @@ namespace DevBlackListSoamChecker.CommandObject
                 );
                 return true;
             }
-
-            Dictionary<string, string> banValues = CommandDecoder.cutKeyIsValue(value);
+            
+            Dictionary<string, string> banValues = CommandDecoder.cutKeyIsValue(RawMessage.text.Substring(saySpace + 1));
 
             string text = new GetValues().GetText(banValues, RawMessage);
 
