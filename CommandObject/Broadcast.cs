@@ -18,7 +18,7 @@ namespace DevBlackListSoamChecker.CommandObject
                 TgApi.getDefaultApiConnection().sendMessage(
                     RawMessage.GetMessageChatInfo().id,
                     "/say [g|group|groupid=1] [t|text=text]" +
-                    "g=ChatID , t=訊息",
+                    "\ng=ChatID\nt=訊息",
                     RawMessage.message_id
                 );
                 return true;

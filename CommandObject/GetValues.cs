@@ -32,14 +32,11 @@ namespace DevBlackListSoamChecker.CommandObject
 
         internal long GetGroupID(Dictionary<string, string> banValues, TgMessage RawMessage)
         {
-            string GroupID = null;
-            GroupID = banValues.GetValueOrDefault("g", null);
-            if (GroupID == null) GroupID = banValues.GetValueOrDefault("group", null);
-            if (GroupID == null) GroupID = banValues.GetValueOrDefault("groupid", null);
-            if (GroupID == null)
-            {
-                return 0;
-            }
+            string GroupID = "";
+            GroupID = banValues.GetValueOrDefault("g", "__invalid__");
+            if (GroupID == "__invalid__") tmpString = banValues.GetValueOrDefault("group", "__invalid__");
+            if (GroupID == "__invalid__") tmpString = banValues.GetValueOrDefault("groupid", "__invalid__");
+            if (GroupID == "__invalid__") return 0;
             long id = 0 ;
             if(System.Int64.TryParse(GroupID,out id))
             {
@@ -51,18 +48,10 @@ namespace DevBlackListSoamChecker.CommandObject
 
         internal string GetText(Dictionary<string, string> banValues, TgMessage RawMessage)
         {
-            string Text = null;
-            Text = banValues.GetValueOrDefault("t", null);
-            if (Text == null) Text = banValues.GetValueOrDefault("text", null);
-            if (Text == null)
-            {
-                TgApi.getDefaultApiConnection().sendMessage(
-                    RawMessage.GetMessageChatInfo().id,
-                    "您的輸入有錯誤，請檢查您的輸入，或使用 /say 查詢幫助。 err9"
-                );
-                return null;
-            }
-
+            string Text = "";
+            Text = banValues.GetValueOrDefault("t", "__invalid__");
+            if (Text == "__invalid__") Text = banValues.GetValueOrDefault("text", "__invalid__");
+            if (Text == "__invalid__") return null;
             return Text;
         }
 
