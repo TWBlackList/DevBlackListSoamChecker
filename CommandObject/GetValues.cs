@@ -40,7 +40,7 @@ namespace DevBlackListSoamChecker.CommandObject
             {
                 return 0;
             }
-            int id = 0 ;
+            long id = 0 ;
             if(System.Int64.TryParse(GroupID,out id))
             {
                 return id;
