@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using ReimuAPI.ReimuBase;
 using ReimuAPI.ReimuBase.TgData;
 
-namespace CNBlackListSoamChecker.DbManager
+namespace DevBlackListSoamChecker.DbManager
 {
     public class DatabaseManager
     {

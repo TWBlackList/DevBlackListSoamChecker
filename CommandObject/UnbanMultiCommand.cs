@@ -4,7 +4,7 @@ using System.Threading;
 using ReimuAPI.ReimuBase;
 using ReimuAPI.ReimuBase.TgData;
 
-namespace CNBlackListSoamChecker.CommandObject
+namespace DevBlackListSoamChecker.CommandObject
 {
     internal class UnBanMultiUserCommand
     {

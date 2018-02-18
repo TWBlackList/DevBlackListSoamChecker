@@ -1,8 +1,8 @@
-﻿using CNBlackListSoamChecker.CommandObject;
+﻿using DevBlackListSoamChecker.CommandObject;
 using ReimuAPI.ReimuBase;
 using ReimuAPI.ReimuBase.TgData;
 
-namespace CNBlackListSoamChecker
+namespace DevBlackListSoamChecker
 {
     internal class AdminCommand
     {

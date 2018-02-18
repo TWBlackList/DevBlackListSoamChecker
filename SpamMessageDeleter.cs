@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using CNBlackListSoamChecker.CommandObject;
-using CNBlackListSoamChecker.DbManager;
+using DevBlackListSoamChecker.CommandObject;
+using DevBlackListSoamChecker.DbManager;
 using ReimuAPI.ReimuBase;
 using ReimuAPI.ReimuBase.Interfaces;
 using ReimuAPI.ReimuBase.TgData;
 
-namespace CNBlackListSoamChecker
+namespace DevBlackListSoamChecker
 {
     internal class SpamMessageDeleter : IOtherMessageReceiver
     {

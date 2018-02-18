@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CNBlackListSoamChecker
+namespace DevBlackListSoamChecker
 {
     public class GetTime
     {

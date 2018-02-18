@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using CNBlackListSoamChecker.DbManager;
+using DevBlackListSoamChecker.DbManager;
 using ReimuAPI.ReimuBase.Interfaces;
 
-namespace CNBlackListSoamChecker
+namespace DevBlackListSoamChecker
 {
     internal class ItemCleaner : IClearItemsReceiver
     {

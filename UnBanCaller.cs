@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using CNBlackListSoamChecker.DbManager;
+using DevBlackListSoamChecker.DbManager;
 using ReimuAPI.ReimuBase;
 
-namespace CNBlackListSoamChecker
+namespace DevBlackListSoamChecker
 {
     internal class UnBanCaller
     {

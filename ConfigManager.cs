@@ -1,4 +1,4 @@
-﻿namespace CNBlackListSoamChecker
+﻿namespace DevBlackListSoamChecker
 {
     class ConfigManager
     {

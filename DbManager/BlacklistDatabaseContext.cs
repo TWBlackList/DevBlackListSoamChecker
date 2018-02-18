@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using ReimuAPI.ReimuBase;
 
-namespace CNBlackListSoamChecker.DbManager
+namespace DevBlackListSoamChecker.DbManager
 {
     internal class BlacklistDatabaseContext : DbContext
     {
