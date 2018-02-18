@@ -229,6 +229,8 @@ namespace DevBlackListSoamChecker.CommandObject
                 "\n清真 = 4" +
                 "\n印度 = 5" +
                 "\n包含 = 6";
+            RawMessage.text = RawMessage.text.Replace("\"M\"","\"Message\"");
+            RawMessage.text = RawMessage.text.Replace("\"P\"","\"Point\"");
             int spacePath = RawMessage.text.IndexOf(" ");
             if (spacePath == -1)
             {
