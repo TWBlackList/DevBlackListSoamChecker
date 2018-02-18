@@ -45,7 +45,7 @@ namespace DevBlackListSoamChecker.CommandObject
                 return 0;
             }
             int id = 0 ;
-            if(System.int.TryParse(GroupID,id))
+            if(System.Int64.TryParse(GroupID,id))
             {
                 return id;
             }else{
