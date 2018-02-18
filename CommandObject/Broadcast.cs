@@ -24,7 +24,9 @@ namespace DevBlackListSoamChecker.CommandObject
                 return true;
             }
 
-            string text = new GetValues().GetText(new Dictionary<string, string>(), RawMessage);
+            Dictionary<string, string> banValues = CommandDecoder.cutKeyIsValue(value);
+
+            string text = new GetValues().GetText(banValues, RawMessage);
 
             if(text == null){
                 TgApi.getDefaultApiConnection().sendMessage(
@@ -36,7 +38,7 @@ namespace DevBlackListSoamChecker.CommandObject
                 return true;
             }
 
-            long groupID = new GetValues().GetGroupID(new Dictionary<string, string>(), RawMessage);
+            long groupID = new GetValues().GetGroupID(banValues, RawMessage);
 
             if(groupID == 0){
                 new Thread(delegate() { BC(RawMessage,text); }).Start();
