@@ -27,15 +27,15 @@ namespace DevBlackListSoamChecker.CommandObject
                 return null;
             }
 
-            return Text;
+            return Reason;
         }
 
         internal int GetGroupID(Dictionary<string, string> banValues, TgMessage RawMessage)
         {
-            int GroupID = 0;
-            GroupID = banValues.GetValueOrDefault("g", 0);
-            if (GroupID == 0) GroupID = banValues.GetValueOrDefault("group", 0);
-            if (GroupID == 0) GroupID = banValues.GetValueOrDefault("groupid", 0);
+            string GroupID = 0;
+            GroupID = banValues.GetValueOrDefault("g", null);
+            if (GroupID == 0) GroupID = banValues.GetValueOrDefault("group", null);
+            if (GroupID == 0) GroupID = banValues.GetValueOrDefault("groupid", null);
             if (GroupID == 0)
             {
                 TgApi.getDefaultApiConnection().sendMessage(
@@ -44,8 +44,13 @@ namespace DevBlackListSoamChecker.CommandObject
                 );
                 return 0;
             }
-
-            return GroupID;
+            int id = 0 ;
+            if(System.int.TryParse(GroupID,id))
+            {
+                return id;
+            }else{
+                return 0;
+            }
         }
 
         internal string GetText(Dictionary<string, string> banValues, TgMessage RawMessage)
