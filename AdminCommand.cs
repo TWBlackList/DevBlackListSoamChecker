@@ -19,11 +19,11 @@ namespace DevBlackListSoamChecker
                         case "/getspampoints":
                             new SpamStringManager().GetSpamPoints(RawMessage);
                             throw new StopProcessException();
-                        case "/" + Temp.CommandPrefix + "ban":
+                        case "/devban":
                         case "/ban":
                             new BanUserCommand().Ban(RawMessage, JsonMessage, Command);
                             throw new StopProcessException();
-                        case "/" + Temp.CommandPrefix + "unban":
+                        case "/devunban":
                         case "/unban":
                             new UnbanUserCommand().Unban(RawMessage);
                             throw new StopProcessException();
@@ -51,6 +51,7 @@ namespace DevBlackListSoamChecker
                                 throw new StopProcessException();
                             case "/suunban":
                                 new UnBanMultiUserCommand().UnbanMulti(RawMessage);
+                                throw new StopProcessException();
                             case "/getspamstr":
                                 new SpamStringManager().GetName(RawMessage);
                                 throw new StopProcessException();
