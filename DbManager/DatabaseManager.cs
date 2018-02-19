@@ -132,14 +132,12 @@ namespace DevBlackListSoamChecker.DbManager
                 banmsg += "\n\n已被解除封鎖";
                 if (Reason != null) banmsg += "，原因 : \n" + Reason;
                 banmsg += "\nOID : " + AdminID + "\n";
-                try
-                {
-                    ChannelReasonID = TgApi.getDefaultApiConnection().sendMessage(Temp.MainChannelID, banmsg).result
-                        .message_id;
-                }
-                catch
-                {
-                }
+
+                BanUser ban = Temp.GetDatabaseManager().GetUserBanStatus(UserID);
+                if(ban.Ban == 1) return true
+
+                ChannelReasonID = TgApi.getDefaultApiConnection().sendMessage(Temp.MainChannelID, banmsg).result.message_id;
+                
             }
 
             ChangeDbUnban(AdminID, UserID, Reason, ChannelReasonID);
