@@ -137,7 +137,7 @@ namespace DevBlackListSoamChecker.DbManager
                 if(ban.Ban == 1) return false;
 
                 ChannelReasonID = TgApi.getDefaultApiConnection().sendMessage(Temp.MainChannelID, banmsg).result.message_id;
-                
+                return true
             }
 
             ChangeDbUnban(AdminID, UserID, Reason, ChannelReasonID);
