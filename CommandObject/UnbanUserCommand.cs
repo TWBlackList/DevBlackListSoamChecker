@@ -90,24 +90,30 @@ namespace DevBlackListSoamChecker.CommandObject
                 return true;
             }
 
-            //if (status)
-            //{
-            TgApi.getDefaultApiConnection().sendMessage(
-                RawMessage.GetMessageChatInfo().id,
-                "操作成功。",
-                RawMessage.message_id
-            );
-            return true;
-            //}
-            //else
-            //{
+            if (status)
+            {
+                TgApi.getDefaultApiConnection().sendMessage(
+                    RawMessage.GetMessageChatInfo().id,
+                    "操作成功。",
+                    RawMessage.message_id
+                );
+                return true;
+            }
+            else
+            {
+                TgApi.getDefaultApiConnection().sendMessage(
+                    RawMessage.GetMessageChatInfo().id,
+                    "操作失敗，或許使用者未被封鎖。",
+                    RawMessage.message_id
+                );
+                return false;
             //    TgApi.getDefaultApiConnection().sendMessage(
             //        RawMessage.GetMessageChatInfo().id,
             //        "操作成功。\n\n請注意 : 轉發使用者訊息到頻道或是發送使用者訊息到頻道失敗，請您手動發送至  @" + Temp.MainChannelName + " 。 err11",
             //        RawMessage.message_id
             //        );
             //    return true;
-            //}
+            }
             //return false;
         }
 
