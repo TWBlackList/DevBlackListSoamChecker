@@ -6,8 +6,6 @@ namespace DevBlackListSoamChecker
 {
     internal class AdminCommand
     {
-        private readonly string Disabled_Ban_Msg = "非常抱歉，目前版本已關閉封鎖用戶的功能，請聯絡管理員開啟此功能。";
-
         internal bool AdminCommands(TgMessage RawMessage, string JsonMessage, string Command)
         {
             if (RAPI.getIsBotOP(RawMessage.GetSendUser().id) || RAPI.getIsBotAdmin(RawMessage.GetSendUser().id))

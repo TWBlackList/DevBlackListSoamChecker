@@ -60,38 +60,30 @@ namespace DevBlackListSoamChecker.CommandObject
 
         internal bool BC(TgMessage RawMessage, string Msg)
         {
-            if (RAPI.getIsBotAdmin(RawMessage.GetSendUser().id))
+            Console.WriteLine("Broadcasting " + Msg + " ......");
+            using (var db = new BlacklistDatabaseContext())
             {
-                Console.WriteLine("Broadcasting " + Msg + " ......");
-                using (var db = new BlacklistDatabaseContext())
+                List<GroupCfg> groupCfg = null;
+                try
                 {
-                    List<GroupCfg> groupCfg = null;
-                    try
-                    {
-                        groupCfg = db.GroupConfig.ToList();
-                    }
-                    catch (InvalidOperationException)
-                    {
-                        return false;
-                    }
-
-                    if (groupCfg == null) return false;
-                    foreach (GroupCfg cfg in groupCfg)
-                    {
-                        Console.WriteLine("Broadcasting " + Msg + " To Group ChatID : " + cfg.GroupID);
-                        TgApi.getDefaultApiConnection()
-                            .sendMessage(cfg.GroupID, Msg, ParseMode: TgApi.PARSEMODE_MARKDOWN);
-                        Thread.Sleep(100);
-                    }
-
-                    TgApi.getDefaultApiConnection()
-                        .sendMessage(RawMessage.chat.id, "有夠Highㄉ，傳送完畢!", RawMessage.message_id);
+                    groupCfg = db.GroupConfig.ToList();
                 }
-            }
-            else
-            {
-                TgApi.getDefaultApiConnection().sendMessage(RawMessage.chat.id, "你沒有權限", RawMessage.message_id);
-                return false;
+                catch (InvalidOperationException)
+                {
+                    return false;
+                }
+
+                if (groupCfg == null) return false;
+                foreach (GroupCfg cfg in groupCfg)
+                {
+                    Console.WriteLine("Broadcasting " + Msg + " To Group ChatID : " + cfg.GroupID);
+                    TgApi.getDefaultApiConnection()
+                        .sendMessage(cfg.GroupID, Msg, ParseMode: TgApi.PARSEMODE_MARKDOWN);
+                    Thread.Sleep(100);
+                }
+
+                TgApi.getDefaultApiConnection()
+                    .sendMessage(RawMessage.chat.id, "有夠Highㄉ，傳送完畢!", RawMessage.message_id);
             }
 
             return true;
