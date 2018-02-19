@@ -88,11 +88,8 @@ namespace DevBlackListSoamChecker
                             new BlockGroup().listBlockGroup(RawMessage);
                             throw new StopProcessException();
                     }
-
-                    throw new StopProcessException();
                 }
             }
-
             return false;
         }
     }
