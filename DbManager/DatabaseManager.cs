@@ -105,7 +105,6 @@ namespace DevBlackListSoamChecker.DbManager
             UserInfo userinfo = null
         )
         {
-            bool finalResult = true;
             int ChannelReasonID = 0;
             if (Temp.MainChannelID != 0)
             {
@@ -120,7 +119,6 @@ namespace DevBlackListSoamChecker.DbManager
                     }
                     else
                     {
-                        finalResult = false;
                         banmsg = "User ID: " + UserID;
                     }
                 }
@@ -137,12 +135,12 @@ namespace DevBlackListSoamChecker.DbManager
                 if(ban.Ban == 1) return false;
 
                 ChannelReasonID = TgApi.getDefaultApiConnection().sendMessage(Temp.MainChannelID, banmsg).result.message_id;
-                return true
+                
             }
 
             ChangeDbUnban(AdminID, UserID, Reason, ChannelReasonID);
             CNBlacklistApi.PostToAPI(UserID, false, 1, 0, Reason);
-            return finalResult;
+            return true;
         }
 
         private void ChangeBanTemp(
