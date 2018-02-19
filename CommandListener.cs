@@ -56,7 +56,6 @@ namespace DevBlackListSoamChecker
                         new SoamManager().SoamEnable(RawMessage);
                         break;
                     case "/soamdisable":
-                        if (cfg.AdminOnly == 0 &&
                         new SoamManager().SoamDisable(RawMessage);
                         break;
                     case "/__get_exception":
