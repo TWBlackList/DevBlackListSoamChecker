@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 using ReimuAPI.ReimuBase;
+using System.Runtime.Serialization.Json;
 
 namespace DevBlackListSoamChecker
 {
