@@ -134,7 +134,7 @@ namespace DevBlackListSoamChecker.DbManager
                 banmsg += "\nOID : " + AdminID + "\n";
 
                 BanUser ban = Temp.GetDatabaseManager().GetUserBanStatus(UserID);
-                if(ban.Ban == 1) return true
+                if(ban.Ban == 1) return true;
 
                 ChannelReasonID = TgApi.getDefaultApiConnection().sendMessage(Temp.MainChannelID, banmsg).result.message_id;
                 
