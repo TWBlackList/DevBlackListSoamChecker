@@ -18,8 +18,8 @@ namespace DevBlackListSoamChecker.CommandObject
                 string UID_Value = RawMessage.text.Replace("/addop", "").Replace(" ", "");
                 if (UID_Value.Length < 5)
                 {
-                        TgApi.getDefaultApiConnection().sendMessage(RawMessage.chat.id, "使用方法 : /addop UID",
-                            RawMessage.message_id);
+                    TgApi.getDefaultApiConnection().sendMessage(RawMessage.chat.id, "使用方法 : /addop UID",
+                        RawMessage.message_id);
 
                     return false;
                 }
@@ -30,7 +30,7 @@ namespace DevBlackListSoamChecker.CommandObject
                 string output =
                     Newtonsoft.Json.JsonConvert.SerializeObject(jsonObj, Newtonsoft.Json.Formatting.Indented);
                 File.WriteAllText("config.json", output);
-                    TgApi.getDefaultApiConnection().sendMessage(RawMessage.chat.id, "新增成功!", RawMessage.message_id);
+                TgApi.getDefaultApiConnection().sendMessage(RawMessage.chat.id, "新增成功!", RawMessage.message_id);
 
                 RAPI.reloadConfig();
             }
@@ -51,8 +51,8 @@ namespace DevBlackListSoamChecker.CommandObject
                 ;
                 if (UID_Value.Length < 5)
                 {
-                        TgApi.getDefaultApiConnection().sendMessage(RawMessage.chat.id, "使用方法 : /delop UID",
-                            RawMessage.message_id);
+                    TgApi.getDefaultApiConnection().sendMessage(RawMessage.chat.id, "使用方法 : /delop UID",
+                        RawMessage.message_id);
 
                     return false;
                 }
@@ -80,14 +80,14 @@ namespace DevBlackListSoamChecker.CommandObject
                     string output =
                         Newtonsoft.Json.JsonConvert.SerializeObject(jsonObj, Newtonsoft.Json.Formatting.Indented);
                     File.WriteAllText("config.json", output);
-                        TgApi.getDefaultApiConnection().sendMessage(RawMessage.chat.id, "刪除成功!", RawMessage.message_id);
+                    TgApi.getDefaultApiConnection().sendMessage(RawMessage.chat.id, "刪除成功!", RawMessage.message_id);
 
                     RAPI.reloadConfig();
                 }
                 else
                 {
-                        TgApi.getDefaultApiConnection()
-                            .sendMessage(RawMessage.chat.id, "找不到OP!", RawMessage.message_id);
+                    TgApi.getDefaultApiConnection()
+                        .sendMessage(RawMessage.chat.id, "找不到OP!", RawMessage.message_id);
                 }
             }
             else

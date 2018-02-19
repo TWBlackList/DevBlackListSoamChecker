@@ -141,10 +141,7 @@ namespace DevBlackListSoamChecker.CommandObject
                     continue;
                 }
 
-                if (nowChar >= 0x1CD0 && nowChar <= 0x1CFF)
-                {
-                    totalPoints++;
-                }
+                if (nowChar >= 0x1CD0 && nowChar <= 0x1CFF) totalPoints++;
             }
 
             return totalPoints;

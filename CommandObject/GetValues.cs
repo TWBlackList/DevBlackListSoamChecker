@@ -37,13 +37,10 @@ namespace DevBlackListSoamChecker.CommandObject
             if (GroupID == "__invalid__") GroupID = banValues.GetValueOrDefault("group", "__invalid__");
             if (GroupID == "__invalid__") GroupID = banValues.GetValueOrDefault("groupid", "__invalid__");
             if (GroupID == "__invalid__") return 0;
-            long id = 0 ;
-            if(System.Int64.TryParse(GroupID,out id))
-            {
+            long id = 0;
+            if (long.TryParse(GroupID, out id))
                 return id;
-            }else{
-                return 0;
-            }
+            return 0;
         }
 
         internal string GetText(Dictionary<string, string> banValues, TgMessage RawMessage)

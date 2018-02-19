@@ -23,12 +23,14 @@ namespace DevBlackListSoamChecker.CommandObject
                 );
                 return true;
             }
-            
-            Dictionary<string, string> banValues = CommandDecoder.cutKeyIsValue(RawMessage.text.Substring(saySpace + 1));
+
+            Dictionary<string, string>
+                banValues = CommandDecoder.cutKeyIsValue(RawMessage.text.Substring(saySpace + 1));
 
             string text = new GetValues().GetText(banValues, RawMessage);
 
-            if(text == null){
+            if (text == null)
+            {
                 TgApi.getDefaultApiConnection().sendMessage(
                     RawMessage.GetMessageChatInfo().id,
                     "/say [g|group|groupid=1] [t|text=text]" +
@@ -40,20 +42,23 @@ namespace DevBlackListSoamChecker.CommandObject
 
             long groupID = new GetValues().GetGroupID(banValues, RawMessage);
 
-            if(groupID == 0){
-                new Thread(delegate() { BC(RawMessage,text); }).Start();
-            }else{
+            if (groupID == 0)
+            {
+                new Thread(delegate() { BC(RawMessage, text); }).Start();
+            }
+            else
+            {
                 TgApi.getDefaultApiConnection()
                     .sendMessage(groupID, text, ParseMode: TgApi.PARSEMODE_MARKDOWN);
                 TgApi.getDefaultApiConnection()
                     .sendMessage(RawMessage.chat.id, "傳送完畢!", RawMessage.message_id);
             }
 
-            
+
             return true;
         }
 
-        internal bool BC(TgMessage RawMessage,string Msg)
+        internal bool BC(TgMessage RawMessage, string Msg)
         {
             if (RAPI.getIsBotAdmin(RawMessage.GetSendUser().id))
             {

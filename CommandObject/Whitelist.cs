@@ -42,10 +42,10 @@ namespace DevBlackListSoamChecker.CommandObject
                     i = i + 1;
                 }
 
-                if(found)
+                if (found)
                 {
-                     TgApi.getDefaultApiConnection().sendMessage(RawMessage.chat.id, "已經在名單內了!", RawMessage.message_id);
-                     return false;
+                    TgApi.getDefaultApiConnection().sendMessage(RawMessage.chat.id, "已經在名單內了!", RawMessage.message_id);
+                    return false;
                 }
 
                 jsonObj["whitelist"].Add(Convert.ToInt32(UID_Value));

@@ -14,8 +14,8 @@ namespace DevBlackListSoamChecker
     {
         public CallbackMessage ReceiveAllNormalMessage(TgMessage BaseMessage, string JsonMessage)
         {
-            
-            if(RAPI.getIsBlockGroup(BaseMessage.GetMessageChatInfo().id)){
+            if (RAPI.getIsBlockGroup(BaseMessage.GetMessageChatInfo().id))
+            {
                 TgApi.getDefaultApiConnection().sendMessage(BaseMessage.GetMessageChatInfo().id, "此群組禁止使用本服務。");
                 TgApi.getDefaultApiConnection().leaveChat(BaseMessage.GetMessageChatInfo().id);
                 return new CallbackMessage();
@@ -161,26 +161,17 @@ namespace DevBlackListSoamChecker
                     }
 
                     if (points >= smsg.MinPoints)
-                    {
-                        if(points > max_point){
+                        if (points > max_point)
+                        {
                             max_point = points;
                             max_point_spam = smsg;
                         }
-                        //new Task(() =>
-                        //{
-                        //    TgApi.getDefaultApiConnection().forwardMessage(
-                        //        Temp.ReasonChannelID,
-                        //        BaseMessage.GetMessageChatInfo().id,
-                        //        BaseMessage.message_id);
-                        //}).Start();
-                        //ProcessMessage (Ban Blacklist Delete kick mute)
-
-
-                    }
                 }
-                if(max_point > 0){
+
+                if (max_point > 0)
+                {
                     ProcessMessage(max_point_spam, BaseMessage.message_id, BaseMessage.GetMessageChatInfo().id,
-                    BaseMessage.GetSendUser(),max_point);
+                        BaseMessage.GetSendUser(), max_point);
 
                     BanUser banstat = Temp.GetDatabaseManager().GetUserBanStatus(BaseMessage.GetSendUser().id);
 
@@ -189,16 +180,16 @@ namespace DevBlackListSoamChecker
                             BaseMessage.GetMessageChatInfo().id,
                             BaseMessage.GetSendUser().id,
                             GetTime.GetUnixTime() + 86400
-                    );
+                        );
                     //Send alert and delete alert after 60 second
                     new Thread(delegate()
                     {
                         SendMessageResult autodeletespammessagesendresult = TgApi.getDefaultApiConnection()
                             .sendMessage(
-                            BaseMessage.GetMessageChatInfo().id,
-                            "偵測到 " + max_point_spam.FriendlyName +
-                            " ，已自動回報，如有誤報請加入 @" + Temp.ReportGroupName + " 以報告誤報。"
-                        );
+                                BaseMessage.GetMessageChatInfo().id,
+                                "偵測到 " + max_point_spam.FriendlyName +
+                                " ，已自動回報，如有誤報請加入 @" + Temp.ReportGroupName + " 以報告誤報。"
+                            );
                         Thread.Sleep(60000);
                         TgApi.getDefaultApiConnection().deleteMessage(
                             autodeletespammessagesendresult.result.chat.id,
@@ -209,7 +200,7 @@ namespace DevBlackListSoamChecker
                 }
             }
 
-            
+
             // AUTO DELETE SPAM MESSAGE END
 
             // Auto DELETE Command START
@@ -279,13 +270,14 @@ namespace DevBlackListSoamChecker
                         SendUserInfo.id,
                         smsg.BanLevel,
                         banUtilTime,
-                        "自動封鎖 - " + smsg.FriendlyName + "\n分數 : " + point.ToString(),
+                        "自動封鎖 - " + smsg.FriendlyName + "\n分數 : " + point,
                         ChatID,
                         MsgID,
                         SendUserInfo
                     );
                 }).Start();
             }
+
             if (smsg.AutoKick)
                 new Task(() =>
                 {

@@ -18,10 +18,9 @@ namespace DevBlackListSoamChecker.CommandObject
                         RawMessage.message_id);
                     return false;
                 }
-                if(ChatID_Value.Length == 10 && Convert.ToInt64(ChatID_Value) > 0)
-                {
+
+                if (ChatID_Value.Length == 10 && Convert.ToInt64(ChatID_Value) > 0)
                     ChatID_Value = "-100" + ChatID_Value;
-                }
 
                 string json = File.ReadAllText("config.json");
                 dynamic jsonObj = Newtonsoft.Json.JsonConvert.DeserializeObject(json);
@@ -39,10 +38,10 @@ namespace DevBlackListSoamChecker.CommandObject
                     i = i + 1;
                 }
 
-                if(found)
+                if (found)
                 {
-                     TgApi.getDefaultApiConnection().sendMessage(RawMessage.chat.id, "已經在名單內了!", RawMessage.message_id);
-                     return false;
+                    TgApi.getDefaultApiConnection().sendMessage(RawMessage.chat.id, "已經在名單內了!", RawMessage.message_id);
+                    return false;
                 }
 
                 jsonObj["blockgroup_list"].Add(Convert.ToInt64(ChatID_Value));
@@ -50,11 +49,15 @@ namespace DevBlackListSoamChecker.CommandObject
                     Newtonsoft.Json.JsonConvert.SerializeObject(jsonObj, Newtonsoft.Json.Formatting.Indented);
                 File.WriteAllText("config.json", output);
                 TgApi.getDefaultApiConnection().sendMessage(RawMessage.chat.id, "新增成功!", RawMessage.message_id);
-                try{
+                try
+                {
                     TgApi.getDefaultApiConnection().sendMessage(Convert.ToInt64(ChatID_Value), "此群組禁止使用本服務。");
                     TgApi.getDefaultApiConnection().leaveChat(Convert.ToInt64(ChatID_Value));
-                }catch{}
-                
+                }
+                catch
+                {
+                }
+
                 RAPI.reloadConfig();
             }
             else
@@ -71,17 +74,16 @@ namespace DevBlackListSoamChecker.CommandObject
             if (RAPI.getIsBotAdmin(RawMessage.GetSendUser().id))
             {
                 string ChatID_Value = RawMessage.text.Replace("/unblock", "").Replace(" ", "");
-                
+
                 if (ChatID_Value.Length < 10)
                 {
                     TgApi.getDefaultApiConnection().sendMessage(RawMessage.chat.id, "使用方法 : /block ChatID",
                         RawMessage.message_id);
                     return false;
                 }
-                if(ChatID_Value.Length == 10 && Convert.ToInt64(ChatID_Value) > 0)
-                {
+
+                if (ChatID_Value.Length == 10 && Convert.ToInt64(ChatID_Value) > 0)
                     ChatID_Value = "-100" + ChatID_Value;
-                }
 
                 string json = File.ReadAllText("config.json");
                 dynamic jsonObj = Newtonsoft.Json.JsonConvert.DeserializeObject(json);
@@ -112,7 +114,8 @@ namespace DevBlackListSoamChecker.CommandObject
                 }
                 else
                 {
-                    TgApi.getDefaultApiConnection().sendMessage(RawMessage.chat.id, "找不到ChatID!", RawMessage.message_id);
+                    TgApi.getDefaultApiConnection()
+                        .sendMessage(RawMessage.chat.id, "找不到ChatID!", RawMessage.message_id);
                 }
             }
             else

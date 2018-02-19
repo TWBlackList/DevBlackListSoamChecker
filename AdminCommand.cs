@@ -8,14 +8,13 @@ namespace DevBlackListSoamChecker
     {
         private readonly string Disabled_Ban_Msg = "非常抱歉，目前版本已關閉封鎖用戶的功能，請聯絡管理員開啟此功能。";
 
-        internal bool AdminCommands(TgMessage RawMessage, string JsonMessage, string Command){
+        internal bool AdminCommands(TgMessage RawMessage, string JsonMessage, string Command)
+        {
             if (RAPI.getIsBotOP(RawMessage.GetSendUser().id) || RAPI.getIsBotAdmin(RawMessage.GetSendUser().id))
             {
-                if(!Temp.DisableBanList)
-                {
+                if (!Temp.DisableBanList)
                     switch (Command)
                     {
-                        
                         case "/getspampoints":
                             new SpamStringManager().GetSpamPoints(RawMessage);
                             throw new StopProcessException();
@@ -28,10 +27,9 @@ namespace DevBlackListSoamChecker
                             new UnbanUserCommand().Unban(RawMessage);
                             throw new StopProcessException();
                     }
-                }
-                if(RAPI.getIsBotAdmin(RawMessage.GetSendUser().id))
+                if (RAPI.getIsBotAdmin(RawMessage.GetSendUser().id))
                 {
-                    if(!Temp.DisableBanList){
+                    if (!Temp.DisableBanList)
                         switch (Command)
                         {
                             case "/__getallspamstr": //暫時不用
@@ -56,10 +54,8 @@ namespace DevBlackListSoamChecker
                                 new SpamStringManager().GetName(RawMessage);
                                 throw new StopProcessException();
                         }
-                    }
                     switch (Command)
                     {
-
                         case "/say":
                             new BroadCast().BroadCast_Status(RawMessage);
                             throw new StopProcessException();
@@ -94,9 +90,11 @@ namespace DevBlackListSoamChecker
                             new BlockGroup().listBlockGroup(RawMessage);
                             throw new StopProcessException();
                     }
+
                     throw new StopProcessException();
                 }
             }
+
             return false;
         }
     }
