@@ -11,15 +11,16 @@ namespace DevBlackListSoamChecker
         internal static List<SpamMessage> spamMessageList = null;
         internal static Dictionary<long, GroupCfg> groupConfig = new Dictionary<long, GroupCfg>();
         internal static Dictionary<int, BanUser> bannedUsers = new Dictionary<int, BanUser>();
-        public static long AdminGroupID = -1001157582347; // If haven't, change it to 0
-        public static long MainChannelID = -1001263651463; // If haven't, change it to 0
-        public static long ReasonChannelID = -1001222529529; // If haven't, change it to 0
-        public static long ReportGroupID = -1001157582347; // If haven't, change it to 0
-        public static long CourtGroupID = -1001197757308; // If haven't, change it to 0
-        public static string MainChannelName = "CNBL_main"; // If haven't, change it to null
-        public static string ReasonChannelName = "CNBL_Reason"; // If haven't, change it to null
-        public static string ReportGroupName = "ChineseBlackList"; //這ㄍ意思是 : 你他媽不能亂改群組username
-        public static string CourtGroupName = "CNBL_Court"; //這ㄍ意思是 : 你他媽不能亂改群組username
+        public static long AdminGroupID = -1001301159042; // If haven't, change it to 0
+        public static long MainChannelID = -1001301159042; // If haven't, change it to 0
+        public static long ReasonChannelID = -1001301159042; // If haven't, change it to 0
+        public static long ReportGroupID = -1001301159042; // If haven't, change it to 0
+        public static long CourtGroupID = -1001301159042; // If haven't, change it to 0
+        public static string MainChannelName = null; // If haven't, change it to null
+        public static string ReasonChannelName = null; // If haven't, change it to null
+        public static string ReportGroupName = null; //這ㄍ意思是 : 你他媽不能亂改群組username
+        public static string CourtGroupName = null; //這ㄍ意思是 : 你他媽不能亂改群組username
+        public static string CommandPrefix = "dev"; //這ㄍ意思是 : 你他媽不能亂改群組username
 
         internal static DatabaseManager GetDatabaseManager()
         {
