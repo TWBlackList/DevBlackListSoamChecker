@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Newtonsoft.Json;
 using ReimuAPI.ReimuBase;
 using ReimuAPI.ReimuBase.TgData;
 
@@ -27,7 +28,7 @@ namespace DevBlackListSoamChecker.CommandObject
                 }
 
                 string json = File.ReadAllText("config.json");
-                dynamic jsonObj = Newtonsoft.Json.JsonConvert.DeserializeObject(json);
+                dynamic jsonObj = JsonConvert.DeserializeObject(json);
 
                 int i = 0;
                 bool found = false;
@@ -50,7 +51,7 @@ namespace DevBlackListSoamChecker.CommandObject
 
                 jsonObj["whitelist"].Add(Convert.ToInt32(UID_Value));
                 string output =
-                    Newtonsoft.Json.JsonConvert.SerializeObject(jsonObj, Newtonsoft.Json.Formatting.Indented);
+                    JsonConvert.SerializeObject(jsonObj, Formatting.Indented);
                 File.WriteAllText("config.json", output);
                 try
                 {
@@ -92,7 +93,7 @@ namespace DevBlackListSoamChecker.CommandObject
                 }
 
                 string json = File.ReadAllText("config.json");
-                dynamic jsonObj = Newtonsoft.Json.JsonConvert.DeserializeObject(json);
+                dynamic jsonObj = JsonConvert.DeserializeObject(json);
 
                 int i = 0;
                 bool found = false;
@@ -112,7 +113,7 @@ namespace DevBlackListSoamChecker.CommandObject
                 {
                     jsonObj["whitelist"].Remove(jsonObj["whitelist"][i]);
                     string output =
-                        Newtonsoft.Json.JsonConvert.SerializeObject(jsonObj, Newtonsoft.Json.Formatting.Indented);
+                        JsonConvert.SerializeObject(jsonObj, Formatting.Indented);
                     File.WriteAllText("config.json", output);
                     try
                     {
@@ -148,7 +149,7 @@ namespace DevBlackListSoamChecker.CommandObject
         internal bool listWhitelist(TgMessage RawMessage)
         {
             string json = File.ReadAllText("config.json");
-            dynamic jsonObj = Newtonsoft.Json.JsonConvert.DeserializeObject(json);
+            dynamic jsonObj = JsonConvert.DeserializeObject(json);
             TgApi.getDefaultApiConnection().sendMessage(RawMessage.chat.id,
                 "Whitelist : \n" + string.Join("\n", jsonObj["whitelist"]), RawMessage.message_id);
             return true;

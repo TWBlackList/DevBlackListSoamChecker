@@ -63,7 +63,6 @@ namespace DevBlackListSoamChecker
                         TgApi.getDefaultApiConnection().leaveChat(RawMessage.GetMessageChatInfo().id);
                     }).Start();
                     return new CallbackMessage();
-                    return new CallbackMessage();
                 }
 
                 TgApi.getDefaultApiConnection().sendMessage(

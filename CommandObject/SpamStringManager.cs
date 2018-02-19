@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.Serialization.Json;
 using System.Text;
 using DevBlackListSoamChecker.DbManager;
 using ReimuAPI.ReimuBase;
 using ReimuAPI.ReimuBase.TgData;
-using System.Runtime.Serialization.Json;
 
 namespace DevBlackListSoamChecker.CommandObject
 {

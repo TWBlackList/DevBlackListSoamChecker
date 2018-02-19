@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using Microsoft.EntityFrameworkCore;
 using System.Runtime.Serialization.Json;
+using System.Text;
+using Microsoft.Data.Sqlite;
+using Microsoft.EntityFrameworkCore;
 using ReimuAPI.ReimuBase;
 using ReimuAPI.ReimuBase.TgData;
 
@@ -171,7 +172,7 @@ namespace DevBlackListSoamChecker.DbManager
                     db.BanUsers.Add(baninfo);
                     db.SaveChanges();
                 }
-                catch (Microsoft.Data.Sqlite.SqliteException)
+                catch (SqliteException)
                 {
                     db.BanUsers.Update(baninfo);
                     db.SaveChanges();
@@ -226,7 +227,7 @@ namespace DevBlackListSoamChecker.DbManager
                     db.BanUsers.Add(baninfo);
                     db.SaveChanges();
                 }
-                catch (Microsoft.Data.Sqlite.SqliteException)
+                catch (SqliteException)
                 {
                     db.BanUsers.Update(baninfo);
                     db.SaveChanges();

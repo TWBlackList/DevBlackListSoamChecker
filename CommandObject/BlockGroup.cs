@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Newtonsoft.Json;
 using ReimuAPI.ReimuBase;
 using ReimuAPI.ReimuBase.TgData;
 
@@ -23,7 +24,7 @@ namespace DevBlackListSoamChecker.CommandObject
                     ChatID_Value = "-100" + ChatID_Value;
 
                 string json = File.ReadAllText("config.json");
-                dynamic jsonObj = Newtonsoft.Json.JsonConvert.DeserializeObject(json);
+                dynamic jsonObj = JsonConvert.DeserializeObject(json);
 
                 int i = 0;
                 bool found = false;
@@ -46,7 +47,7 @@ namespace DevBlackListSoamChecker.CommandObject
 
                 jsonObj["blockgroup_list"].Add(Convert.ToInt64(ChatID_Value));
                 string output =
-                    Newtonsoft.Json.JsonConvert.SerializeObject(jsonObj, Newtonsoft.Json.Formatting.Indented);
+                    JsonConvert.SerializeObject(jsonObj, Formatting.Indented);
                 File.WriteAllText("config.json", output);
                 TgApi.getDefaultApiConnection().sendMessage(RawMessage.chat.id, "新增成功!", RawMessage.message_id);
                 try
@@ -86,7 +87,7 @@ namespace DevBlackListSoamChecker.CommandObject
                     ChatID_Value = "-100" + ChatID_Value;
 
                 string json = File.ReadAllText("config.json");
-                dynamic jsonObj = Newtonsoft.Json.JsonConvert.DeserializeObject(json);
+                dynamic jsonObj = JsonConvert.DeserializeObject(json);
 
                 int i = 0;
                 bool found = false;
@@ -106,7 +107,7 @@ namespace DevBlackListSoamChecker.CommandObject
                 {
                     jsonObj["blockgroup_list"].Remove(jsonObj["blockgroup_list"][i]);
                     string output =
-                        Newtonsoft.Json.JsonConvert.SerializeObject(jsonObj, Newtonsoft.Json.Formatting.Indented);
+                        JsonConvert.SerializeObject(jsonObj, Formatting.Indented);
                     File.WriteAllText("config.json", output);
 
                     TgApi.getDefaultApiConnection().sendMessage(RawMessage.chat.id, "刪除成功!", RawMessage.message_id);
@@ -130,7 +131,7 @@ namespace DevBlackListSoamChecker.CommandObject
         internal bool listBlockGroup(TgMessage RawMessage)
         {
             string json = File.ReadAllText("config.json");
-            dynamic jsonObj = Newtonsoft.Json.JsonConvert.DeserializeObject(json);
+            dynamic jsonObj = JsonConvert.DeserializeObject(json);
             TgApi.getDefaultApiConnection().sendMessage(RawMessage.chat.id,
                 "Block List : \n" + string.Join("\n", jsonObj["blockgroup_list"]), RawMessage.message_id);
             return true;
