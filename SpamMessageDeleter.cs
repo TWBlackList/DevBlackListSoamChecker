@@ -159,7 +159,7 @@ namespace DevBlackListSoamChecker
                             points = new SpamMessageChecker().GetContainsPoints(smsg.Messages, chatText);
                             break;
                         case 7:
-                            points = new SpamMessageChecker().GetRussiaPoints(text);
+                            points = new SpamMessageChecker().GetRussiaPoints(chatText);
                             break;
                     }
 
