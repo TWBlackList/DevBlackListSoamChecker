@@ -48,17 +48,17 @@ namespace DevBlackListSoamChecker
                                 TgApi.getDefaultApiConnection().sendMessage(
                                     cfg.GroupID,
                                     "使用者 : " + user.UserID + "\n" + user.GetBanMessage() +
-                                    "\n由於開啟了 SubscribeBanList ，已自動移除。"
+                                    "\n\n由於開啟了 SubscribeBanList ，已自動移除。"
                                 );
                             else
                                 TgApi.getDefaultApiConnection().sendMessage(
                                     cfg.GroupID,
                                     "使用者 : " + user.UserID + "\n" + user.GetBanMessage() +
-                                    "\n由於開啟了 SubscribeBanList ，但沒有 (Ban User) 權限，請設定正確的權限。"
+                                    "\n\n由於開啟了 SubscribeBanList ，但沒有 (Ban User) 權限，請設定正確的權限。"
                                 );
                         }
 
-                    Thread.Sleep(3000);
+                    Thread.Sleep(500);
                 }
             }
         }
