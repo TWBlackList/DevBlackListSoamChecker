@@ -60,7 +60,10 @@ namespace DevBlackListSoamChecker.CommandObject
 
         internal bool BC(TgMessage RawMessage, string Msg)
         {
+            TgApi.getDefaultApiConnection()
+                .sendMessage(RawMessage.chat.id, "傳送中.........!" + groups, RawMessage.message_id);
             Console.WriteLine("Broadcasting " + Msg + " ......");
+            string groups;
             using (var db = new BlacklistDatabaseContext())
             {
                 List<GroupCfg> groupCfg = null;
@@ -76,14 +79,24 @@ namespace DevBlackListSoamChecker.CommandObject
                 if (groupCfg == null) return false;
                 foreach (GroupCfg cfg in groupCfg)
                 {
-                    Console.WriteLine("Broadcasting " + Msg + " To Group ChatID : " + cfg.GroupID);
-                    TgApi.getDefaultApiConnection()
-                        .sendMessage(cfg.GroupID, Msg, ParseMode: TgApi.PARSEMODE_MARKDOWN);
+                    Console.WriteLine("Broadcasting " + Msg + " to group ChatID : " + cfg.GroupID);
+                    
+                    SendMessageResult result =  TgApi.getDefaultApiConnection().sendMessage(cfg.GroupID, Msg, ParseMode: TgApi.PARSEMODE_MARKDOWN);
+
+                    if (result.ok)
+                    {
+                        groups = +"\n" + cfg.GroupID.ToString() + " : 成功";
+                    }
+                    else
+                    {
+                        groups = +"\n" + cfg.GroupID.ToString() + " : 失敗";
+                    }
+
                     Thread.Sleep(500);
                 }
 
                 TgApi.getDefaultApiConnection()
-                    .sendMessage(RawMessage.chat.id, "有夠Highㄉ，傳送完畢!", RawMessage.message_id);
+                    .sendMessage(RawMessage.chat.id, "有夠Highㄉ，傳送完畢!" + groups, RawMessage.message_id);
             }
 
             return true;
