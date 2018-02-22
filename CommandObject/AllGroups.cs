@@ -8,7 +8,7 @@ using ReimuAPI.ReimuBase.TgData;
 
 namespace DevBlackListSoamChecker.CommandObject
 {
-    internal class Groups
+    internal class AllGroups
     {
         internal bool Groups_Status(TgMessage RawMessage)
         {

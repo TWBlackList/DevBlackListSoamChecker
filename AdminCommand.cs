@@ -52,7 +52,7 @@ namespace DevBlackListSoamChecker
                     switch (Command)
                     {
                         case "/groups":
-                            new Groups().Groups_Status(RawMessage);
+                            new AllGroups().Groups_Status(RawMessage);
                             throw new StopProcessException();
                         case "/say":
                             new BroadCast().BroadCast_Status(RawMessage);
