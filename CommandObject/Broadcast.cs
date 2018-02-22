@@ -65,7 +65,7 @@ namespace DevBlackListSoamChecker.CommandObject
             Console.WriteLine("Broadcasting " + Msg + " ......");
             using (var db = new BlacklistDatabaseContext())
             {
-                string groups;
+                string groups = "";
                 List<GroupCfg> groupCfg = null;
                 try
                 {
