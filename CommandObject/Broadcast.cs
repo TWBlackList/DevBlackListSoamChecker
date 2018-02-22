@@ -61,7 +61,7 @@ namespace DevBlackListSoamChecker.CommandObject
         internal bool BC(TgMessage RawMessage, string Msg)
         {
             TgApi.getDefaultApiConnection()
-                .sendMessage(RawMessage.chat.id, "傳送中.........!" + groups, RawMessage.message_id);
+                .sendMessage(RawMessage.chat.id, "傳送中.........!" , RawMessage.message_id);
             Console.WriteLine("Broadcasting " + Msg + " ......");
             string groups;
             using (var db = new BlacklistDatabaseContext())
@@ -85,11 +85,11 @@ namespace DevBlackListSoamChecker.CommandObject
 
                     if (result.ok)
                     {
-                        groups = +"\n" + cfg.GroupID.ToString() + " : 成功";
+                        groups = groups + "\n" + cfg.GroupID.ToString() + " : 成功";
                     }
                     else
                     {
-                        groups = +"\n" + cfg.GroupID.ToString() + " : 失敗";
+                        groups = groups + "\n" + cfg.GroupID.ToString() + " : 失敗";
                     }
 
                     Thread.Sleep(500);
