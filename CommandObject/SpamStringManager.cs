@@ -60,7 +60,7 @@ namespace DevBlackListSoamChecker.CommandObject
                         RawMessage.message_id,
                         TgApi.PARSEMODE_HTML
                     );
-                    spamstrings.Remove(spamstrings.Substring(0, 4000));
+                    spamstrings.Remove(0, 4000);
                 }
             }
         }
