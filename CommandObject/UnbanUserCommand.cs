@@ -62,7 +62,8 @@ namespace DevBlackListSoamChecker.CommandObject
                 );
                 return true;
             }
-
+            
+            UnBanCaller.UnBanCallerThread(BanUserId);
             bool status;
             try
             {

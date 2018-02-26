@@ -141,7 +141,7 @@ namespace DevBlackListSoamChecker.CommandObject
             int totalPoints = 0;
             foreach (SpamMessageObj msg in spamMessages)
                 if (text.ToLower().Contains(msg.Message.ToLower()))
-                    totalPoints += msg.Point;
+                    totalPoints += (msg.Point * text.ToLower().Split(msg.Message.ToLower()) - 1);
             return totalPoints;
         }
 

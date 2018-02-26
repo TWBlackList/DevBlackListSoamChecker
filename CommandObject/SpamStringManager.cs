@@ -50,12 +50,19 @@ namespace DevBlackListSoamChecker.CommandObject
                 return;
             }
 
-            TgApi.getDefaultApiConnection().sendMessage(
-                RawMessage.GetMessageChatInfo().id,
-                spamstrings,
-                RawMessage.message_id,
-                TgApi.PARSEMODE_HTML
-            );
+            while (spamstrings.Length == 0)
+            {
+                if(spamstrings.Length > 4000)
+                {
+                    TgApi.getDefaultApiConnection().sendMessage(
+                        RawMessage.GetMessageChatInfo().id,
+                        spamstrings.Substring(0,4000),
+                        RawMessage.message_id,
+                        TgApi.PARSEMODE_HTML
+                    );
+                    spamstrings.Remove(spamstrings.Substring(0, 4000));
+                }
+            }
         }
 
         public void GetName(TgMessage RawMessage)
