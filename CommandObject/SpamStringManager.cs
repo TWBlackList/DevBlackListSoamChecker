@@ -49,26 +49,23 @@ namespace DevBlackListSoamChecker.CommandObject
                 return;
             }
 
-            while (spamstrings.Length == 0)
+            var spamlist = new List<string>();
+
+            for (var i = 0; i < spamstrings.Length; i += 4000)
             {
-                if(spamstrings.Length > 0)
-                {
-                    TgApi.getDefaultApiConnection().sendMessage(
-                        RawMessage.GetMessageChatInfo().id,
-                        "<code>" + spamstrings.Substring(0,4000) + "</code>",
-                        RawMessage.message_id,
-                        TgApi.PARSEMODE_HTML
-                    );
-                    if (spamstrings.Length > 4000)
-                    {
-                        spamstrings.Remove(0, 4000);
-                    }
-                    else
-                    {
-                        spamstrings.Remove(0, spamstrings.Length);
-                    }
-                }
+                spamlist.Add(spamstrings.Substring(i, Math.Min(4000, spamstrings.Length - i)));
             }
+
+            foreach (string msg in spamlist)
+            {
+                Api.getDefaultApiConnection().sendMessage(
+                    RawMessage.GetMessageChatInfo().id,
+                    "<code>" + msg + "</code>",
+                    RawMessage.message_id,
+                    TgApi.PARSEMODE_HTML
+                );
+            }
+            
             return;
         }
 
