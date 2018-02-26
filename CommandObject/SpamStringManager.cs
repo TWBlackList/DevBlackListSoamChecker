@@ -51,7 +51,7 @@ namespace DevBlackListSoamChecker.CommandObject
 
             while (spamstrings.Length == 0)
             {
-                if(spamstrings.Length > 4000)
+                if(spamstrings.Length > 0)
                 {
                     TgApi.getDefaultApiConnection().sendMessage(
                         RawMessage.GetMessageChatInfo().id,
@@ -59,9 +59,17 @@ namespace DevBlackListSoamChecker.CommandObject
                         RawMessage.message_id,
                         TgApi.PARSEMODE_HTML
                     );
-                    spamstrings.Remove(0, 4000);
+                    if (spamstrings.Length > 4000)
+                    {
+                        spamstrings.Remove(0, 4000);
+                    }
+                    else
+                    {
+                        spamstrings.Remove(0, spamstrings.Length);
+                    }
                 }
             }
+            return;
         }
 
         public void GetName(TgMessage RawMessage)
