@@ -20,7 +20,6 @@ namespace DevBlackListSoamChecker.CommandObject
 
         public void GetAllInfo(TgMessage RawMessage)
         {
-            string spamstrings = "<code>";
             List<SpamMessage> msgs = Temp.GetDatabaseManager().GetSpamMessageList();
             foreach (SpamMessage msg in msgs)
             {
@@ -41,9 +40,8 @@ namespace DevBlackListSoamChecker.CommandObject
                                    "\n      Point: " + i.Point;
                 spamstrings += "\n\n";
             }
-
-            spamstrings += "</code>";
-            if (spamstrings == "<code></code>")
+            
+            if (spamstrings == "")
             {
                 TgApi.getDefaultApiConnection()
                     .sendMessage(RawMessage.GetMessageChatInfo().id, "null", RawMessage.message_id);
@@ -56,7 +54,7 @@ namespace DevBlackListSoamChecker.CommandObject
                 {
                     TgApi.getDefaultApiConnection().sendMessage(
                         RawMessage.GetMessageChatInfo().id,
-                        spamstrings.Substring(0,4000),
+                        "<code>" + spamstrings.Substring(0,4000) + "</code>",
                         RawMessage.message_id,
                         TgApi.PARSEMODE_HTML
                     );
