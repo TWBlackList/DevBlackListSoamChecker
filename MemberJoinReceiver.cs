@@ -85,7 +85,7 @@ namespace DevBlackListSoamChecker
                 BanUser banUser = dbmgr.GetUserBanStatus(JoinedUser.id);
                 if (banUser.Ban == 0)
                 {
-                    string resultmsg = "這位使用者被封鎖了\n";
+                    string resultmsg = "這位使用者被封鎖了\n" + banUser.GetBanMessage_ESCMD;
                     resultmsg += banUser.GetBanMessage_ESCMD;
                     TgApi.getDefaultApiConnection().sendMessage(
                         RawMessage.GetMessageChatInfo().id,
@@ -133,8 +133,7 @@ namespace DevBlackListSoamChecker
                 BanUser banUser = dbmgr.GetUserBanStatus(RawMessage.forward_from.id);
                 if (banUser.Ban == 0)
                 {
-                    string resultmsg = "這位使用者被封鎖了\n";
-                    resultmsg += banUser.GetBanMessage_ESCMD;
+                    string resultmsg = "這位使用者被封鎖了\n" + banUser.GetBanMessage_ESCMD;
                     TgApi.getDefaultApiConnection().sendMessage(
                         RawMessage.GetMessageChatInfo().id,
                         resultmsg,
