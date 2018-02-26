@@ -86,7 +86,6 @@ namespace DevBlackListSoamChecker
                 if (banUser.Ban == 0)
                 {
                     string resultmsg = "這位使用者被封鎖了\n" + banUser.GetBanMessage_ESCMD;
-                    resultmsg += banUser.GetBanMessage_ESCMD;
                     TgApi.getDefaultApiConnection().sendMessage(
                         RawMessage.GetMessageChatInfo().id,
                         resultmsg,
