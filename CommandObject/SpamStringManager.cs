@@ -20,6 +20,7 @@ namespace DevBlackListSoamChecker.CommandObject
 
         public void GetAllInfo(TgMessage RawMessage)
         {
+            string spamstrings = "";
             List<SpamMessage> msgs = Temp.GetDatabaseManager().GetSpamMessageList();
             foreach (SpamMessage msg in msgs)
             {
