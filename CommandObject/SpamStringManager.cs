@@ -58,7 +58,7 @@ namespace DevBlackListSoamChecker.CommandObject
 
             foreach (string msg in spamlist)
             {
-                Api.getDefaultApiConnection().sendMessage(
+                TgApi.getDefaultApiConnection().sendMessage(
                     RawMessage.GetMessageChatInfo().id,
                     "<code>" + msg + "</code>",
                     RawMessage.message_id,
