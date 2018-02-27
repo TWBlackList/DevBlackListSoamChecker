@@ -92,10 +92,6 @@ namespace DevBlackListSoamChecker
                         RawMessage.message_id,
                         TgApi.PARSEMODE_MARKDOWN
                     );
-                    TgApi.getDefaultApiConnection().restrictChatMember(
-                        RawMessage.GetMessageChatInfo().id,
-                        JoinedUser.id,
-                        0, true, true, false, false);
                 }
                 else
                 {
@@ -121,6 +117,10 @@ namespace DevBlackListSoamChecker
                                 JoinedUser.id,
                                 GetTime.GetUnixTime() + 86400
                             );
+                            TgApi.getDefaultApiConnection().restrictChatMember(
+                                RawMessage.GetMessageChatInfo().id,
+                                JoinedUser.id,
+                                0, true, true, false, false);
                         }
                         catch
                         {
