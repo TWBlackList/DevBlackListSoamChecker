@@ -450,7 +450,7 @@ namespace DevBlackListSoamChecker.CommandObject
             {
                 TgApi.getDefaultApiConnection().sendMessage(
                     RawMessage.GetMessageChatInfo().id,
-                    "/getspampoints text=\"被檢測訊息，如果包含英文與數字以外的文字需要加引號\"" +
+                    "/points text=\"被檢測訊息，如果包含英文與數字以外的文字需要加引號\"" +
                     " rule=\"規則的暱稱，如果包含英文與數字以外的文字需要加引號\"",
                     RawMessage.message_id
                 );
