@@ -17,7 +17,7 @@ namespace DevBlackListSoamChecker.CommandObject
                 banmsg = "發送者 : " + RawMessage.GetSendUser().GetUserTextInfo_ESCMD() + "\n" + ban.GetBanMessage_ESCMD();
                 if (RAPI.getIsInWhitelist(RawMessage.GetSendUser().id))
                 {
-                    banmsg = banmsg + "\n使用者在白名單內";
+                    banmsg = banmsg + "，使用者在白名單內";
                 }
                 if (ban.Ban == 0)
                     banmsg += "\n對於被封鎖的使用者，你可以通過 [點選這裡](https://t.me/" + Temp.CourtGroupName + ") 以請求解除。";
@@ -29,7 +29,7 @@ namespace DevBlackListSoamChecker.CommandObject
                               ban.GetBanMessage_ESCMD();
                     if (RAPI.getIsInWhitelist(RawMessage.reply_to_message.GetSendUser().id))
                     {
-                        banmsg = banmsg + "\n使用者在白名單內";
+                        banmsg = banmsg + "，使用者在白名單內";
                     }
                     if (RawMessage.reply_to_message.forward_from != null)
                     {
@@ -39,7 +39,7 @@ namespace DevBlackListSoamChecker.CommandObject
                                   ban.GetBanMessage_ESCMD();
                         if (RAPI.getIsInWhitelist(RawMessage.reply_to_message.forward_from.id))
                         {
-                            banmsg = banmsg + "\n使用者在白名單內";
+                            banmsg = banmsg + "，使用者在白名單內";
                         }
                     }
                 }
