@@ -510,7 +510,7 @@ namespace DevBlackListSoamChecker.CommandObject
                     if (keywords != "")
                     {
                         found = true;
-                        msg = msg + smsg.FriendlyName + " : " + keywords + "\n";
+                        msg = msg + smsg.FriendlyName + " : \n" + keywords + "\n";
                     }
                 }
 
