@@ -23,6 +23,17 @@ namespace DevBlackListSoamChecker.CommandObject
             using (var db = new BlacklistDatabaseContext())
             {
                 string groups = "";
+                List<GroupCfg> groupCfg = null;
+                try
+                {
+                    groupCfg = db.GroupConfig.ToList();
+                }
+                catch (InvalidOperationException)
+                {
+                    return false;
+                }
+
+                if (groupCfg == null) return false;
                 foreach (GroupCfg cfg in groupCfg)
                 {
                     string groupInfo = null;
