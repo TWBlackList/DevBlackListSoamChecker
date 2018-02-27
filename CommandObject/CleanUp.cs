@@ -12,11 +12,11 @@ namespace DevBlackListSoamChecker.CommandObject
     {
         internal bool CleanUP_Status(TgMessage RawMessage)
         {
-            new Thread(delegate() { CleanUP(RawMessage); }).Start();
+            new Thread(delegate() { CUP(RawMessage); }).Start();
             return true;
         }
 
-        internal bool CleanUP(TgMessage RawMessage)
+        internal bool CUP(TgMessage RawMessage)
         {
             TgApi.getDefaultApiConnection()
                 .sendMessage(RawMessage.chat.id, "處理中.........!" , RawMessage.message_id);
@@ -30,7 +30,15 @@ namespace DevBlackListSoamChecker.CommandObject
 
                     if (groupInfo == null)
                     {
-                        groups = groups + cfg.GroupID.ToString() + " : 無法取得聊天，嘗試移除\n";
+                        groups = groups + cfg.GroupID.ToString() + " : 無法取得聊天，";
+                        if (Temp.GetDatabaseManager().RemoveGroupCfg(cfg.GroupID))
+                        {
+                            groups = groups + "移除成功\n";
+                        }
+                        else
+                        {
+                            groups = groups + "移除失敗\n";
+                        }
                     }
                     else
                     {
