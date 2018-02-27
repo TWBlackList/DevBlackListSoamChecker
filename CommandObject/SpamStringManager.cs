@@ -540,7 +540,7 @@ namespace DevBlackListSoamChecker.CommandObject
                     return;
                 }
 
-                string keywords = 0;
+                string keywords = smsg.FriendlyName + " : \n";
                 switch (smsg.Type)
                 {
                     case 0:

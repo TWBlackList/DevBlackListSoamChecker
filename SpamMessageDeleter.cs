@@ -54,55 +54,33 @@ namespace DevBlackListSoamChecker
             }
             // Call Admin END
 
-            if (Temp.CourtGroupName != null && RawMessage.GetMessageChatInfo().username == Temp.CourtGroupName)
+            if (Temp.ReportGroupName != null && BaseMessage.GetMessageChatInfo().username == Temp.ReportGroupName)
             {
-                BanUser banUser = dbmgr.GetUserBanStatus(JoinedUser.id);
-                if (banUser.Ban == 0)
+                if (BaseMessage.forward_from != null)
                 {
-                    string resultmsg = "這位使用者被封鎖了\n" + banUser.GetBanMessage_ESCMD();
-                    TgApi.getDefaultApiConnection().sendMessage(
-                        RawMessage.GetMessageChatInfo().id,
-                        resultmsg,
-                        RawMessage.message_id,
-                        TgApi.PARSEMODE_MARKDOWN
-                    );
-                }
-                else
-                {
-                    if (RAPI.getIsInWhitelist(JoinedUser.id)) return new CallbackMessage();
-                    TgApi.getDefaultApiConnection().sendMessage(
-                        RawMessage.GetMessageChatInfo().id,
-                        "您未被封鎖，請離開",
-                        RawMessage.message_id,
-                        TgApi.PARSEMODE_MARKDOWN
-                    );
-                    
-                    TgApi.getDefaultApiConnection().restrictChatMember(
-                        RawMessage.GetMessageChatInfo().id,
-                        JoinedUser.id,
-                        0, false, false, false, false);
-                    new Thread(delegate()
+                    BanUser banUser = Temp.GetDatabaseManager().GetUserBanStatus(BaseMessage.forward_from.id);
+                    if (banUser.Ban == 0)
                     {
-                        Thread.Sleep(30000);
-                        try
-                        {
-                            TgApi.getDefaultApiConnection().kickChatMember(
-                                RawMessage.GetMessageChatInfo().id,
-                                JoinedUser.id,
-                                GetTime.GetUnixTime() + 86400
-                            );
-                            TgApi.getDefaultApiConnection().restrictChatMember(
-                                RawMessage.GetMessageChatInfo().id,
-                                JoinedUser.id,
-                                0, true, false, false, false);
-                        }
-                        catch
-                        {
-                        }
-                    }).Start();
-                }
+                        string resultmsg = "使用者被封鎖了\n" + banUser.GetBanMessage_ESCMD();
+                        TgApi.getDefaultApiConnection().sendMessage(
+                            BaseMessage.GetMessageChatInfo().id,
+                            resultmsg,
+                            BaseMessage.message_id,
+                            TgApi.PARSEMODE_MARKDOWN
+                        );
+                    }
+                    else
+                    {
+                        TgApi.getDefaultApiConnection().sendMessage(
+                            BaseMessage.GetMessageChatInfo().id,
+                            "使用者未被封鎖",
+                            BaseMessage.message_id,
+                            TgApi.PARSEMODE_MARKDOWN
+                        );
+                    }
 
-                return new CallbackMessage();
+                    return new CallbackMessage();
+                }
             }
 
             if (RAPI.getIsInWhitelist(BaseMessage.from.id)) return new CallbackMessage();
@@ -306,7 +284,6 @@ namespace DevBlackListSoamChecker
             else
                 banUtilTime = GetTime.GetUnixTime() + smsg.BanDays * 86400 + smsg.BanHours * 3600 +
                               smsg.BanMinutes * 60;
-
             if (smsg.AutoBlackList)
             {
                 if (Temp.GetDatabaseManager().GetUserBanStatus(SendUserInfo.id).Ban == 0) return;

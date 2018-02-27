@@ -9,7 +9,7 @@ namespace DevBlackListSoamChecker.CommandObject
     {
         public string GetEqualsKeyword(SpamMessageObj[] spamMessages, string text) // Mode 0 完全匹配
         {
-            string totalPoints = 0;
+            string totalPoints = "";
             foreach (SpamMessageObj msg in spamMessages)
                 if (text.ToLower().Equals(msg.Message.ToLower()))
                     totalPoints = totalPoints + msg.Message.ToLower() + " : " + msg.Point.ToString() + "\n";
@@ -18,7 +18,7 @@ namespace DevBlackListSoamChecker.CommandObject
 
         public string GetRegexKeyword(SpamMessageObj[] spamMessages, string text) // Mode 1 正则
         {
-            string totalPoints = 0;
+            string totalPoints = "";
             foreach (SpamMessageObj msg in spamMessages)
                 if (new Regex(msg.Message).Match(text).Success)
                     totalPoints = totalPoints + msg.Message + " : " + msg.Point.ToString() + "\n";
@@ -27,7 +27,7 @@ namespace DevBlackListSoamChecker.CommandObject
 
         public string GetSpamKeyword(SpamMessageObj[] spamMessages, string text) // Mode 2 迷之算法
         {
-            string totalPoints = 0; // 总分，预定义，返回值用
+            string totalPoints = ""; // 总分，预定义，返回值用
             int textLen = text.Length - 1; // 被检测的消息的长度
             foreach (SpamMessageObj msg in spamMessages) // 已有的关键字循环
             {
@@ -72,7 +72,7 @@ namespace DevBlackListSoamChecker.CommandObject
 
         public string GetIndexOfKeyword(SpamMessageObj[] spamMessages, string text) // Mode 3 寻找匹配字符串
         {
-            string totalPoints = 0;
+            string totalPoints = "";
             foreach (SpamMessageObj msg in spamMessages)
                 if (text.ToLower().IndexOf(msg.Message.ToLower()) != -1)
                     totalPoints = totalPoints + msg.Message.ToLower() + " : " + msg.Point.ToString() + "\n";
@@ -81,7 +81,7 @@ namespace DevBlackListSoamChecker.CommandObject
 
         public string GetHalalKeyword(string text) // Mode 4 清真
         {
-            string totalPoints = 0;
+            string totalPoints = "";
             int textLen = text.Length - 1;
             for (int nowPath = 0; nowPath < textLen; nowPath++)
             {
@@ -113,7 +113,7 @@ namespace DevBlackListSoamChecker.CommandObject
 
         public string GetIndiaKeyword(string text) // Mode 5 印度
         {
-            string totalPoints = 0;
+            string totalPoints = "";
             int textLen = text.Length - 1;
             for (int nowPath = 0; nowPath < textLen; nowPath++)
             {
@@ -139,7 +139,7 @@ namespace DevBlackListSoamChecker.CommandObject
 
         public string GetContainsKeyword(SpamMessageObj[] spamMessages, string text) // Mode 6 如果包含
         {
-            string totalPoints = 0;
+            string totalPoints = "";
             int point = 0;
             foreach (SpamMessageObj msg in spamMessages)
                 if (text.ToLower().Contains(msg.Message.ToLower()))
@@ -152,7 +152,7 @@ namespace DevBlackListSoamChecker.CommandObject
 
         public string GetRussiaKeyword(string text) // Mode 7 普丁
         {
-            string totalPoints = 0;
+            string totalPoints = "";
             int textLen = text.Length - 1;
             for (int nowPath = 0; nowPath < textLen; nowPath++)
             {
