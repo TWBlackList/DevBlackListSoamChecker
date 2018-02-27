@@ -284,14 +284,7 @@ namespace DevBlackListSoamChecker
             else
                 banUtilTime = GetTime.GetUnixTime() + smsg.BanDays * 86400 + smsg.BanHours * 3600 +
                               smsg.BanMinutes * 60;
-            if (smsg.AutoMute)
-                TgApi.getDefaultApiConnection().restrictChatMember(
-                    ChatID,
-                    SendUserInfo.id,
-                    banUtilTime,
-                    true,
-                    false
-                );
+
             if (smsg.AutoBlackList)
             {
                 if (Temp.GetDatabaseManager().GetUserBanStatus(SendUserInfo.id).Ban == 0) return;
@@ -308,6 +301,17 @@ namespace DevBlackListSoamChecker
                         SendUserInfo
                     );
                 }).Start();
+            }
+            else
+            {
+                if (smsg.AutoMute)
+                    TgApi.getDefaultApiConnection().restrictChatMember(
+                        ChatID,
+                        SendUserInfo.id,
+                        banUtilTime,
+                        true,
+                        false
+                    );
             }
 
             if (smsg.AutoKick)
