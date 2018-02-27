@@ -92,6 +92,10 @@ namespace DevBlackListSoamChecker
                         RawMessage.message_id,
                         TgApi.PARSEMODE_MARKDOWN
                     );
+                    TgApi.getDefaultApiConnection().restrictChatMember(
+                        RawMessage.GetMessageChatInfo().id,
+                        JoinedUser.id,
+                        0, true, true, false, false);
                 }
                 else
                 {
@@ -102,7 +106,11 @@ namespace DevBlackListSoamChecker
                         RawMessage.message_id,
                         TgApi.PARSEMODE_MARKDOWN
                     );
-
+                    
+                    TgApi.getDefaultApiConnection().restrictChatMember(
+                        RawMessage.GetMessageChatInfo().id,
+                        JoinedUser.id,
+                        0, true, false, false, false);
                     new Thread(delegate()
                     {
                         Thread.Sleep(30000);
@@ -113,10 +121,6 @@ namespace DevBlackListSoamChecker
                                 JoinedUser.id,
                                 GetTime.GetUnixTime() + 86400
                             );
-                            TgApi.getDefaultApiConnection().restrictChatMember(
-                                RawMessage.GetMessageChatInfo().id,
-                                JoinedUser.id,
-                                0, true, true, false, false);
                         }
                         catch
                         {
