@@ -85,7 +85,6 @@ namespace DevBlackListSoamChecker.CommandObject
             int textLen = text.Length - 1;
             for (int nowPath = 0; nowPath < textLen; nowPath++)
             {
-                if (totalPoints >= 230) return 230;
                 char nowChar = text[nowPath];
                 if (nowChar >= 0x0600 && nowChar <= 0x06FF)
                 {
@@ -117,7 +116,6 @@ namespace DevBlackListSoamChecker.CommandObject
             int textLen = text.Length - 1;
             for (int nowPath = 0; nowPath < textLen; nowPath++)
             {
-                if (totalPoints >= 230) return 230;
                 char nowChar = text[nowPath];
                 if (nowChar >= 0x0900 && nowChar <= 0x097F)
                 {
@@ -156,7 +154,6 @@ namespace DevBlackListSoamChecker.CommandObject
             int textLen = text.Length - 1;
             for (int nowPath = 0; nowPath < textLen; nowPath++)
             {
-                if (totalPoints >= 230) return 230;
                 char nowChar = text[nowPath];
                 if (nowChar >= 0x0400 && nowChar <= 0x052F){ totalPoints = totalPoints + nowChar + " : 1\n"; }
             }
