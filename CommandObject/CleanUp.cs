@@ -20,9 +20,9 @@ namespace DevBlackListSoamChecker.CommandObject
         {
             TgApi.getDefaultApiConnection()
                 .sendMessage(RawMessage.chat.id, "處理中.........!" , RawMessage.message_id);
-            Console.WriteLine("Broadcasting " + Msg + " ......");
             using (var db = new BlacklistDatabaseContext())
             {
+                string groups = "";
                 foreach (GroupCfg cfg in groupCfg)
                 {
                     string groupInfo = null;
