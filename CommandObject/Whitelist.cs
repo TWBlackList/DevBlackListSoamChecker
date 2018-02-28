@@ -40,7 +40,7 @@ namespace DevBlackListSoamChecker.CommandObject
                 return false;
             }
 
-            jsonObj["whitelist"].Add(Convert.ToInt32(UID_Value));
+            jsonObj["whitelist"].Add(Convert.ToInt64(UID_Value));
             string output =
                 JsonConvert.SerializeObject(jsonObj, Formatting.Indented);
             File.WriteAllText("config.json", output);

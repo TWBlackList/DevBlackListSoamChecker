@@ -44,11 +44,11 @@ namespace DevBlackListSoamChecker.CommandObject
                     }
                     if (RawMessage.reply_to_message.forward_from_chat != null)
                     {
-                        banmsg += "\n\n被回覆的訊息轉發自頻道 : " +
+                        banmsg += "\n\n被回覆的訊息轉發自頻道 : \n" +
                                   RawMessage.reply_to_message.forward_from_chat.GetChatTextInfo();
                         if (RAPI.getIsInWhitelist(RawMessage.reply_to_message.forward_from_chat.id))
                         {
-                            banmsg = banmsg + "，頻道在白名單內";
+                            banmsg = banmsg + "\n頻道在白名單內";
                         }
                     }
                 }
