@@ -11,12 +11,14 @@ namespace DevBlackListSoamChecker.CommandObject
         internal bool addWhitelist(TgMessage RawMessage)
         {
             string UID_Value = RawMessage.text.Replace("/addwl", "").Replace(" ", "");
+
             if (UID_Value.Length < 5)
             {
                 TgApi.getDefaultApiConnection().sendMessage(RawMessage.chat.id, "使用方法 : /addwl UID",
                     RawMessage.message_id);
                 return false;
             }
+            if (UID_Value.Length == 10 && Convert.ToInt64(UID_Value) > 0) UID_Value = "-100" + UID_Value;
 
             string json = File.ReadAllText("config.json");
             dynamic jsonObj = JsonConvert.DeserializeObject(json);
@@ -53,7 +55,7 @@ namespace DevBlackListSoamChecker.CommandObject
         internal bool deleteWhitelist(TgMessage RawMessage)
         {
             string UID_Value = RawMessage.text.Replace("/delwl", "").Replace(" ", "");
-            ;
+
             if (UID_Value.Length < 5)
             {
                 TgApi.getDefaultApiConnection().sendMessage(RawMessage.chat.id, "使用方法 : /delwl UID",
@@ -61,6 +63,7 @@ namespace DevBlackListSoamChecker.CommandObject
 
                 return false;
             }
+            if (UID_Value.Length == 10 && Convert.ToInt64(UID_Value) > 0) UID_Value = "-100" + UID_Value;
 
             string json = File.ReadAllText("config.json");
             dynamic jsonObj = JsonConvert.DeserializeObject(json);
