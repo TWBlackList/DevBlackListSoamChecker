@@ -95,7 +95,7 @@ namespace DevBlackListSoamChecker.CommandObject
                 {
                     if (name != msg.FriendlyName) continue;
                     if (spamstrings != "") spamstrings += "\n\n------\n\n";
-                    spamstrings += "<code>- " + msg.FriendlyName + ":" +
+                    spamstrings += "- " + msg.FriendlyName + ":" +
                                    "\n    Enabled: " + msg.Enabled +
                                    "\n    Type: " + msg.Type +
                                    "\n    AutoGlobalBlock: " + msg.AutoBlackList +
@@ -110,18 +110,26 @@ namespace DevBlackListSoamChecker.CommandObject
                     foreach (SpamMessageObj i in msg.Messages)
                         spamstrings += "\n    - Message: " + TgApi.getDefaultApiConnection().jsonEncode(i.Message) +
                                        "\n      Point: " + i.Point;
-                    spamstrings += "</code>";
+                    spamstrings += "";
                 }
 
                 if (spamstrings == "") spamstrings = "沒有查到這筆紀錄，請檢查您的輸入。";
             }
+            
+            for (var i = 0; i < spamstrings.Length; i += 4000)
+            {
+                spamlist.Add(spamstrings.Substring(i, Math.Min(4000, spamstrings.Length - i)));
+            }
 
-            TgApi.getDefaultApiConnection().sendMessage(
-                RawMessage.GetMessageChatInfo().id,
-                spamstrings,
-                RawMessage.message_id,
-                TgApi.PARSEMODE_HTML
-            );
+            foreach (string msg in spamlist)
+            {
+                TgApi.getDefaultApiConnection().sendMessage(
+                    RawMessage.GetMessageChatInfo().id,
+                    "<code>" + msg + "</code>",
+                    RawMessage.message_id,
+                    TgApi.PARSEMODE_HTML
+                );
+            }
         }
 
         public void GetByID(TgMessage RawMessage)
