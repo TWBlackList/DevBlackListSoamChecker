@@ -116,6 +116,8 @@ namespace DevBlackListSoamChecker.CommandObject
                 if (spamstrings == "") spamstrings = "沒有查到這筆紀錄，請檢查您的輸入。";
             }
             
+            var spamlist = new List<string>();
+
             for (var i = 0; i < spamstrings.Length; i += 4000)
             {
                 spamlist.Add(spamstrings.Substring(i, Math.Min(4000, spamstrings.Length - i)));
