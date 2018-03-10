@@ -220,6 +220,7 @@ namespace DevBlackListSoamChecker
                             );
                         ProcessMessage(max_point_spam, BaseMessage.message_id, BaseMessage.GetMessageChatInfo().id,
                             BaseMessage.GetSendUser(), max_point);
+                        Thread.Sleep(30000);
                         TgApi.getDefaultApiConnection().deleteMessage(
                             autodeletespammessagesendresult.result.chat.id,
                             autodeletespammessagesendresult.result.message_id
