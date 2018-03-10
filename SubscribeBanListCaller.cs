@@ -57,7 +57,7 @@ namespace DevBlackListSoamChecker
                                     "若要提出申訴，請至 @" + Temp.CourtGroupName + " 。"
                                 );
                                 Thread.Sleep(10000);
-                                kickresult = TgApi.getDefaultApiConnection()
+                                SetActionResult kickresult = TgApi.getDefaultApiConnection()
                                     .kickChatMember(cfg.GroupID, user.UserID, GetTime.GetUnixTime() + 60);
                                 if(kickresult.ok)
                                     System.Console.Write("...Done");
