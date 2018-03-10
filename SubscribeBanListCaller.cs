@@ -43,7 +43,7 @@ namespace DevBlackListSoamChecker
                         {
                             new Thread(delegate()
                             {
-                                System.Console.WriteLine("[SubscribeBanList] Ban " + user.UserID.ToString() + " in " + cfg.GroupID.ToString());
+                                System.Console.Write("[SubscribeBanList] Ban " + user.UserID.ToString() + " in " + cfg.GroupID.ToString());
                                 TgApi.getDefaultApiConnection().restrictChatMember(
                                     cfg.GroupID,
                                     user.UserID,
@@ -60,9 +60,9 @@ namespace DevBlackListSoamChecker
                                 SetActionResult kickresult = TgApi.getDefaultApiConnection()
                                     .kickChatMember(cfg.GroupID, user.UserID, GetTime.GetUnixTime() + 60);
                                 if(kickresult.ok)
-                                    System.Console.Write("...Done");
+                                    System.Console.WriteLine("...Done");
                                 else
-                                    System.Console.Write("...Fail");
+                                    System.Console.WriteLine("...Fail");
                                 Thread.Sleep(10000);
                                 TgApi.getDefaultApiConnection().deleteMessage(
                                     result.result.chat.id,

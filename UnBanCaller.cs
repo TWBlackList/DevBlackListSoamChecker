@@ -35,21 +35,10 @@ namespace DevBlackListSoamChecker
                     var userInChatInfo = TgApi.getDefaultApiConnection().getChatMember(cfg.GroupID, user);
 
                     if (!userInChatInfo.ok)
-                        try
-                        {
-                            TgApi.getDefaultApiConnection().unbanChatMember(cfg.GroupID, user);
-                        }
-                        catch
-                        {
-                        }
-
-                    try
                     {
+                        TgApi.getDefaultApiConnection().unbanChatMember(cfg.GroupID, user);
                         TgApi.getDefaultApiConnection()
                             .restrictChatMember(cfg.GroupID, user, 0, true, true, true, true);
-                    }
-                    catch
-                    {
                     }
 
                     Thread.Sleep(500);
