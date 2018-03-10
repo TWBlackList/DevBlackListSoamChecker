@@ -290,29 +290,28 @@ namespace DevBlackListSoamChecker
                         ChatID,
                         SendUserInfo.id,
                         GetTime.GetUnixTime() + 60,
-                        true,
                         false);
                     Thread.Sleep(10500);
                     TgApi.getDefaultApiConnection().kickChatMember(ChatID, SendUserInfo.id, GetTime.GetUnixTime() + 60);
                 }).Start();
-            
             if (smsg.AutoBlackList)
-            {
-                if (Temp.GetDatabaseManager().GetUserBanStatus(SendUserInfo.id).Ban == 0) return;
-                new Task(() =>
+                new Thread(delegate()
                 {
-                    Temp.GetDatabaseManager().BanUser(
-                        0,
-                        SendUserInfo.id,
-                        smsg.BanLevel,
-                        banUtilTime,
-                        smsg.FriendlyName + "\n分數 : " + point,
-                        ChatID,
-                        MsgID,
-                        SendUserInfo
-                    );
+                    if (Temp.GetDatabaseManager().GetUserBanStatus(SendUserInfo.id).Ban == 0) return;
+                    new Task(() =>
+                    {
+                        Temp.GetDatabaseManager().BanUser(
+                            0,
+                            SendUserInfo.id,
+                            smsg.BanLevel,
+                            banUtilTime,
+                            smsg.FriendlyName + "\n分數 : " + point,
+                            ChatID,
+                            MsgID,
+                            SendUserInfo
+                        );
+                    }).Start();
                 }).Start();
-            }
             else
             {
                 if (smsg.AutoMute)
@@ -324,13 +323,14 @@ namespace DevBlackListSoamChecker
                         false
                     );
             }
-
+            
             if (smsg.AutoDelete)
                 new Thread(delegate()
                 {
                     Thread.Sleep(10000);
                     TgApi.getDefaultApiConnection().deleteMessage(ChatID, MsgID);
                 }).Start();
+            
         }
 
         private void CallAdmin_SendMessage(TgMessage msg, string content, int step)
