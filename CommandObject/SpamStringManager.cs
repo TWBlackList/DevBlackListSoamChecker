@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Json;
 using System.Text;
-using DevBlackListSoamChecker.DbManager;
+using DDevBlackListSoamChecker.DbManager;
 using ReimuAPI.ReimuBase;
 using ReimuAPI.ReimuBase.TgData;
 
-namespace DevBlackListSoamChecker.CommandObject
+namespace DDevBlackListSoamChecker.CommandObject
 {
     public class SpamStringManager
     {
@@ -355,8 +355,8 @@ namespace DevBlackListSoamChecker.CommandObject
                 return;
             }
 
-            Dictionary<string, string> banValues =
-                CommandDecoder.cutKeyIsValue(RawMessage.text.Substring(spacePath + 1));
+            //Dictionary<string, string> banValues =
+            //    CommandDecoder.cutKeyIsValue(RawMessage.text.Substring(spacePath + 1));
             string text = RawMessage.text.Replace("/getspampoints ", "");
             //string text = banValues.GetValueOrDefault("text", null);
             //string rule = banValues.GetValueOrDefault("rule", null);
