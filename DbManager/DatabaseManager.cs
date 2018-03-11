@@ -128,7 +128,11 @@ namespace DevBlackListSoamChecker.DbManager
                 }
 
                 banmsg += "\n\n已被解除封鎖";
+                
                 if (Reason != null) banmsg += "，原因 : \n" + Reason;
+
+                banmsg += "\n原處分 : \n"  + Temp.GetDatabaseManager().GetUserBanStatus(UserID).Reason + "\n";
+
                 banmsg += "\nOID : " + AdminID + "\n";
 
                 BanUser ban = Temp.GetDatabaseManager().GetUserBanStatus(UserID);
