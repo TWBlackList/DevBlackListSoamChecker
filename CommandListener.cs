@@ -66,7 +66,7 @@ namespace DevBlackListSoamChecker
                                     autodeletecommandsendresult.result.message_id
                                 );
                             }).Start();
-                            TgApi.getDefaultApiConnection().deleteMessage(RawMessage.chat.id, BaseMessage.message_id);
+                            TgApi.getDefaultApiConnection().deleteMessage(RawMessage.chat.id, RawMessage.message_id);
                         }
                         return new CallbackMessage {StopProcess = true};
                     }
