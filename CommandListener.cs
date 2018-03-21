@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using DevBlackListSoamChecker.CommandObject;
 using DevBlackListSoamChecker.DbManager;
 using ReimuAPI.ReimuBase;
@@ -51,19 +52,22 @@ namespace DevBlackListSoamChecker
                     else
                     {
                         if (cfg.AutoDeleteCommand == 0)
+                        {
                             new Thread(delegate()
                             {
-                                SendMessageResult autodeletecommandsendresult = TgApi.getDefaultApiConnection().sendMessage(
-                                    BaseMessage.GetMessageChatInfo().id,
-                                    "請您不要亂玩機器人的指令，有問題請聯絡群組管理員。"
-                                );
+                                SendMessageResult autodeletecommandsendresult = TgApi.getDefaultApiConnection()
+                                    .sendMessage(
+                                        RawMessage.GetMessageChatInfo().id,
+                                        "請您不要亂玩機器人的指令，有問題請聯絡群組管理員。"
+                                    );
                                 Thread.Sleep(60000);
                                 TgApi.getDefaultApiConnection().deleteMessage(
                                     autodeletecommandsendresult.result.chat.id,
                                     autodeletecommandsendresult.result.message_id
                                 );
                             }).Start();
-                        TgApi.getDefaultApiConnection().deleteMessage(BaseMessage.chat.id, BaseMessage.message_id);
+                            TgApi.getDefaultApiConnection().deleteMessage(RawMessage.chat.id, BaseMessage.message_id);
+                        }
                         return new CallbackMessage {StopProcess = true};
                     }
                 }
