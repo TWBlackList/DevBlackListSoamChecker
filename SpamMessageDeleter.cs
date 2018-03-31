@@ -188,16 +188,16 @@ namespace DevBlackListSoamChecker
                             points = +new SpamMessageChecker().GetIndexOfPoints(smsg.Messages, chatText);
                             break;
                         case 4:
-                            points = +new SpamMessageChecker().GetHalalPoints(chatText+BaseMessage.from.full_name);
+                            points = +new SpamMessageChecker().GetHalalPoints(chatText+BaseMessage.from.full_name());
                             break;
                         case 5:
-                            points = +new SpamMessageChecker().GetIndiaPoints(chatText+BaseMessage.from.full_name);
+                            points = +new SpamMessageChecker().GetIndiaPoints(chatText+BaseMessage.from.full_name());
                             break;
                         case 6:
                             points = new SpamMessageChecker().GetContainsPoints(smsg.Messages, chatText + " " + forward_from_id);
                             break;
                         case 7:
-                            points = new SpamMessageChecker().GetRussiaPoints(chatText+BaseMessage.from.full_name);
+                            points = new SpamMessageChecker().GetRussiaPoints(chatText+BaseMessage.from.full_name());
                             break;
                         case 8:
                             points = new SpamMessageChecker().GetNamePoints(smsg.Messages, BaseMessage.from.full_name);
