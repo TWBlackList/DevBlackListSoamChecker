@@ -200,7 +200,7 @@ namespace DevBlackListSoamChecker
                             points = new SpamMessageChecker().GetRussiaPoints(chatText+BaseMessage.from.full_name());
                             break;
                         case 8:
-                            points = new SpamMessageChecker().GetNamePoints(smsg.Messages, BaseMessage.from.full_name);
+                            points = new SpamMessageChecker().GetNamePoints(smsg.Messages, BaseMessage.from.full_name());
                             break;
                     }
 
