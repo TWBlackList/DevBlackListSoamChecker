@@ -36,7 +36,7 @@ namespace DevBlackListSoamChecker.CommandObject
                 if (groupCfg == null) return false;
                 foreach (GroupCfg cfg in groupCfg)
                 {
-                    if (TgApi.getDefaultApiConnection().getChatMember(cfg.GroupID,TgApi.getDefaultApiConnection().getMe().id).result.ok)
+                    if (TgApi.getDefaultApiConnection().getChatMember(cfg.GroupID,TgApi.getDefaultApiConnection().getMe().id).ok)
                     {
                         groups = groups + cfg.GroupID.ToString() + " : Bot是聊天成員，略過\n";
                     }
