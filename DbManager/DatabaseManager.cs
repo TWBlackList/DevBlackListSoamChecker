@@ -40,7 +40,7 @@ namespace DevBlackListSoamChecker.DbManager
             System.Console.WriteLine(string.Format("Reason : {0}",Reason));
             System.Console.WriteLine(string.Format("ChatID : {0}",ChatID.ToString()));
             System.Console.WriteLine(string.Format("MessageID : {0}",MessageID.ToString()));
-            System.Console.WriteLine(string.Format("UserInfo : {0}",UserInfo.GetUserTextInfo()));
+            System.Console.WriteLine(string.Format("UserInfo : {0}",userinfo.GetUserTextInfo()));
             if (RAPI.getIsInWhitelist(UserID)) return false;
             bool finalResult = true;
             string banmsg = "";
