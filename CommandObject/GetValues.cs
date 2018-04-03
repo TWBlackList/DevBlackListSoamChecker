@@ -55,6 +55,7 @@ namespace DevBlackListSoamChecker.CommandObject
         internal UserInfo GetUserInfo(TgMessage RawMessage, string from)
         {
             if (RawMessage.reply_to_message == null) return null;
+            if (RawMessage.reply_to_message.new_chat_member != null) return RawMessage.reply_to_message.new_chat_member;
             if (from == "r" || from == "reply")
                 return RawMessage.GetReplyMessage().GetSendUser();
             if (from == "f" || from == "fwd") return RawMessage.GetReplyMessage().GetForwardedFromUser();
@@ -150,11 +151,15 @@ namespace DevBlackListSoamChecker.CommandObject
                                 tmpUserInfo = GetUserInfo(RawMessage, "reply");
                                 if (tmpUserInfo == null)
                                 {
-                                    TgApi.getDefaultApiConnection().sendMessage(
-                                        RawMessage.GetMessageChatInfo().id,
-                                        "没有找到任何使用者 ID，請檢查您的輸入，或使用 /cnban 查看帮助。 err1"
-                                    );
-                                    return null;
+                                    tmpUserInfo = GetUserInfo(RawMessage, "r");
+                                    if (tmpUserInfo == null)
+                                    {
+                                        TgApi.getDefaultApiConnection().sendMessage(
+                                            RawMessage.GetMessageChatInfo().id,
+                                            "没有找到任何使用者 ID，請檢查您的輸入，或使用 /cnban 查看帮助。 err1"
+                                        );
+                                        return null;
+                                    }
                                 }
                             }
 
