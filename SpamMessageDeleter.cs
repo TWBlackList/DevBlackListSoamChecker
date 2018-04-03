@@ -361,7 +361,7 @@ namespace DevBlackListSoamChecker
                         GetTime.GetUnixTime() + 60,
                         false);
                     Thread.Sleep(10500);
-                    TgApi.getDefaultApiConnection().kickChatMember(ChatID, SendUserInfo.id, GetTime.GetUnixTime() + 300);
+                    TgApi.getDefaultApiConnection().kickChatMember(ChatID, SendUserInfo.id, GetTime.GetUnixTime() + 1800);
                 }).Start();
             if (smsg.AutoBlackList)
                 new Thread(delegate()
