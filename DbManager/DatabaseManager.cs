@@ -41,17 +41,23 @@ namespace DevBlackListSoamChecker.DbManager
             System.Console.WriteLine(string.Format("ChatID : {0}",ChatID.ToString()));
             System.Console.WriteLine(string.Format("MessageID : {0}",MessageID.ToString()));
             System.Console.WriteLine(string.Format("UserInfo : {0}",userinfo.GetUserTextInfo()));
+            
+            System.Console.WriteLine("Checking in Whitelist");
+            
             if (RAPI.getIsInWhitelist(UserID)) return false;
             bool finalResult = true;
             string banmsg = "";
             SendMessageResult result = null;
             int ReasonID = 0;
             int ChannelReasonID = 0;
+            System.Console.WriteLine("Checking ChatID Message");
             if (Temp.ReasonChannelID != 0 && ChatID != 0 && MessageID != 0)
+                System.Console.WriteLine("Forward Message");
                 ReasonID = TgApi.getDefaultApiConnection().forwardMessage(Temp.ReasonChannelID, ChatID, MessageID)
                     .result.message_id;
             if (Temp.MainChannelID != 0)
             {
+                System.Console.WriteLine("Sending Ban msg to Channel");
                 if (userinfo == null)
                 {
                     UserInfoRequest userinforeq = TgApi.getDefaultApiConnection().getChat(UserID);
@@ -102,6 +108,7 @@ namespace DevBlackListSoamChecker.DbManager
                     .message_id;
             }
 
+            System.Console.WriteLine("Change DataBase data ");
             ChangeDbBan(AdminID, UserID, Level, Expires, Reason, ChannelReasonID, ReasonID);
             CNBlacklistApi.PostToAPI(UserID, true, Level, Expires, Reason);
             return finalResult;
