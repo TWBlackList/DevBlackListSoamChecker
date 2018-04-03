@@ -32,6 +32,15 @@ namespace DevBlackListSoamChecker.DbManager
             UserInfo userinfo = null
         )
         {
+            System.Console.WriteLine("[BanUser] Has been called");
+            System.Console.WriteLine(string.Format("AdminID : {0}",AdminID.ToString()));
+            System.Console.WriteLine(string.Format("UserID : {0}",UserID.ToString()));
+            System.Console.WriteLine(string.Format("Level : {0}",Level.ToString()));
+            System.Console.WriteLine(string.Format("Expires : {0}",Expires.ToString()));
+            System.Console.WriteLine(string.Format("Reason : {0}",Reason));
+            System.Console.WriteLine(string.Format("ChatID : {0}",ChatID.ToString()));
+            System.Console.WriteLine(string.Format("MessageID : {0}",MessageID.ToString()));
+            System.Console.WriteLine(string.Format("UserInfo : {0}",UserInfo.GetUserTextInfo()));
             if (RAPI.getIsInWhitelist(UserID)) return false;
             bool finalResult = true;
             string banmsg = "";
