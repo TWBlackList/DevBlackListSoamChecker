@@ -54,7 +54,7 @@ namespace DevBlackListSoamChecker.DbManager
             if (Temp.ReasonChannelID != 0 && ChatID != 0 && MessageID != 0)
             {
                 System.Console.WriteLine("Forward Message");
-                SendMessageResult forward = TgApi.getDefaultApiConnection()
+                SendResult forward = TgApi.getDefaultApiConnection()
                     .forwardMessage(Temp.ReasonChannelID, ChatID, MessageID);
                 if (forward.result.ok)
                 {
