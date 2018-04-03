@@ -160,6 +160,8 @@ namespace DevBlackListSoamChecker.CommandObject
                     Level,
                     ExpiresTime,
                     Reason,
+                    0,
+                    0,
                     BanUserInfo
                 );
             else
