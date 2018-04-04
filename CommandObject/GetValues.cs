@@ -32,7 +32,7 @@ namespace DevBlackListSoamChecker.CommandObject
 
         internal long GetGroupID(Dictionary<string, string> banValues, TgMessage RawMessage)
         {
-            var GroupID = "";
+            string GroupID = "";
             GroupID = banValues.GetValueOrDefault("g", "__invalid__");
             if (GroupID == "__invalid__") GroupID = banValues.GetValueOrDefault("group", "__invalid__");
             if (GroupID == "__invalid__") GroupID = banValues.GetValueOrDefault("groupid", "__invalid__");
@@ -45,7 +45,7 @@ namespace DevBlackListSoamChecker.CommandObject
 
         internal string GetText(Dictionary<string, string> banValues, TgMessage RawMessage)
         {
-            var Text = "";
+            string Text = "";
             Text = banValues.GetValueOrDefault("t", "__invalid__");
             if (Text == "__invalid__") Text = banValues.GetValueOrDefault("text", "__invalid__");
             if (Text == "__invalid__") return null;
@@ -64,10 +64,10 @@ namespace DevBlackListSoamChecker.CommandObject
 
         internal long GetBanUnixTime(Dictionary<string, string> banValues, TgMessage RawMessage)
         {
-            var tmpString = "";
-            var Minutes = 0;
-            var Hours = 0;
-            var Days = 0;
+            string tmpString = "";
+            int Minutes = 0;
+            int Hours = 0;
+            int Days = 0;
             long ExpiresTime = 0;
             tmpString = banValues.GetValueOrDefault("m", "__invalid__");
             if (tmpString == "__invalid__") tmpString = banValues.GetValueOrDefault("minutes", "0");
@@ -131,7 +131,7 @@ namespace DevBlackListSoamChecker.CommandObject
         internal UserInfo GetByTgMessage(Dictionary<string, string> banValues, TgMessage RawMessage)
         {
             UserInfo BanUserInfo = null;
-            var tmpString = "";
+            string tmpString = "";
             tmpString = banValues.GetValueOrDefault("i", "__invalid__");
             if (tmpString == "__invalid__")
             {
@@ -217,10 +217,10 @@ namespace DevBlackListSoamChecker.CommandObject
 
         internal int[] GetUserIDs(Dictionary<string, string> banValues, TgMessage RawMessage)
         {
-            var tmpString = "";
+            string tmpString = "";
             tmpString = banValues.GetValueOrDefault("i", "__invalid__");
             if (tmpString == "__invalid__") tmpString = banValues.GetValueOrDefault("id", "__invalid__");
-            var users = Array.ConvertAll(tmpString.Split(","), int.Parse);
+            int[] users = Array.ConvertAll(tmpString.Split(","), int.Parse);
 
             return users;
         }

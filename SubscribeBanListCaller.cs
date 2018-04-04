@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using DevBlackListSoamChecker.DbManager;
 using ReimuAPI.ReimuBase;
+using ReimuAPI.ReimuBase.TgData;
 
 namespace DevBlackListSoamChecker
 {
@@ -34,7 +35,7 @@ namespace DevBlackListSoamChecker
                 }
 
                 if (groupCfg == null) return;
-                foreach (var cfg in groupCfg)
+                foreach (GroupCfg cfg in groupCfg)
                 {
                     var userInChatInfo = TgApi.getDefaultApiConnection().getChatMember(cfg.GroupID, user.UserID);
                     if (userInChatInfo.ok)
@@ -48,7 +49,7 @@ namespace DevBlackListSoamChecker
                                 //    user.UserID,
                                 //    GetTime.GetUnixTime() + 10,
                                 //    false);
-                                var result = TgApi.getDefaultApiConnection().sendMessage(
+                                SendMessageResult result = TgApi.getDefaultApiConnection().sendMessage(
                                     cfg.GroupID,
                                     "使用者 : " + user.UserID + "\n" + user.GetBanMessage() +
                                     "\n\n由於開啟了 SubscribeBanList ，已嘗試自動移除。"

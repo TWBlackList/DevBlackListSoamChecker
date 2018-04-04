@@ -10,7 +10,7 @@ namespace DevBlackListSoamChecker
         {
             if (ConfigPath == null)
             {
-                var configPath = Environment.GetEnvironmentVariable("BOT_CONFIGPATH");
+                string configPath = Environment.GetEnvironmentVariable("BOT_CONFIGPATH");
                 if (configPath == "" || configPath == null)
                     ConfigPath = @"plugincfg/soamchecker/";
                 else
