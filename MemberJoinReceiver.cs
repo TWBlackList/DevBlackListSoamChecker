@@ -1,6 +1,5 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using DevBlackListSoamChecker.DbManager;
 using ReimuAPI.ReimuBase;
 using ReimuAPI.ReimuBase.Interfaces;
 using ReimuAPI.ReimuBase.TgData;
@@ -17,14 +16,14 @@ namespace DevBlackListSoamChecker
         public CallbackMessage OnSupergroupMemberJoinReceive(TgMessage RawMessage, string JsonMessage,
             UserInfo JoinedUser)
         {
-            DatabaseManager dbmgr = Temp.GetDatabaseManager();
-            GroupCfg groupCfg = dbmgr.GetGroupConfig(RawMessage.GetMessageChatInfo().id);
+            var dbmgr = Temp.GetDatabaseManager();
+            var groupCfg = dbmgr.GetGroupConfig(RawMessage.GetMessageChatInfo().id);
 
             if (groupCfg.AntiBot == 0 && JoinedUser.is_bot && !TgApi.getDefaultApiConnection()
                     .checkIsAdmin(RawMessage.GetMessageChatInfo().id, RawMessage.from.id))
             {
-                SetActionResult result = TgApi.getDefaultApiConnection()
-                    .kickChatMember(RawMessage.GetMessageChatInfo().id, JoinedUser.id,GetTime.GetUnixTime() + 300);
+                var result = TgApi.getDefaultApiConnection()
+                    .kickChatMember(RawMessage.GetMessageChatInfo().id, JoinedUser.id, GetTime.GetUnixTime() + 300);
                 if (result.ok)
                     TgApi.getDefaultApiConnection().sendMessage(
                         RawMessage.GetMessageChatInfo().id,
@@ -38,13 +37,13 @@ namespace DevBlackListSoamChecker
 
                 new Task(() =>
                 {
-                    long banUtilTime = GetTime.GetUnixTime() + 86400;
+                    var banUtilTime = GetTime.GetUnixTime() + 86400;
                     Temp.GetDatabaseManager().BanUser(
                         0,
                         RawMessage.GetSendUser().id,
                         0,
                         banUtilTime,
-                        "自動封鎖 - 拉入機器人" + JoinedUser.GetUserTextInfo() ,
+                        "自動封鎖 - 拉入機器人" + JoinedUser.GetUserTextInfo(),
                         RawMessage.GetMessageChatInfo().id,
                         0,
                         RawMessage.GetSendUser()
@@ -67,7 +66,8 @@ namespace DevBlackListSoamChecker
 
                 if (RawMessage.GetMessageChatInfo().type == "group")
                 {
-                    TgApi.getDefaultApiConnection().sendMessage(RawMessage.GetMessageChatInfo().id, "一般群組無法使用本服務，如有疑問請至 @ChineseBlackList ");
+                    TgApi.getDefaultApiConnection().sendMessage(RawMessage.GetMessageChatInfo().id,
+                        "一般群組無法使用本服務，如有疑問請至 @ChineseBlackList ");
                     Thread.Sleep(2000);
                     TgApi.getDefaultApiConnection().leaveChat(RawMessage.GetMessageChatInfo().id);
                     return new CallbackMessage();
@@ -90,10 +90,10 @@ namespace DevBlackListSoamChecker
 
             if (Temp.CourtGroupName != null && RawMessage.GetMessageChatInfo().username == Temp.CourtGroupName)
             {
-                BanUser banUser = dbmgr.GetUserBanStatus(JoinedUser.id);
+                var banUser = dbmgr.GetUserBanStatus(JoinedUser.id);
                 if (banUser.Ban == 0)
                 {
-                    string resultmsg = "這位使用者被封鎖了\n" + banUser.GetBanMessage_ESCMD();
+                    var resultmsg = "這位使用者被封鎖了\n" + banUser.GetBanMessage_ESCMD();
                     TgApi.getDefaultApiConnection().sendMessage(
                         RawMessage.GetMessageChatInfo().id,
                         resultmsg,
@@ -110,7 +110,7 @@ namespace DevBlackListSoamChecker
                         RawMessage.message_id,
                         TgApi.PARSEMODE_MARKDOWN
                     );
-                    
+
                     TgApi.getDefaultApiConnection().restrictChatMember(
                         RawMessage.GetMessageChatInfo().id,
                         JoinedUser.id,
@@ -141,8 +141,8 @@ namespace DevBlackListSoamChecker
 
             if (groupCfg.BlackList == 0)
             {
-                BanUser banUser = dbmgr.GetUserBanStatus(JoinedUser.id);
-                string resultmsg = "";
+                var banUser = dbmgr.GetUserBanStatus(JoinedUser.id);
+                var resultmsg = "";
                 if (banUser.Ban == 0)
                 {
                     string banReason;
@@ -159,7 +159,7 @@ namespace DevBlackListSoamChecker
                         if (groupCfg.AutoKick == 0)
                             try
                             {
-                                SetActionResult result = TgApi.getDefaultApiConnection().kickChatMember(
+                                var result = TgApi.getDefaultApiConnection().kickChatMember(
                                     RawMessage.GetMessageChatInfo().id,
                                     JoinedUser.id,
                                     GetTime.GetUnixTime() + 300
@@ -186,12 +186,12 @@ namespace DevBlackListSoamChecker
 
                 new Thread(delegate()
                 {
-                    SendMessageResult autodeletespammessagesendresult = TgApi.getDefaultApiConnection().sendMessage(
-                            RawMessage.GetMessageChatInfo().id,
-                            resultmsg,
-                            RawMessage.message_id,
-                            TgApi.PARSEMODE_MARKDOWN
-                        );
+                    var autodeletespammessagesendresult = TgApi.getDefaultApiConnection().sendMessage(
+                        RawMessage.GetMessageChatInfo().id,
+                        resultmsg,
+                        RawMessage.message_id,
+                        TgApi.PARSEMODE_MARKDOWN
+                    );
                     Thread.Sleep(60000);
                     TgApi.getDefaultApiConnection().deleteMessage(
                         autodeletespammessagesendresult.result.chat.id,

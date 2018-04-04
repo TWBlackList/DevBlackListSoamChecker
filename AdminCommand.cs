@@ -96,6 +96,7 @@ namespace DevBlackListSoamChecker
                     }
                 }
             }
+
             return false;
         }
     }
