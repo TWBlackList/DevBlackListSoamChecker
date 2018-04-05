@@ -19,7 +19,7 @@ namespace DevBlackListSoamChecker
                 {
                     var result = TgApi.getDefaultApiConnection().getChatMember(ChatID, admin.user.id);
                     if (result.ok)
-                        if(result.status != "left")
+                        if(result.result.status != "left")
                         {
                             status = true;
                             break;
