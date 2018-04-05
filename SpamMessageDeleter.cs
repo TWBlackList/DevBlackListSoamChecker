@@ -93,7 +93,7 @@ namespace DevBlackListSoamChecker
             }
             // Call Admin END
 
-            if (Temp.ReportGroupName != null && BaseMessage.GetMessageChatInfo().id == Temp.ReportGroupID)
+            if (Temp.ReportGroupID != 0 && BaseMessage.GetMessageChatInfo().id == Temp.ReportGroupID)
                 if (BaseMessage.forward_from != null)
                 {
                     BanUser banUser = Temp.GetDatabaseManager().GetUserBanStatus(BaseMessage.forward_from.id);
