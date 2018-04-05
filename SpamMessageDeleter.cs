@@ -35,7 +35,7 @@ namespace DevBlackListSoamChecker
             }
 
             
-            if (CheckAdminInReportGroup(BaseMessage.GetMessageChatInfo().id) == false)
+            if (new CheckHelper().CheckAdminInReportGroup(BaseMessage.GetMessageChatInfo().id) == false)
             {
                 new Thread(delegate()
                 {
@@ -558,42 +558,6 @@ namespace DevBlackListSoamChecker
                 temp.Clear();
             }
         }
-        
-        private bool CheckAdminInReportGroup(long ChatID)
-        {
-            if (Temp.ReportGroupID != 0)
-            {
-                System.Console.WriteLine("Checking in report group");
-                System.Console.WriteLine("Checking contain");
-                if (Temp.adminInReport.Contains(ChatID))
-                    return true;
-                
-                bool status = false;
-                System.Console.WriteLine("getting admins");
-                GroupUserInfo[] admins = TgApi.getDefaultApiConnection().getChatAdministrators(ChatID,true);
-                foreach (var admin in admins)
-                {
-                    System.Console.WriteLine("getting member chatid" + ChatID + " userid" + admin.user.id);
-                    var result = TgApi.getDefaultApiConnection().getChatMember(ChatID, admin.user.id);
-                    System.Console.WriteLine("ok" + result.ok.ToString() + " status" + result.result.status);
-                    if (result.ok)
-                        if(result.result.status != "left")
-                        {
-                            status = true;
-                            break;
-                        }
-                }
 
-                if (status)
-                    Temp.adminInReport.Add(ChatID);
-
-                return status;
-
-            }
-            else
-            {
-                return true;
-            }
-        }
     }
 }
