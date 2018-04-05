@@ -82,7 +82,7 @@ namespace DevBlackListSoamChecker
                 {
                     TgApi.getDefaultApiConnection().forwardMessage(
                         Temp.InternGroupID,
-                        BaseMessage.get.GetMessageChatInfo().id,
+                        BaseMessage.GetMessageChatInfo().id,
                         BaseMessage.GetReplyMessage().message_id
                     );
                     TgApi.getDefaultApiConnection().sendMessage(
