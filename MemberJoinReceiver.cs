@@ -73,6 +73,20 @@ namespace DevBlackListSoamChecker
                     TgApi.getDefaultApiConnection().leaveChat(RawMessage.GetMessageChatInfo().id);
                     return new CallbackMessage();
                 }
+                
+                if (!new CheckHelper().CheckAdminInReportGroup(RawMessage.GetMessageChatInfo().id))
+                {
+                    new Thread(delegate()
+                    {
+                        TgApi.getDefaultApiConnection().sendMessage(BaseMessage.GetMessageChatInfo().id, 
+                            "群管理必須加入本[項目群組](https://t.me/" + Temp.ReportGroupName + ")才可使用本服務。",
+                            TgApi.PARSEMODE_MARKDOWN);
+                        Thread.Sleep(2000);
+                        TgApi.getDefaultApiConnection().leaveChat(RawMessage.GetMessageChatInfo().id);
+                    }).Start();
+                    return new CallbackMessage();
+                
+                }
 
                 TgApi.getDefaultApiConnection().sendMessage(
                     RawMessage.GetMessageChatInfo().id,
