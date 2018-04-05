@@ -35,7 +35,7 @@ namespace DevBlackListSoamChecker
             }
 
             
-            if (new CheckHelper().CheckAdminInReportGroup(BaseMessage.GetMessageChatInfo().id) == false)
+            if (!new CheckHelper().CheckAdminInReportGroup(BaseMessage.GetMessageChatInfo().id))
             {
                 new Thread(delegate()
                 {
