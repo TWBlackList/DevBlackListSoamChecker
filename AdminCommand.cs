@@ -10,10 +10,13 @@ namespace DevBlackListSoamChecker
         {
             if (RawMessage.GetMessageChatInfo().id == Temp.InternGroupID && RawMessage.GetReplyMessage().GetSendUser().id == TgApi.getDefaultApiConnection().getMe().id)
             {
-                case "/devban":
-                case "/ban":
-                    new BanUserCommand().Ban(RawMessage, JsonMessage, Command);
-                    throw new StopProcessException();
+                switch (Command)
+                {
+                    case "/devban":
+                    case "/ban":
+                        new BanUserCommand().Ban(RawMessage, JsonMessage, Command);
+                        throw new StopProcessException();                    
+                }
             }
             if (RAPI.getIsBotOP(RawMessage.GetSendUser().id) || RAPI.getIsBotAdmin(RawMessage.GetSendUser().id))
             {
