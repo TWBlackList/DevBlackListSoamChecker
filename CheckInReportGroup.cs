@@ -4,9 +4,9 @@ using ReimuAPI.ReimuBase.TgData;
 
 namespace DevBlackListSoamChecker
 {
-    internal class CheckInReportGroup
+    public class CheckInReportGroup
     {
-        internal bool CheckAdminInReportGroup(long ChatID)
+        public static bool CheckAdminInReportGroup(long ChatID)
         {
             if (Temp.ReportGroupID != 0)
             {
