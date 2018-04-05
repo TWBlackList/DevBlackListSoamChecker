@@ -16,7 +16,7 @@ namespace DevBlackListSoamChecker
         public static long ReasonChannelID = -1001301159042; // If haven't, change it to 0
         public static long ReportGroupID = -1001301159042; // If haven't, change it to 0
         public static long CourtGroupID = -1001301159042; // If haven't, change it to 0
-        public static long InternGroupID = -1001378349819; // If haven't, change it to 0
+        public static long InternGroupID = -1001220977885; // If haven't, change it to 0
         public static string MainChannelName = null; // If haven't, change it to null
         public static string ReasonChannelName = null; // If haven't, change it to null
         public static string ReportGroupName = null; //這ㄍ意思是 : 你他媽不能亂改群組username
