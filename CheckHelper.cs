@@ -7,6 +7,7 @@ namespace DevBlackListSoamChecker
     {
         public bool CheckAdminInReportGroup(long ChatID)
         {
+            System.Console.WriteLine("CheckAdminInReportGroup Called. ChatID" + ChatID.ToString());
             if (Temp.ReportGroupID != 0)
             {
                 foreach (long i in Temp.adminInReport)
