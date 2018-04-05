@@ -18,7 +18,7 @@ namespace DevBlackListSoamChecker.CommandObject
 
         internal bool GCA(TgMessage RawMessage)
         {
-            string[] values = String.Split(RawMessage.text," ");
+            string[] values = RawMessage.text.Split(' ');
 
             if (values.Count() == 1)
                 TgApi.getDefaultApiConnection().sendMessage(RawMessage.chat.id, "輸入錯誤\n /groupadmin GID", RawMessage.message_id);
@@ -45,7 +45,7 @@ namespace DevBlackListSoamChecker.CommandObject
             }
             
             TgApi.getDefaultApiConnection()
-                .sendMessage(RawMessage.chat.id, msg, RawMessage.message_id,ParseMode: TgApi.PARSEMODE_MARKDOWN);
+                .sendMessage(RawMessage.chat.id, msg, ParseMode: TgApi.PARSEMODE_MARKDOWN);
             
             return true;
         }
