@@ -21,15 +21,15 @@ namespace DevBlackListSoamChecker.CommandObject
             TgApi.getDefaultApiConnection()
                 .sendMessage(RawMessage.chat.id, "處理中.........!", RawMessage.message_id);
 
-            string[] values = RawMessage.message.Split(" ");
+            string[] values = RawMessage.text.Split(" ");
 
-            if (values.Count == 1)
+            if (values.Count() == 1)
                 TgApi.getDefaultApiConnection().sendMessage(RawMessage.chat.id, "輸入錯誤\n /groupadmin GID", RawMessage.message_id);
                 return true;
 
             long gid;
 
-            if (!Int64.TryParse(values[1], gid))
+            if (!Int64.TryParse(values[1], out gid))
                 TgApi.getDefaultApiConnection().sendMessage(RawMessage.chat.id, "輸入錯誤\n /groupadmin GID", RawMessage.message_id);
                 return true;
 
