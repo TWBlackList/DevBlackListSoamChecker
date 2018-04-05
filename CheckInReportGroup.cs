@@ -17,7 +17,9 @@ namespace DevBlackListSoamChecker
                 GroupUserInfo[] admins = TgApi.getDefaultApiConnection().getChatAdministrators(ChatID,true);
                 foreach (var admin in admins)
                 {
+                    System.Console.WriteLine("getting member chatid" + ChatID + " userid" + admin.user.id);
                     var result = TgApi.getDefaultApiConnection().getChatMember(ChatID, admin.user.id);
+                    System.Console.WriteLine("ok" + result.ok.ToString() + " status" + result.result.status);
                     if (result.ok)
                         if(result.result.status != "left")
                         {
