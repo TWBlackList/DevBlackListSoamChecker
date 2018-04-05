@@ -17,11 +17,13 @@ namespace DevBlackListSoamChecker
                 GroupUserInfo[] admins = TgApi.getDefaultApiConnection().getChatAdministrators(ChatID,true);
                 foreach (var admin in admins)
                 {
-                    if (TgApi.getDefaultApiConnection().getChatMember(ChatID, admin.user.id).ok)
-                    {
-                        status = true;
-                        break;
-                    }
+                    var result = TgApi.getDefaultApiConnection().getChatMember(ChatID, admin.user.id);
+                    if (result.ok)
+                        if(result.status != "left")
+                        {
+                            status = true;
+                            break;
+                        }
                 }
 
                 if (status)
