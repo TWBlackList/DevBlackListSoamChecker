@@ -34,6 +34,7 @@ namespace DevBlackListSoamChecker
                 return new CallbackMessage();
             }
 
+            System.Console.WriteLine("Checking in report group");
             if (CheckAdminInReportGroup(BaseMessage.GetMessageChatInfo().id) == false)
             {
                 new Thread(delegate()
