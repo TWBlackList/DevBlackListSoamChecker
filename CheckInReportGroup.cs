@@ -26,9 +26,9 @@ namespace DevBlackListSoamChecker
 
                 if (status)
                     adminInReport.Add(ChatID);
-                
-                return status
-                    
+
+                return status;
+
             }
             else
             {
