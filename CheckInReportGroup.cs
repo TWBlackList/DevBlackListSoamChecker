@@ -10,7 +10,7 @@ namespace DevBlackListSoamChecker
         {
             if (Temp.ReportGroupID != 0)
             {
-                if (adminInReport.Contains(ChatID))
+                if (Temp.adminInReport.Contains(ChatID))
                     return true;
                 
                 bool status = false;
@@ -25,7 +25,7 @@ namespace DevBlackListSoamChecker
                 }
 
                 if (status)
-                    adminInReport.Add(ChatID);
+                    Temp.adminInReport.Add(ChatID);
 
                 return status;
 
