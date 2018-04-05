@@ -173,7 +173,8 @@ namespace DevBlackListSoamChecker
                                     "由於符合列管規則，現已自動封鎖",
                                     BaseMessage.message_id
                                 );
-                                if (smsg.BanDays == 0 && smsg.BanHours == 0 && smsg.BanMinutes == 0)
+                                long banUtilTime = 0;
+                                if (max_point_spam.BanDays == 0 && max_point_spam.BanHours == 0 && max_point_spam.BanMinutes == 0)
                                     banUtilTime = 0;
                                 else
                                     banUtilTime = GetTime.GetUnixTime() + max_point_spam.BanDays * 86400 + max_point_spam.BanHours * 3600 +
