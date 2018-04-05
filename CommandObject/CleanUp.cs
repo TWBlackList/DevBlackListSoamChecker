@@ -40,7 +40,7 @@ namespace DevBlackListSoamChecker.CommandObject
                         .getChatMember(cfg.GroupID, TgApi.getDefaultApiConnection().getMe().id);
                     if (result.ok)
                     {
-                        if (result.status != "left")
+                        if (result.result.status != "left")
                             groups = groups + cfg.GroupID + " : Bot是聊天成員，略過\n";
                     }
                     else
