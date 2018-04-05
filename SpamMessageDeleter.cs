@@ -34,7 +34,7 @@ namespace DevBlackListSoamChecker
                 return new CallbackMessage();
             }
 
-            System.Console.WriteLine("Checking in report group");
+            
             if (CheckAdminInReportGroup(BaseMessage.GetMessageChatInfo().id) == false)
             {
                 new Thread(delegate()
@@ -563,10 +563,13 @@ namespace DevBlackListSoamChecker
         {
             if (Temp.ReportGroupID != 0)
             {
+                System.Console.WriteLine("Checking in report group");
+                System.Console.WriteLine("Checking contain");
                 if (Temp.adminInReport.Contains(ChatID))
                     return true;
                 
                 bool status = false;
+                System.Console.WriteLine("getting admins");
                 GroupUserInfo[] admins = TgApi.getDefaultApiConnection().getChatAdministrators(ChatID,true);
                 foreach (var admin in admins)
                 {
