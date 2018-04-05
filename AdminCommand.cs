@@ -65,6 +65,9 @@ namespace DevBlackListSoamChecker
                         }
                     switch (Command)
                     {
+                        case "/groupadmin":
+                            new GetAdmins().GetGroupAdmins(RawMessage);
+                            throw new StopProcessException();
                         case "/cleanup":
                             new CleanUP().CleanUP_Status(RawMessage);
                             throw new StopProcessException();
