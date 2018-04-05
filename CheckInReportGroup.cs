@@ -1,4 +1,3 @@
-using System.Threading;
 using ReimuAPI.ReimuBase;
 using ReimuAPI.ReimuBase.TgData;
 
