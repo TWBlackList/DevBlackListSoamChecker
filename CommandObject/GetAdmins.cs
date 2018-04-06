@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Linq;....
 using ReimuAPI.ReimuBase;
 using ReimuAPI.ReimuBase.TgData;
 
@@ -35,15 +35,13 @@ namespace DevBlackListSoamChecker.CommandObject
             foreach (var admin in admins)
             {
                 if (admin.user.username != null)
-                    msg = msg + admin.user.id.ToString() + " [" + RAPI.escapeMarkdown(admin.user.full_name()) + "](tg://user?id=" +
-                          admin.user.id.ToString() + ") @" + admin.user.username + "\n";
+                    msg = msg + admin.user.id.ToString() + " " +  admin.user.full_name() + " @" + admin.user.username + "\n";
                 else
-                    msg = msg + admin.user.id.ToString() + " [" + RAPI.escapeMarkdown(admin.user.full_name()) + "](tg://user?id=" +
-                          admin.user.id.ToString() + ") \n";
+                    msg = msg + admin.user.id.ToString() +  " " +  admin.user.full_name() + "\n";
             }
 
             TgApi.getDefaultApiConnection()
-                .sendMessage(RawMessage.chat.id, msg, ParseMode: TgApi.PARSEMODE_MARKDOWN);
+                .sendMessage(RawMessage.chat.id, msg);
             
             return true;
         }
