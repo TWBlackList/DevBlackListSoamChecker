@@ -15,14 +15,20 @@ namespace DevBlackListSoamChecker.CommandObject
             string[] values = RawMessage.text.Split(' ');
 
             if (values.Count() == 1)
-                TgApi.getDefaultApiConnection().sendMessage(RawMessage.chat.id, "輸入錯誤\n /groupadmin GID", RawMessage.message_id);
+            {
+                TgApi.getDefaultApiConnection()
+                    .sendMessage(RawMessage.chat.id, "輸入錯誤\n /groupadmin GID", RawMessage.message_id);
                 return true;
+            }
 
             long gid;
 
             if (!Int64.TryParse(values[1], out gid))
-                TgApi.getDefaultApiConnection().sendMessage(RawMessage.chat.id, "輸入錯誤\n /groupadmin GID", RawMessage.message_id);
+            {
+                TgApi.getDefaultApiConnection()
+                    .sendMessage(RawMessage.chat.id, "輸入錯誤\n /groupadmin GID", RawMessage.message_id);
                 return true;
+            }
 
             GroupUserInfo[] admins = TgApi.getDefaultApiConnection().getChatAdministrators(gid);
 
@@ -38,7 +44,6 @@ namespace DevBlackListSoamChecker.CommandObject
                           admin.user.id.ToString() + ") \n";
             }
 
-            System.Console.WriteLine(msg);
             TgApi.getDefaultApiConnection()
                 .sendMessage(RawMessage.chat.id, msg, ParseMode: TgApi.PARSEMODE_MARKDOWN);
             
