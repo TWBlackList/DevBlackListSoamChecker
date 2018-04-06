@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using DevBlackListSoamChecker.DbManager;
 using ReimuAPI.ReimuBase;
 using ReimuAPI.ReimuBase.TgData;
@@ -13,7 +16,7 @@ namespace DevBlackListSoamChecker.CommandObject
             if (values.Count() == 1)
             {
                 TgApi.getDefaultApiConnection()
-                    .sendMessage(RawMessage.chat.id, "輸入錯誤\n /groupadmin GID", RawMessage.message_id);
+                    .sendMessage(RawMessage.chat.id, "輸入錯誤\n/groupadmin GID", RawMessage.message_id);
                 return true;
             }
 
@@ -22,7 +25,7 @@ namespace DevBlackListSoamChecker.CommandObject
             if (!Int64.TryParse(values[1], out gid))
             {
                 TgApi.getDefaultApiConnection()
-                    .sendMessage(RawMessage.chat.id, "輸入錯誤\n /groupadmin GID", RawMessage.message_id);
+                    .sendMessage(RawMessage.chat.id, "輸入錯誤\n/groupadmin GID", RawMessage.message_id);
                 return true;
             }
 
