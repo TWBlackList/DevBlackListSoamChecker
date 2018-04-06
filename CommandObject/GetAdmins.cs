@@ -44,7 +44,7 @@ namespace DevBlackListSoamChecker.CommandObject
                           admin.user.id.ToString() + ") \n";
             }
 
-            System.Console.Writeline(msg);
+            System.Console.WriteLine(msg);
             TgApi.getDefaultApiConnection()
                 .sendMessage(RawMessage.chat.id, msg, ParseMode: TgApi.PARSEMODE_MARKDOWN);
             
