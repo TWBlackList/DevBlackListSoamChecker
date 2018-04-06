@@ -24,6 +24,9 @@ namespace DevBlackListSoamChecker
                 if (!Temp.DisableBanList)
                     switch (Command)
                     {
+                        case "/groupadmin":
+                            new GetAdmins().GetGroupAdmins(RawMessage);
+                            throw new StopProcessException();
                         case "/getspampoints":
                             new SpamStringManager().GetSpamPoints(RawMessage);
                             throw new StopProcessException();
@@ -62,9 +65,6 @@ namespace DevBlackListSoamChecker
                         }
                     switch (Command)
                     {
-                        case "/groupadmin":
-                            new GetAdmins().GetGroupAdmins(RawMessage);
-                            throw new StopProcessException();
                         case "/points":
                             new SpamStringManager().GetSpamKeywords(RawMessage);
                             throw new StopProcessException();
