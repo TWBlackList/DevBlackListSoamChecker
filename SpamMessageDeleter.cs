@@ -100,7 +100,7 @@ namespace DevBlackListSoamChecker
                     );
                     TgApi.getDefaultApiConnection().sendMessage(
                         Temp.InternGroupID,
-                        BaseMessage.GetMessageChatInfo().GetChatTextInfo()
+                        BaseMessage.GetMessageChatInfo().GetChatTextInfo() + "\n\nReport By" + BaseMessage.GetSendUser().GetUserTextInfo()
                     );
                 }
             }
