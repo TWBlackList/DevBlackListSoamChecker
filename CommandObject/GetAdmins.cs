@@ -30,17 +30,18 @@ namespace DevBlackListSoamChecker.CommandObject
                 TgApi.getDefaultApiConnection().sendMessage(RawMessage.chat.id, "輸入錯誤\n /groupadmin GID", RawMessage.message_id);
                 return true;
 
-            GroupUserInfo[] admins = TgApi.getDefaultApiConnection().getChatAdministrators(gid);
+            GroupUserInfo[] admins = TgApi.getDefaultApiConnection().getC
+            hatAdministrators(gid);
 
             string msg = "GID : " + gid.ToString() + "\nCreator : ";
             
             foreach (var admin in admins)
             {
                 if (admin.user.username != null)
-                    msg = msg + admin.user.id.ToString() + " [" + RAPI.escapeMarkdown(admin.user.full_name()) + "](tg-user://" +
+                    msg = msg + admin.user.id.ToString() + " [" + RAPI.escapeMarkdown(admin.user.full_name()) + "](tg://user?id=" +
                           admin.user.id.ToString() + ") @" + admin.user.username + "\n";
                 else
-                    msg = msg + admin.user.id.ToString() + " [" + RAPI.escapeMarkdown(admin.user.full_name()) + "](tg-user://" +
+                    msg = msg + admin.user.id.ToString() + " [" + RAPI.escapeMarkdown(admin.user.full_name()) + "](tg://user?id=" +
                           admin.user.id.ToString() + ") \n";
             }
             
