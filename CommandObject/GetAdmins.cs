@@ -30,8 +30,7 @@ namespace DevBlackListSoamChecker.CommandObject
                 TgApi.getDefaultApiConnection().sendMessage(RawMessage.chat.id, "輸入錯誤\n /groupadmin GID", RawMessage.message_id);
                 return true;
 
-            GroupUserInfo[] admins = TgApi.getDefaultApiConnection().getC
-            hatAdministrators(gid);
+            GroupUserInfo[] admins = TgApi.getDefaultApiConnection().getChatAdministrators(gid);
 
             string msg = "GID : " + gid.ToString() + "\nCreator : ";
             
