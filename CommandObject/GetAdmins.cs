@@ -12,12 +12,6 @@ namespace DevBlackListSoamChecker.CommandObject
     {
         internal bool GetGroupAdmins(TgMessage RawMessage)
         {
-            new Thread(delegate() { GCA(RawMessage); }).Start();
-            return true;
-        }
-
-        internal bool GCA(TgMessage RawMessage)
-        {
             string[] values = RawMessage.text.Split(' ');
 
             if (values.Count() == 1)
