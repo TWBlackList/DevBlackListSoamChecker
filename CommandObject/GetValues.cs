@@ -113,11 +113,11 @@ namespace DevBlackListSoamChecker.CommandObject
             }
             else
             {
-                if (totalTime > 31622400)
+                if (totalTime > 316224000)
                 {
                     TgApi.getDefaultApiConnection().sendMessage(
                         RawMessage.GetMessageChatInfo().id,
-                        "最大時間不可超過 366 天，請重新輸入。你可以將 m, h, d 3個項目改成 0 以代表永久，您可以使用 /ban 取得帮助。 err7"
+                        "最大時間不可超過 3660 天，請重新輸入。你可以將 m, h, d 3個項目改成 0 以代表永久，您可以使用 /ban 取得帮助。 err7"
                     );
                     return -1;
                 }
