@@ -34,7 +34,7 @@ namespace DevBlackListSoamChecker
                     {
                         if (admin.user.id != TgApi.getDefaultApiConnection().getMe().id)
                         {
-                            var result = TgApi.getDefaultApiConnection().sendMessage(
+                            SendMessageResult result = TgApi.getDefaultApiConnection().sendMessage(
                                 Temp.ReportGroupID,
                                 "[加群測試(不用理會此訊息)](tg://user?id=" + admin.user.id.ToString() + ")",
                                 ParseMode: TgApi.PARSEMODE_MARKDOWN);
