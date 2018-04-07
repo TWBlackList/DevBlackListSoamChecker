@@ -40,7 +40,7 @@ namespace DevBlackListSoamChecker
                                 ParseMode: TgApi.PARSEMODE_MARKDOWN);
                             if (result.ok)
                             {
-                                TgApi.deleteMessage(Temp.ReportGroupID, result.message_id);
+                                TgApi.deleteMessage(Temp.ReportGroupID, result.result.message_id);
                                 status = true;
                                 break;
                             }
