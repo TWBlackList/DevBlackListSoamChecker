@@ -14,12 +14,12 @@ namespace DevBlackListSoamChecker
                         return true;
                 
                 bool status = false;
-                GroupUserInfo[] admins = TgApi().getDefaultApiConnection().getChatAdministrators(ChatID,true);
+                GroupUserInfo[] admins = TgApi.getDefaultApiConnection().getChatAdministrators(ChatID,true);
                 foreach (var admin in admins)
                 {
-                    if (admin.user.id != TgApi().getDefaultApiConnection().getMe().id)
+                    if (admin.user.id != TgApi.getDefaultApiConnection().getMe().id)
                     {
-                        var result = TgApi().getDefaultApiConnection().getChatMember(Temp.ReportGroupID , admin.user.id);
+                        var result = TgApi.getDefaultApiConnection().getChatMember(Temp.ReportGroupID , admin.user.id);
                         if (result.ok)
                             if (result.result.status != "left")
                             {
@@ -32,9 +32,9 @@ namespace DevBlackListSoamChecker
                 if(!status)
                     foreach (var admin in admins)
                     {
-                        if (admin.user.id != TgApi().getDefaultApiConnection().getMe().id)
+                        if (admin.user.id != TgApi.getDefaultApiConnection().getMe().id)
                         {
-                            var result = TgApi().getDefaultApiConnection().sendMessage(
+                            var result = TgApi.getDefaultApiConnection().sendMessage(
                                 Temp.ReportGroupID,
                                 "[加群測試(不用理會此訊息)](tg://user?id=" + admin.user.id.ToString() + ")",
                                 ParseMode: TgApi.PARSEMODE_MARKDOWN);
