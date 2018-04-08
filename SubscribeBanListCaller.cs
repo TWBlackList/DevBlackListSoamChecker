@@ -33,8 +33,12 @@ namespace DevBlackListSoamChecker
                 {
                     return;
                 }
-
+                
                 if (groupCfg == null) return;
+                
+                var random = new Random();
+                groupCfg = groupCfg.OrderBy (x => random.Next()).ToList();
+                
                 foreach (GroupCfg cfg in groupCfg)
                 {
                     var userInChatInfo = TgApi.getDefaultApiConnection().getChatMember(cfg.GroupID, user.UserID);
