@@ -34,7 +34,7 @@ namespace DevBlackListSoamChecker.CommandObject
             {
                 Dictionary<string, string> banValues =
                     CommandDecoder.cutKeyIsValue(RawMessage.text.Substring(banSpace + 1));
-
+    
                 // 获取使用者信息
                 UserInfo tmpUinfo = new GetValues().GetByTgMessage(banValues, RawMessage);
                 if (tmpUinfo == null) return true; // 如果没拿到使用者信息則代表出现了异常
@@ -98,6 +98,9 @@ namespace DevBlackListSoamChecker.CommandObject
                     "操作成功。",
                     RawMessage.message_id
                 );
+                if(RawMessage.GetMessageChatInfo().id == Temp.CourtGroupID)
+                    TgApi.getDefaultApiConnection()
+                        .kickChatMember(RawMessage.GetMessageChatInfo().id, BanUserId, GetTime.GetUnixTime() + 1);
                 return true;
             }
 
