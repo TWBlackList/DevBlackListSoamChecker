@@ -50,6 +50,11 @@ namespace DevBlackListSoamChecker.CommandObject
                         if (RAPI.getIsInWhitelist(RawMessage.reply_to_message.forward_from_chat.id))
                             banmsg = banmsg + "\n頻道在白名單內";
                     }
+                }
+
+                TgApi.getDefaultApiConnection().sendMessage(RawMessage.GetMessageChatInfo().id, banmsg,
+                    RawMessage.message_id, TgApi.PARSEMODE_MARKDOWN);
+                return true;
             }
 
             if (int.TryParse(RawMessage.text.Substring(banstatSpace + 1), out int userid))
