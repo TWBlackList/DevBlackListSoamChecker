@@ -39,7 +39,7 @@ namespace DevBlackListSoamChecker.CommandObject
                     bool status = false;
                     SendMessageResult result = TgApi.getDefaultApiConnection().sendMessage(
                         cfg.GroupID,
-                        "測試訊息(不用理會此訊息)";
+                        "測試訊息(不用理會此訊息)");
                     if (result.ok)
                     {
                         TgApi.getDefaultApiConnection().deleteMessage(cfg.GroupID, result.result.message_id);
