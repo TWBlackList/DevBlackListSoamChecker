@@ -17,7 +17,7 @@ namespace DevBlackListSoamChecker
                     if (i == ChatID)
                         return true;
                 
-                adminChecking.Add(ChatID);
+                Temp.adminChecking.Add(ChatID);
                 
                 bool status = false;
                 GroupUserInfo[] admins = TgApi.getDefaultApiConnection().getChatAdministrators(ChatID,true);
@@ -61,7 +61,7 @@ namespace DevBlackListSoamChecker
                 else
                     System.Console.WriteLine("[checkHelper] Admin not in report group GID : " + ChatID.ToString());
 
-                adminChecking.Remove(ChatID);
+                Temp.adminChecking.Remove(ChatID);
                 
                 return status;
 
