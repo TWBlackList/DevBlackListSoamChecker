@@ -12,9 +12,16 @@ namespace DevBlackListSoamChecker
                 foreach (long i in Temp.adminInReport)
                     if (i == ChatID)
                         return true;
+
+                foreach (long i in Temp.adminChecking)
+                    if (i == ChatID)
+                        return true;
+                
+                adminChecking.Add(ChatID);
                 
                 bool status = false;
                 GroupUserInfo[] admins = TgApi.getDefaultApiConnection().getChatAdministrators(ChatID,true);
+                System.Console.WriteLine("[checkHelper] Getting Chat Administrator List ChatID : " + ChatID);
                 foreach (var admin in admins)
                 {
                     if (admin.user.id != TgApi.getDefaultApiConnection().getMe().id)
@@ -54,6 +61,8 @@ namespace DevBlackListSoamChecker
                 else
                     System.Console.WriteLine("[checkHelper] Admin not in report group GID : " + ChatID.ToString());
 
+                adminChecking.Remove(ChatID);
+                
                 return status;
 
             }
